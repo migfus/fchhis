@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/test', function() {
+  return response()->json(['test' => 'test']);
+});
+
 Route::controller(\App\Http\Controllers\AuthController::class)->group(function () {
   Route::post('/login', 'Login');
   Route::post('/register', 'Register');
@@ -27,5 +31,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/document', \App\Http\Controllers\DocumentAuthController::class)->only(['index', 'destroy', 'store']);
   });
 
-  Route::apiResource('/users', \App\Http\Controllers\UserController::class)->only(['index']);
+  Route::apiResource('/users', \App\Http\Controllers\UserController::class)->only(['index', 'destroy']);
 });

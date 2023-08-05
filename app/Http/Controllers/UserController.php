@@ -57,6 +57,23 @@ class UserController extends Controller
     return $this->G_UnauthorizedResponse();
   }
 
+  public function destroy(string $id, Request $req) {
+    if($req->user()->hasPermissionTo('destroy user')) {
+      $data = User::where('id', $id)->first();
+      $data->roles()->detach();
+      $data->person()->delete();
+      $data->delete();
+      // $data->roles()->detach();
+      // $data->delete();
+
+      return response()->json([
+        ...$this->G_ReturnDefault($req),
+        'data' => $data,
+      ]);
+    }
+    return $this->G_UnauthorizedResponse();
+  }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -81,11 +98,5 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
 }

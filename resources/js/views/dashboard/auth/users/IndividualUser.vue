@@ -1,7 +1,7 @@
 <template>
   <li>
     <div :to="`/users/${data.id}`" class="block ">
-      <div @click="open = !open" class="flex items-center px-4 py-4 sm:px-6 cursor-pointer hover:bg-gray-50">
+      <div @click="data.open = !data.open" class="flex items-center px-4 py-4 sm:px-6 cursor-pointer hover:bg-gray-50">
 
         <div class="flex min-w-0 flex-1 items-center">
 
@@ -41,7 +41,7 @@
         </div>
 
         <div class="">
-          <ChevronUpIcon v-if="open" class="h-5 w-5 text-gray-400" aria-hidden="true" />
+          <ChevronUpIcon v-if="data.open" class="h-5 w-5 text-gray-400" aria-hidden="true" />
           <ChevronRightIcon v-else class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </div>
 
@@ -53,7 +53,7 @@
 
       <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
 
-        <div v-if="open" class="flex items-end px-4 py-4 sm:px-6 ">
+        <div v-if="data.open" class="flex items-end px-4 py-4 sm:px-6 ">
 
           <div class="flex flex-1 items-center">
             <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4 px-4 justify-between">
@@ -79,7 +79,7 @@
               <ButtonComp :icon="InformationCircleIcon">Details</ButtonComp>
             </RouterLink>
             <ButtonComp :icon="PencilSquareIcon">Edit</ButtonComp>
-            <ButtonComp v-if="data.id != $user.content.auth.id" :icon="XMarkIcon" injectClass="text-red-400">Remove</ButtonComp>
+            <ButtonComp v-if="data.id != $auth.content.auth.id" @click="$user.config.deleteID = data.id" :icon="XMarkIcon" injectClass="bg-red-400 hover:bg-red-500 text-red-50">Remove</ButtonComp>
           </div>
 
         </div>
@@ -99,15 +99,18 @@
 import { toRefs, ref } from 'vue'
 import moment from 'moment'
 import { convertName } from '@/helpers/Converter'
-import { CheckCircleIcon, XMarkIcon, ChevronRightIcon, ChevronUpIcon, PencilSquareIcon, CalendarIcon, InformationCircleIcon } from '@heroicons/vue/20/solid'
+import { XMarkIcon, ChevronRightIcon, ChevronUpIcon, PencilSquareIcon, CalendarIcon, InformationCircleIcon } from '@heroicons/vue/20/solid'
 import { sexIDToText, addressIDToFull } from '@/helpers/Converter'
 import { useAuthStore } from '@/store/auth/AuthStore'
+import { useUserStore } from '@/store/users/UserStore'
 
 import ButtonComp from '@/components/form/ButtonComp.vue'
 
-const $user = useAuthStore();
+const $auth = useAuthStore();
+const $user = useUserStore();
 const $props = defineProps<{
   data?: {
+    open: boolean
     id: number
     email: string
     avatar: string
@@ -136,13 +139,7 @@ const $props = defineProps<{
       name: string
     }>
     created_at: string
-
   }
 }>()
 const { data } = toRefs($props)
-const open = ref(false)
-
-function toggleOpen(value: boolean) {
-  open.value = value
-}
 </script>

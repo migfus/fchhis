@@ -22,6 +22,14 @@
       <div class="flex justify-end col-span-3 mb-4">
         <span class="isolate inline-flex rounded-md shadow-sm">
           <ButtonComp v-if="$user.config.loading" :icon="ArrowPathIcon" injectIconClass="animate-spin" disabled/>
+          <ButtonComp v-else-if="!$user.config.open" @click="$user.toggleOpen" :icon="StopIcon">
+            Detail View
+          </ButtonComp>
+          <ButtonComp v-else @click="$user.toggleOpen" :icon="QueueListIcon">
+            Summary View
+          </ButtonComp>
+
+          <ButtonComp v-if="$user.config.loading" :icon="ArrowPathIcon" injectIconClass="animate-spin" disabled/>
           <ButtonComp v-else :icon="PrinterIcon">
             Report
           </ButtonComp>
@@ -30,7 +38,6 @@
           <ButtonComp v-else :icon="$user.config.loading ? ArrowPathIcon : PlusIcon">
             Add User
           </ButtonComp>
-
         </span>
       </div>
     </div>
@@ -38,11 +45,11 @@
 </template>
 
 <script setup lang='ts'>
-import { PlusIcon, PrinterIcon, ArrowPathIcon } from '@heroicons/vue/20/solid'
+import { PlusIcon, PrinterIcon, ArrowPathIcon, StopIcon, QueueListIcon } from '@heroicons/vue/20/solid'
 import { useUserStore } from '@/store/users/UserStore'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-import { watch } from 'vue'
+import { watch, ref } from 'vue'
 import { throttle } from 'lodash'
 
 import ButtonComp from '@/components/form/ButtonComp.vue'

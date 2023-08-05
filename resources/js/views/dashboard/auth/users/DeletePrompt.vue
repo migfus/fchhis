@@ -1,6 +1,6 @@
 <template>
-  <TransitionRoot as="template" :show="$doc.config.deleteID == null ? false : true">
-    <Dialog as="div" class="relative z-10" @close="$doc.config.deleteID = null">
+  <TransitionRoot as="template" :show="$user.config.deleteID == null ? false : true">
+    <Dialog as="div" class="relative z-10" @close="$user.config.deleteID = null">
       <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity backdrop-blur" />
       </TransitionChild>
@@ -15,29 +15,32 @@
                     <ExclamationTriangleIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
                   </div>
                   <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">Delete document</DialogTitle>
+                    <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">Delete User</DialogTitle>
                     <div class="mt-2">
-                      <p class="text-sm text-gray-500">Are you sure you want to delete your document? Your file will be permanently removed. This action cannot be undone.</p>
+                      <p class="text-sm text-gray-500">Are you sure you want to delete this user? This user will be permanently removed. This action cannot be undone.</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                <button type="button" class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm" @click="$doc.DestroyAPI()">Delete</button>
-                <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" @click="$doc.config.deleteID = null" ref="cancelButtonRef">Cancel</button>
+                <ButtonComp v-if="$user.config.loadingDestroy" :icon="XMarkIcon" injectClass="bg-red-400 hover:bg-red-500 text-white" injectIconClass="animate-spin">Delete</ButtonComp>
+                <ButtonComp v-else @click="$user.DestroyAPI()" :icon="XMarkIcon" injectClass="bg-red-400 hover:bg-red-500 text-white">Delete</ButtonComp>
+                <ButtonComp @click="$user.config.deleteID = null" :icon="ArrowLeftIcon" autofocus>Cancel</ButtonComp>
               </div>
             </DialogPanel>
           </TransitionChild>
         </div>
       </div>
     </Dialog>
-  </TransitionRoot>
+</TransitionRoot>
 </template>
 
 <script setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
-import { useDocumentAuthStore } from '@/store/files/DocumentAuthStore'
+import { ExclamationTriangleIcon, XMarkIcon, ArrowLeftIcon } from '@heroicons/vue/24/outline'
+import { useUserStore } from '@/store/users/UserStore'
 
-const $doc = useDocumentAuthStore();
+import ButtonComp from '@/components/form/ButtonComp.vue'
+
+const $user = useUserStore();
 </script>

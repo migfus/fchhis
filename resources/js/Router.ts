@@ -169,8 +169,8 @@ const router = createRouter({
     },
       {
         path: "/user/:id",
-        name: "users",
-        component: () => import("@/views/dashboard/auth/users/UserPage.vue"),
+        name: "user",
+        component: () => import("@/views/dashboard/auth/user/UserPage.vue"),
         meta: {
           sideBar: true,
           title: "Users",
