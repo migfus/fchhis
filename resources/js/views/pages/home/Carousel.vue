@@ -19,10 +19,14 @@
         <p class="mt-6 text-base leading-7 text-gray-300">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat quisque ut interdum tincidunt duis.</p>
         <div class="mt-8">
 
-          <RouterLink :to="{ name: 'job-listing'}" class="inline-flex rounded-md bg-white/10 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Look for a Job
+          <RouterLink :to="{name: 'login'}">
+            <ButtonComp
+              :icon="HandThumbUpIcon"
+              injectClass="ml-0 bg-white/10 text-base font-semibold leading-7 text-white shadow-sm hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white border-none"
+            >
+              Sign Up
+            </ButtonComp>
           </RouterLink>
-
-          <div v-if="$job.content.length > 0" class="relative inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-black bg-amber-400 rounded-full -top-4 right-5 dark:border-gray-900">{{ $job.content.length }}</div>
 
         </div>
       </div>
@@ -32,6 +36,9 @@
 
 <script setup lang='ts'>
 import { useJobPublicStore } from '@/store/job/JobPublicStore';
+import { HandThumbUpIcon } from '@heroicons/vue/24/outline'
+
+import ButtonComp from '@/components/form/ButtonComp.vue';
 
 const $job = useJobPublicStore();
 </script>

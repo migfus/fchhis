@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>CMU HRMO</title>
+	<title>Loading...</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <link rel="icon" href="/images/logo.svg" type="image/x-icon">
+  <link rel="icon" href="/images/logo.png" type="image/x-icon">
 
   <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
@@ -35,7 +35,7 @@
     <div id="loading-bg" class="preload-logo-container">
       <div class="preload-logo-item">
         <div class="loading-bg">
-          <object data="/images/logo-anim.svg" style="width: 240px; height: auto; z-index: 10"/>
+          <object data="/images/logo.png" style="width: 240px; height: auto; z-index: 10"/>
         </div>
 
         <div class="loading-bg" style="margin-top: 0px">

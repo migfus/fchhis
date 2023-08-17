@@ -61,8 +61,8 @@
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex flex-grow flex-col overflow-y-auto border-gray-200 bg-gray-800 pt-5">
         <RouterLink :to="{name: 'home'}" class="flex flex-shrink-0 items-center px-4">
-          <object class="h-8 w-auto" data="/images/logo.svg" alt="Your Company" />
-          <p class="ml-4 font-semibold text-white">HRMO | CMU</p>
+          <img class="h-8 w-auto" src="/images/logo.png" alt="Your Company" />
+          <p class="ml-4 font-semibold text-white">FCHHIS</p>
         </RouterLink>
         <div class="mt-5 flex flex-grow flex-col">
           <nav class="flex-1 space-y-1 px-2 pb-4">
@@ -218,15 +218,6 @@ const navigation = [
     link: 'about',
     icon: InformationCircleIcon,
     count: null
-  },
-  {
-    name: 'Job Listing',
-    link: 'job-listing',
-    icon: QueueListIcon,
-    count: {
-      number: $job.content.length,
-      color: 'text-black bg-amber-400'
-    }
   },
   {
     name: 'Calendar',

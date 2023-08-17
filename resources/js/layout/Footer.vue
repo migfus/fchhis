@@ -4,9 +4,10 @@
     <div :class="[$props.sideBar ? 'max-w-full' : 'max-w-7xl ', 'mx-auto px-6 pb-8 pt-4 sm:pt-24 lg:px-8 lg:pt-32']">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-6">
-          <object class="h-48" data="/images/logo-anim.svg" alt="Company name" />
-          <p class="text-sm leading-6 text-gray-600 mt-0 font-bold">HRMO, Admin. Bldg., CMU, Musuan, Maramag, Bukidnon</p>
-          <p class="text-sm leading-6 text-gray-600 mt-0" style="margin-top: 0px">Email: <a href="mailto:hrmo@cmu.edu.ph" class="font-bold">hrmo@cmu.edu.ph</a></p>
+          <img class="h-48" :src="logo" alt="Company name" />
+          <p class="text-sm leading-6 text-gray-600 mt-0 font-bold">2nd Floor, Facoma Building, P-12 Poblacion, Valencia City, Bukidnon</p>
+          <p class="text-sm leading-6 text-gray-600 mt-0" style="margin-top: 0px">Email: <a href="mailto:contact@fchhis.com" class="font-bold">contact@fchhis.com</a></p>
+          <p class="text-sm leading-6 text-gray-600 mt-0" style="margin-top: 0px">Contact: <a class="font-bold">0916-859-8192</a></p>
           <div class="flex space-x-6">
             <a v-for="item in $nav.social" :key="item.name" :href="item.href" class="text-gray-400 hover:text-gray-500">
               <span class="sr-only">{{ item.name }}</span>
@@ -54,7 +55,7 @@
         </div>
       </div>
       <div class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
-        <p class="text-xs leading-5 text-gray-500">&copy; 2023 Human Resource Management Office | Central Mindanao University.</p>
+        <p class="text-xs leading-5 text-gray-500">&copy; 2023 Future Care and Helping Hands.</p>
       </div>
     </div>
   </footer>
@@ -70,6 +71,7 @@ const $props = defineProps({
     type: Boolean,
   }
 })
+import logo from '@/assets/images/logo.png';
 
 const navigation = {
   pages: $nav.pages,

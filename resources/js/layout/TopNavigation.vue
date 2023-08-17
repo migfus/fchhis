@@ -11,13 +11,13 @@
             <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
             <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </DisclosureButton>
-          <object class="block h-10 w-auto lg:hidden" data="/images/logo.svg" alt="Your Company" />
+          <img class="block h-10 w-auto lg:hidden" :src="logo" alt="Future Care Helping Hands" />
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex flex-shrink-0 items-center">
-            <object class="hidden h-10 w-auto sm:block sm:ml-5" data="/images/logo.svg" alt="Your Company" />
+            <img class="hidden h-10 w-auto sm:block sm:ml-5" :src="logo" alt="Future Care Helping Hands" />
             <!-- <object class="block h-10 w-auto lg:hidden" data="/images/logo.svg" alt="Your Company" /> -->
-            <span class="ml-3 font-semibold lg:block hidden xs:block">CMU | HRMO</span>
+            <span class="ml-3 font-semibold lg:block hidden xs:block">FCHHIS</span>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
 
@@ -39,16 +39,6 @@
               About
             </RouterLink>
 
-            <RouterLink :to="{ name: 'job-listing'}" :class="[$route.name == 'job-listing' ?
-              'border-primary-700 text-gray-900' :
-              'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-              'hidden md:inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
-              ]"
-            >
-              Job Listing
-              <div v-if="$job.content.length > 0" class="relative inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-black bg-amber-300 rounded-full -top-2 right-1">{{ $job.content.length }}</div>
-            </RouterLink>
-
             <RouterLink :to="{ name: 'calendar'}" :class="[$route.name == 'calendar' ?
               'border-primary-700 text-gray-900' :
               'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
@@ -56,7 +46,7 @@
               ]"
             >
               Calendar
-              <div class="relative inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-black bg-gradient-to-r from-primary-500 to-amber-200 rounded-full -top-2 right-1">{{ $event.eventCount }}</div>
+              <div class="relative inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-black bg-gradient-to-r from-primary-500 to-secondary-200 rounded-full -top-2 right-1">{{ $event.eventCount }}</div>
             </RouterLink>
 
             <RouterLink :to="{ name: 'faqs'}" :class="[$route.name == 'faqs' ?
@@ -176,4 +166,6 @@ const $route = useRoute();
 const $preLoader = usePreLoader();
 const $job = useJobPublicStore();
 const $event = useEventPublicStore();
+
+import logo from '@/assets/images/logo.png'
 </script>

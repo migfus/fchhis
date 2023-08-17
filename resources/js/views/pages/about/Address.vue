@@ -5,11 +5,10 @@
       <p class="mt-6 max-w-3xl text-lg text-gray-500">Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.</p>
       <div class="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2">
         <div>
-          <h3 class="text-lg font-medium text-gray-900">Central Mindanao University</h3>
+          <h3 class="text-lg font-medium text-gray-900">Future Care and Helping Hands Valencia Branch</h3>
           <p class="mt-2 text-base text-gray-500">
-            <span class="block">Admin Bldg., CMU, Musuan</span>
-            <span class="block">Dologon, Maramag, Bukidnon 8710</span>
-            <span class="block">+63 999 888 7777</span>
+            <span class="block">2nd Floor, Facoma Building, P-12 Poblacion, Valencia City, Bukidnon 8710</span>
+            <span class="block">0916-859-8192</span>
           </p>
         </div>
       </div>

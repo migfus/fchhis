@@ -13,16 +13,17 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import Data from '@/Data'
+
 import { useJobPublicStore } from '@/store/job/JobPublicStore';
 import { useEventPublicStore } from '@/store/event/EventPublicStore';
-Data();
 import { useAddressStore } from './store/system/AddressStore';
 
 import NotificationsSection from './components/Notifications.vue';
 import TopNavigation from '@/layout/TopNavigation.vue';
 import SideNavigation from '@/layout/SideNavigation.vue';
 
+// import Data from '@/Data'
+// Data();
 
 const $route = useRoute();
 const $job = useJobPublicStore();

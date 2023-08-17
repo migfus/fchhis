@@ -1,5 +1,6 @@
 <template>
-  <div v-if="$post.content" class="relative px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28" style="background: url('/images/background1.jpg') no-repeat center center; background-size: cover;">
+  <!-- <div v-if="$post.content" class="relative px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28" style="background: url('/images/background1.jpg') no-repeat center center; background-size: cover;"> -->
+  <div v-if="$post.content" class="relative px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28 bg-neutral-200">
     <div class="absolute inset-0">
       <div class="h-1/3 bg-white/20 sm:h-2/3" />
     </div>

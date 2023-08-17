@@ -27,22 +27,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/job-listing',
-      name: 'job-listing',
-      component: () => import('@/views/jobs/JobsListingPage.vue'),
-      meta: {
-        title: 'Job Listing'
-      }
-    },
-    {
-      path: '/job/:id',
-      name: 'job-view',
-      component: () => import('@/views/job/JobViewPage.vue'),
-      meta: {
-        title: 'Job'
-      }
-    },
-    {
       path: '/calendar',
       name: 'calendar',
       component: () => import('@/views/pages/calendar/CalendarPage.vue'),
@@ -306,7 +290,7 @@ const router = createRouter({
     },
   ],
 });
-const TITLE = "CMU | HRMO";
+const TITLE = "FCHHIS";
 
 router.beforeEach(async (to, from, next) => {
   const $load = usePreLoader();
