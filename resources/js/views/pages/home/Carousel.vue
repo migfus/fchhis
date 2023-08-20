@@ -35,10 +35,7 @@
 </template>
 
 <script setup lang='ts'>
-import { useJobPublicStore } from '@/store/job/JobPublicStore';
 import { HandThumbUpIcon } from '@heroicons/vue/24/outline'
 
 import ButtonComp from '@/components/form/ButtonComp.vue';
-
-const $job = useJobPublicStore();
 </script>

@@ -22,17 +22,17 @@
             </RouterLink>
           </MenuItem>
           <MenuItem v-slot="{ active }">
-            <RouterLink :to="{name: 'profile'}" :class="[active || $route.name == 'profile' ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+            <RouterLink :to="{name: 'account-settings'}" :class="[active || $route.name == 'account-settings' ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
               <SquaresPlusIcon class="h-5 w-5 inline-block mr-1" aria-hidden="true" />
-              Profile
+              Acccount Settings
             </RouterLink>
           </MenuItem>
-          <MenuItem v-slot="{ active }">
+          <!-- <MenuItem v-slot="{ active }">
             <RouterLink :to="{name: 'documents'}" :class="[active || $route.name == 'documents'  ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
               <FolderIcon class="h-5 w-5 inline-block mr-1" aria-hidden="true" />
               Documents
             </RouterLink>
-          </MenuItem>
+          </MenuItem> -->
           <MenuItem v-slot="{ active }">
             <a @click="$auth.Logout()" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']">
               <XMarkIcon class="h-5 w-5 inline-block mr-1" aria-hidden="true" />

@@ -17,12 +17,12 @@ Route::controller(\App\Http\Controllers\AuthController::class)->group(function (
 
 // NOTE PUBLICS API
 Route::group(['prefix' => 'public', 'as' => 'public.'], function() {
-  Route::apiResource('/address', \App\Http\Controllers\AddressPublicController::class)->only(['index']);
-  Route::apiResource('/post', \App\Http\Controllers\PostPublicController::class)->only(['index', 'show']);
-  Route::apiResource('/job', \App\Http\Controllers\JobPublicController::class)->only(['index']);
-  Route::apiResource('/faq', \App\Http\Controllers\FAQPublicController::class)->only(['index']);
-  Route::apiResource('/event', \App\Http\Controllers\EventPublicController::class)->only(['index']);
-    Route::get('/event/count', [\App\Http\Controllers\EventPublicController::class, 'getCount']);
+  Route::apiResource('/address', \App\Http\Controllers\Public\AddressPublicController::class)->only(['index']);
+  Route::apiResource('/post',    \App\Http\Controllers\Public\PostPublicController::class)->only(['index', 'show']);
+  Route::apiResource('/job',     \App\Http\Controllers\Public\JobPublicController::class)->only(['index']);
+  Route::apiResource('/faq',     \App\Http\Controllers\Public\FAQPublicController::class)->only(['index']);
+  Route::apiResource('/event',   \App\Http\Controllers\Public\EventPublicController::class)->only(['index']);
+    Route::get('/event/count',  [\App\Http\Controllers\Public\EventPublicController::class, 'getCount']);
 });
 
 

@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
 use Illuminate\Http\Request;
 use App\Models\Event;

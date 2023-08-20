@@ -9,7 +9,8 @@ return new class extends Migration
   public function up(): void {
     Schema::create('users', function (Blueprint $table) {
       $table->id();
-      $table->bigInteger('person_id')->unsigned()->unique();
+      $table->bigInteger('region_id')->unsigned();
+      $table->bigInteger('city_id')->unsigned()->nullable();
       $table->string('email')->unique()->nullable();
       $table->string('password')->nullable();
       $table->string('avatar')->nullable();

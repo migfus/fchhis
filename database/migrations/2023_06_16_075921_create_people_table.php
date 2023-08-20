@@ -9,6 +9,7 @@ return new class extends Migration
   public function up(): void {
     Schema::create('people', function (Blueprint $table) {
       $table->id();
+      $table->bigInteger('user_id')->unsigned()->unique();
       $table->string('last_name');
       $table->string('first_name');
       $table->string('mid_name');
@@ -22,9 +23,6 @@ return new class extends Migration
       $table->decimal('weight', 5, 2);
       $table->integer('address_id')->unsgined();
       $table->string('address')->comment('specific address');
-      $table->string('gsis_id')->nullable();
-      $table->string('pagibig_id')->nullable();
-      $table->string('tin_id')->nullable();
       $table->timestamps();
     });
   }

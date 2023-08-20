@@ -10,7 +10,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
-  <link rel="stylesheet" href="/flat-top.css" >
+  <link rel="stylesheet" href="/flash.css" >
   <style>
     .preload-logo-container {
       text-align: center;

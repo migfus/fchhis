@@ -120,48 +120,48 @@ const router = createRouter({
       },
     },
     {
-      path: "/profile",
-      name: "profile",
-      component: () => import("@/views/dashboard/ProfilePage.vue"),
+      path: "/account-settings",
+      name: "account-settings",
+      component: () => import("@/views/dashboard/AccountSettingsPage.vue"),
       meta: {
         sideBar: true,
         title: "Dashboard",
         auth: true,
       },
     },
-    {
-      path: "/documents",
-      name: "documents",
-      component: () => import("@/views/dashboard/auth/documents/DocumentPage.vue"),
-      meta: {
-        sideBar: true,
-        title: "Dashboard",
-        auth: true,
-        resource: 'profile',
-      },
-    },
-    {
-      path: "/users",
-      name: "users",
-      component: () => import("@/views/dashboard/auth/users/UserPage.vue"),
-      meta: {
-        sideBar: true,
-        title: "Users",
-        auth: true,
-        resource: 'user',
-      },
-    },
-      {
-        path: "/user/:id",
-        name: "user",
-        component: () => import("@/views/dashboard/auth/user/UserPage.vue"),
-        meta: {
-          sideBar: true,
-          title: "Users",
-          auth: true,
-          resource: 'user',
-        },
-      },
+    // {
+    //   path: "/documents",
+    //   name: "documents",
+    //   component: () => import("@/views/dashboard/auth/documents/DocumentPage.vue"),
+    //   meta: {
+    //     sideBar: true,
+    //     title: "Dashboard",
+    //     auth: true,
+    //     resource: 'profile',
+    //   },
+    // },
+    // {
+    //   path: "/users",
+    //   name: "users",
+    //   component: () => import("@/views/dashboard/auth/users/UserPage.vue"),
+    //   meta: {
+    //     sideBar: true,
+    //     title: "Users",
+    //     auth: true,
+    //     resource: 'user',
+    //   },
+    // },
+    //   {
+    //     path: "/user/:id",
+    //     name: "user",
+    //     component: () => import("@/views/dashboard/auth/user/UserPage.vue"),
+    //     meta: {
+    //       sideBar: true,
+    //       title: "Users",
+    //       auth: true,
+    //       resource: 'user',
+    //     },
+    //   },
     // NOTE TRANSACTIONS
     // {
     //   path: "/transactions-all",

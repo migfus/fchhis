@@ -14,7 +14,6 @@
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
-import { useJobPublicStore } from '@/store/job/JobPublicStore';
 import { useEventPublicStore } from '@/store/event/EventPublicStore';
 import { useAddressStore } from './store/system/AddressStore';
 
@@ -26,12 +25,10 @@ import SideNavigation from '@/layout/SideNavigation.vue';
 // Data();
 
 const $route = useRoute();
-const $job = useJobPublicStore();
 const $event = useEventPublicStore();
 const $address = useAddressStore();
 
 onMounted(() => {
-  $job.GetAPI()
   $event.GetCountAPI()
   $address.GetAPI()
 });

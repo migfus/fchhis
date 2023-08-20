@@ -163,7 +163,6 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { usePreLoader } from '@/store/system/PreLoader'
 import { useEventPublicStore } from '@/store/event/EventPublicStore';
-import { useJobPublicStore } from '@/store/job/JobPublicStore'
 
 import BreadCrumbs from '@/layout/BreadCrumbs.vue';
 import HeaderBanner from '@/layout/HeaderBanner.vue';
@@ -174,7 +173,6 @@ import FooterLayout from './Footer.vue'
 const $preLoader = usePreLoader();
 const $route = useRoute();
 const $event = useEventPublicStore();
-const $job = useJobPublicStore();
 
 const navigation = [
   {
@@ -184,23 +182,23 @@ const navigation = [
     count: null,
   },
   {
-    name: 'Profile',
-    link: 'profile',
+    name: 'Account Settings',
+    link: 'account-settings',
     icon: SquaresPlusIcon,
     count: null,
   },
-  {
-    name: 'Documents',
-    link: 'documents',
-    icon: FolderIcon,
-    count: null
-  },
-  {
-    name: 'Users',
-    link: 'users',
-    icon: UsersIcon,
-    count: null
-  },
+  // {
+  //   name: 'Documents',
+  //   link: 'documents',
+  //   icon: FolderIcon,
+  //   count: null
+  // },
+  // {
+  //   name: 'Users',
+  //   link: 'users',
+  //   icon: UsersIcon,
+  //   count: null
+  // },
 
   {
     name: 'Pages',
