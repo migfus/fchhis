@@ -4,7 +4,7 @@
     <div :class="[$props.sideBar ? 'max-w-full' : 'max-w-7xl ', 'mx-auto px-6 pb-8 pt-4 sm:pt-24 lg:px-8 lg:pt-32']">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-6">
-          <img class="h-48" :src="logo" alt="Company name" />
+          <img class="h-48" src="http://127.0.0.1:8000/images/logo.png" alt="Company name" />
           <p class="text-sm leading-6 text-gray-600 mt-0 font-bold">2nd Floor, Facoma Building, P-12 Poblacion, Valencia City, Bukidnon</p>
           <p class="text-sm leading-6 text-gray-600 mt-0" style="margin-top: 0px">Email: <a href="mailto:contact@fchhis.com" class="font-bold">contact@fchhis.com</a></p>
           <p class="text-sm leading-6 text-gray-600 mt-0" style="margin-top: 0px">Contact: <a class="font-bold">0916-859-8192</a></p>
@@ -71,7 +71,6 @@ const $props = defineProps({
     type: Boolean,
   }
 })
-import logo from '@/assets/images/logo.png';
 
 const navigation = {
   pages: $nav.pages,

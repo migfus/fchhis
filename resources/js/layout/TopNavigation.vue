@@ -11,11 +11,11 @@
             <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
             <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </DisclosureButton>
-          <img class="block h-10 w-auto lg:hidden" :src="logo" alt="Future Care Helping Hands" />
+          <img class="block h-10 w-auto lg:hidden" src="http://127.0.0.1:8000/images/logo.png" alt="Future Care Helping Hands" />
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex flex-shrink-0 items-center">
-            <img class="hidden h-10 w-auto sm:block sm:ml-5" :src="logo" alt="Future Care Helping Hands" />
+            <img class="hidden h-10 w-auto sm:block sm:ml-5" src="http://127.0.0.1:8000/images/logo.png" alt="Future Care Helping Hands" />
             <!-- <object class="block h-10 w-auto lg:hidden" data="/images/logo.svg" alt="Your Company" /> -->
             <span class="ml-3 font-semibold lg:block hidden xs:block">FCHHIS</span>
           </div>
@@ -157,6 +157,4 @@ const $nav = useNavigationStore();
 const $route = useRoute();
 const $preLoader = usePreLoader();
 const $event = useEventPublicStore();
-
-import logo from '@/assets/images/logo.png'
 </script>

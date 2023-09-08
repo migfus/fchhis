@@ -155,7 +155,6 @@ export const useAuthStore = defineStore("auth/AuthStore", () => {
         }
       ])
     }
-
   }
 
   return {

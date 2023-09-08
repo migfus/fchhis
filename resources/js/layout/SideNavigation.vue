@@ -26,7 +26,7 @@
                 </div>
               </TransitionChild>
               <div class="flex flex-shrink-0 items-center px-4">
-                <object class="h-8 w-auto" data="/images/logo.svg" alt="HRMO" />
+                <img class="h-8 w-auto" src="http://127.0.0.1:8000/images/logo.png" alt="FCHHIS" />
               </div>
               <div class="mt-5 h-0 flex-1 overflow-y-auto">
                 <nav class="space-y-1 px-2">
@@ -61,7 +61,7 @@
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex flex-grow flex-col overflow-y-auto border-gray-200 bg-gray-800 pt-5">
         <RouterLink :to="{name: 'home'}" class="flex flex-shrink-0 items-center px-4">
-          <img class="h-8 w-auto" src="/images/logo.png" alt="Your Company" />
+          <img class="h-8 w-auto" src="http://127.0.0.1:8000/images/logo.png" alt="Your Company" />
           <p class="ml-4 font-semibold text-white">FCHHIS</p>
         </RouterLink>
         <div class="mt-5 flex flex-grow flex-col">
