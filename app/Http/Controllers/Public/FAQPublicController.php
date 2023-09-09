@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use Illuminate\Http\Request;
 use App\Models\FAQ;
+use Illuminate\Http\JsonResponse;
 
 class FAQPublicController extends Controller
 {

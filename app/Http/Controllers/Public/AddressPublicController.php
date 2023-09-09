@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Public;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\JsonResponse;
 
 class AddressPublicController extends Controller
 {
-    public function index() : JsonRespone {
+    public function index() : JsonResponse {
         $provinces = DB::table('address_provinces')->orderBy('name')->get();
         $out = [];
         $index = 0;

@@ -49,4 +49,12 @@ class User extends Authenticatable
     public function info() {
         return $this->hasOne(Info::class);
     }
+
+    public function region() {
+        return $this->belongsTo(Region::class);
+    }
+
+    public function branch() {
+        return $this->belongsTo(Branch::class);
+    }
 }

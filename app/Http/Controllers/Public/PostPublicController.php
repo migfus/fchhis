@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class PostPublicController extends Controller
 {
