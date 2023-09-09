@@ -9,4 +9,9 @@ use Kra8\Snowflake\HasShortflakePrimary;
 class PostCategory extends Model
 {
     use HasFactory, HasShortflakePrimary;
+
+    protected $fillable = [
+        'user_id',
+        'name'
+    ];
 }

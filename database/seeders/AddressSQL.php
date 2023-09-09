@@ -8,12 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class AddressSQL extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-      $path = 'database/sql/location.sql';
-      DB::unprepared(file_get_contents($path));
+        $path = 'database/sql/location.sql';
+        DB::unprepared(file_get_contents($path));
     }
 }

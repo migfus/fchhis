@@ -9,4 +9,11 @@ use Kra8\Snowflake\HasShortflakePrimary;
 class EventCategory extends Model
 {
     use HasFactory, HasShortflakePrimary;
+
+    protected $fillable = [
+        'user_id',
+        'name',
+        'bg_color',
+        'text_color',
+    ];
 }

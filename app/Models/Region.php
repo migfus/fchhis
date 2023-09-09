@@ -9,4 +9,8 @@ use Kra8\Snowflake\HasShortflakePrimary;
 class Region extends Model
 {
     use HasFactory, HasShortflakePrimary;
+
+    protected $fillable = [
+        'name'
+    ];
 }

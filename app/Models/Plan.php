@@ -9,4 +9,10 @@ use Kra8\Snowflake\HasShortflakePrimary;
 class Plan extends Model
 {
     use HasFactory, HasShortflakePrimary;
+
+    protected $fillabe = [
+        'user_id',
+        'avatar',
+        'name'
+    ];
 }

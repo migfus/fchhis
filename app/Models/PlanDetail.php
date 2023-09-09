@@ -10,4 +10,18 @@ class PlanDetail extends Model
 {
     use HasFactory, HasShortflakePrimary;
 
+    protected $fillable = [
+        'plan_id',
+        'user_id',
+        'age_start',
+        'age_end',
+        'desc',
+        'contract_price',
+        'spot_pay',
+        'spot_service',
+        'annual',
+        'semi_annual',
+        'querterly',
+        'monthly',
+    ];
 }
