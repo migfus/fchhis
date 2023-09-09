@@ -119,6 +119,8 @@ const router = createRouter({
         auth: true,
       },
     },
+
+    // NOTE AUTH
     {
       path: "/account-settings",
       name: "account-settings",
@@ -129,157 +131,9 @@ const router = createRouter({
         auth: true,
       },
     },
-    // {
-    //   path: "/documents",
-    //   name: "documents",
-    //   component: () => import("@/views/dashboard/auth/documents/DocumentPage.vue"),
-    //   meta: {
-    //     sideBar: true,
-    //     title: "Dashboard",
-    //     auth: true,
-    //     resource: 'profile',
-    //   },
-    // },
-    // {
-    //   path: "/users",
-    //   name: "users",
-    //   component: () => import("@/views/dashboard/auth/users/UserPage.vue"),
-    //   meta: {
-    //     sideBar: true,
-    //     title: "Users",
-    //     auth: true,
-    //     resource: 'user',
-    //   },
-    // },
-    //   {
-    //     path: "/user/:id",
-    //     name: "user",
-    //     component: () => import("@/views/dashboard/auth/user/UserPage.vue"),
-    //     meta: {
-    //       sideBar: true,
-    //       title: "Users",
-    //       auth: true,
-    //       resource: 'user',
-    //     },
-    //   },
-    // NOTE TRANSACTIONS
-    // {
-    //   path: "/transactions-all",
-    //   name: "transactions-all",
-    //   component: () => import("@/views/transaction/AllTransactionPage.vue"),
-    //   meta: {
-    //     title: "Transactions",
-    //     // role: 5, //admin
-    //     auth: true,
-    //     sideBar: true,
-    //   },
-    // },
-    // {
-    //   path: "/overdue",
-    //   name: "overdue",
-    //   component: () => import("@/views/users/overdue/OverduePage.vue"),
-    //   meta: {
-    //     title: "Overdue",
-    //     role: 5, //admin
-    //     auth: true,
-    //     sideBar: true,
-    //   },
-    // },
-    // NOTE PLANS
-    // {
-    //   path: "/plans",
-    //   name: "plans",
-    //   component: () => import("@/views/plans/PlanPage.vue"),
-    //   meta: {
-    //     title: "Plans' Management",
-    //     role: 2, //admin
-    //     auth: true,
-    //     sideBar: true,
-    //   },
-    // },
-    // NOTE USERS
-    // {
-    //   path: '/users/clients',
-    //   name: 'users-clients',
-    //   component: () => import("@/views/users/clients/ClientPage.vue"),
-    //   meta: {
-    //     title: 'Clients Management',
-    //     // role: 5,
-    //     auth: true,
-    //     sideBar: true,
-    //   }
-    // },
-    // {
-    //   path: '/users/overdue',
-    //   name: 'users-overdue',
-    //   component: () => import("@/views/users/overdue/OverduePage.vue"),
-    //   meta: {
-    //     title: 'Overdue Management',
-    //     // role: 5,
-    //     auth: true,
-    //     sideBar: true,
-    //   }
-    // },
-    // {
-    //   path: "/users/list",
-    //   name: "users-list",
-    //   component: () => import("@/views/users/users/UsersPage.vue"),
-    //   meta: {
-    //     title: "Users' Management",
-    //     role: 2, //admin
-    //     auth: true,
-    //     sideBar: true,
-    //   },
-    // },
-    // {
-    //   path: "/users/roles",
-    //   name: "users-roles",
-    //   component: () => import("@/views/users/roles/RolePage.vue"),
-    //   meta: {
-    //     title: "User's Roles",
-    //     role: 2, //admin
-    //     auth: true,
-    //     sideBar: true,
-    //   },
-    // },
-    // {
-    //   path: '/user/:id',
-    //   name: 'user',
-    //   component: () => import("@/views/user/UserPage.vue"),
-    //   meta: {
-    //     title: "User Details",
-    //     // role: 5,
-    //     auth: true,
-    //     sideBar: true,
-    //   }
-    // },
-    // NOTE CLIENTS
-    // {
-    //   path: "/clients",
-    //   name: "clients-list",
-    //   component: () => import("@/views/clients/ClientPage.vue"),
-    //   meta: {
-    //     title: "Users' Management",
-    //     role: 5, //client only
-    //     auth: true,
-    //     sideBar: true,
-    //   },
-    // },
-    // NOTE ACCOUNT SETTINGS
-    // {
-    //   path: "/account-settings",
-    //   name: "account-settings",
-    //   component: () =>
-    //     import(
-    //       "@/views/account-settings/AccountSettingsPage.vue"
-    //     ),
-    //   meta: {
-    //     title: "Account Settings",
-    //     auth: true,
-    //     sideBar: true,
-    //   },
-    // },
-    // NOTE OTHER
+
+
+    // NOTE SPECIAL
     {
       path: "/:pathMatch(.*)*",
       name: 'error',

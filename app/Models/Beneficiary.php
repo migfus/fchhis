@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kra8\Snowflake\HasShortflakePrimary;
 
-class File extends Model
+class Beneficiary extends Model
 {
     use HasFactory, HasShortflakePrimary;
 }

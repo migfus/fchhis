@@ -8,22 +8,27 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-      $this->call([
-        AddressSQL::class,
+        $this->call([
+            AddressSQL::class,
 
-        BloodTypeSeeder::class,
-        RoleAndPermissionsSeeder::class,
-        CivilStatusSeeder::class,
+            RoleAndPermissionsSeeder::class,
 
-        FAQSeeder::class,
-        EventCategorySeeder::class,
-        EventSeeder::class,
-        // EligibilitySeeder::class,
+            FAQSeeder::class,
+            EventCategorySeeder::class,
+            EventSeeder::class,
+            // EligibilitySeeder::class,
 
-        UserSeeder::class,
+            PlanSeeder::class, //plan & planDetails
+            PayTypeSeeder::class,
+            RegionSeeder::class,
+            BranchSeeder::class,
+            BeneficiarySeeder::class,
 
-        PostCategorySeeder::class,
-        PostSeeder::class,
-      ]);
+            UserSeeder::class,
+            TransactionSeeder::class,
+
+            PostCategorySeeder::class,
+            PostSeeder::class,
+        ]);
     }
 }

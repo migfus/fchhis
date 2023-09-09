@@ -6,22 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-  public function up(): void {
-    Schema::create('users', function (Blueprint $table) {
-      $table->id();
-      $table->bigInteger('region_id')->unsigned();
-      $table->bigInteger('city_id')->unsigned()->nullable();
-      $table->string('email')->unique()->nullable();
-      $table->string('password')->nullable();
-      $table->string('avatar')->nullable();
+    public function up(): void {
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('region_id')->nullable();
+            $table->unsignedBigInteger('branch_id')->nullable();
 
-      $table->timestamp('email_verified_at')->nullable();
-      $table->rememberToken();
-      $table->timestamps();
-    });
-  }
+            $table->string('email')->unique();
+            $table->string('password');
 
-  public function down(): void {
-      Schema::dropIfExists('users');
-  }
+            $table->string('name');
+            $table->string('avatar')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void {
+        Schema::dropIfExists('users');
+    }
 };

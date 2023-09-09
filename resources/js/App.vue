@@ -21,9 +21,6 @@ import NotificationsSection from './components/Notifications.vue';
 import TopNavigation from '@/layout/TopNavigation.vue';
 import SideNavigation from '@/layout/SideNavigation.vue';
 
-// import Data from '@/Data'
-// Data();
-
 const $route = useRoute();
 const $event = useEventPublicStore();
 const $address = useAddressStore();

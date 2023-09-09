@@ -1,12 +1,4 @@
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-100">
-    <body class="h-full">
-    ```
-  -->
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog as="div" class="relative z-40 md:hidden" @close="sidebarOpen = false">
@@ -30,6 +22,9 @@
               </div>
               <div class="mt-5 h-0 flex-1 overflow-y-auto">
                 <nav class="space-y-1 px-2">
+
+
+
                   <RouterLink v-for="item in navigation" :key="item.name" :to="{name: item.link}"
                     @click="sidebarOpen = false"
                     :class="[$route.name == item.link ? 'bg-gray-700 text-gray-50' : 'text-gray-300 hover:bg-gray-600 hover:text-gray-50', 'group flex items-center px-2 py-2 text-base font-medium rounded-md']"
@@ -45,6 +40,10 @@
                     {{ item.name }}
                     <div v-if="item.count" :class="[item.count.color, 'relative inline-flex items-center justify-center w-6 h-6 text-xs font-bold rounded-full -top-2 _right-1']">{{ item.count.number }}</div>
                   </RouterLink>
+
+                  <!-- <AppSidebarNav @click="sidebarOpen = false" :icon="HomeIcon" linkName="name">
+                    Home Test
+                  </AppSidebarNav> -->
                 </nav>
               </div>
             </DialogPanel>
@@ -169,6 +168,7 @@ import HeaderBanner from '@/layout/HeaderBanner.vue';
 import PreLoader from '@/layout/preloader/@PreLoader.vue';
 import ProfileDropdown from './ProfileDropdown.vue'
 import FooterLayout from './Footer.vue'
+import AppSidebarNav from '@/components/AppSidebarNav.vue'
 
 const $preLoader = usePreLoader();
 const $route = useRoute();
@@ -238,12 +238,6 @@ const navigation = [
     icon: MegaphoneIcon,
     count: null,
   },
-]
-
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
 ]
 
 const sidebarOpen = ref(false);
