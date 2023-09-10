@@ -1,24 +1,27 @@
 import axios from 'axios'
-import { useStorage } from '@vueuse/core'
+import { useStorage, StorageSerializers } from '@vueuse/core'
 import { defineStore } from 'pinia'
+import type { TGAddress } from '../GlobalType'
 
+const title = 'system/AddressStore'
+const url = '/api/public/address'
 export const useAddressStore = defineStore('system/AddressStore', () => {
-  const content = useStorage('sytem/AddressStore/content', [], localStorage)
+    const content = useStorage<Array<TGAddress>>(`${title}/content`, null, localStorage, { serializer: StorageSerializers.object })
 
-  async function GetAPI() {
-    try {
-      let { data } = await axios.get('/api/public/address')
-      content.value = data
-      console.log(data)
+    async function GetAPI() {
+        try {
+            let { data } = await axios.get(url)
+            content.value = data
+            console.log(data)
+        }
+        catch(err) {
+            console.log(err)
+        }
     }
-    catch(err) {
-      console.log(err)
+
+    return {
+        content,
+
+        GetAPI
     }
-  }
-
-  return {
-    content,
-
-    GetAPI
-  }
 })

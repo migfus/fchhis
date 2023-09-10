@@ -3,17 +3,18 @@ import { reactive } from 'vue'
 import type { RouteRecordName } from 'vue-router'
 
 interface configInt {
-  loading: boolean
-  to: RouteRecordName
+    loading: boolean
+    to: RouteRecordName
 }
 
-export const usePreLoader = defineStore('system/PreLoader', () => {
-  const config = reactive<configInt>({
-    loading: false,
-    to: 'home'
-  });
+const title = 'system/PreLoader'
+export const usePreLoader = defineStore(title, () => {
+    const config = reactive<configInt>({
+        loading: false,
+        to: 'home'
+    });
 
-  return {
-    config,
-  }
+    return {
+        config,
+    }
 });

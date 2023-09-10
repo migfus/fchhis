@@ -1,7 +1,7 @@
-import { ref, reactive } from 'vue';
+import { reactive } from 'vue';
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import { useSessionStorage, useStorage, StorageSerializers } from '@vueuse/core'
+import { useStorage, StorageSerializers } from '@vueuse/core'
 import type { TGConfig } from '../GlobalType';
 
 interface paramsInt {
@@ -23,8 +23,9 @@ interface contentInt {
 }
 
 const title = 'event/EventPublicStore'
+const url = '/api/public/event'
 export const useEventPublicStore = defineStore(title, () => {
-    const count = useStorage<Number>(`${title}/count`, 0, sessionStorage)
+    const countEvent = useStorage<Number>(`${title}/count`, 0, sessionStorage)
     const content = useStorage<Array<contentInt>>('event/EventPublic/content', [], sessionStorage, {serializer: StorageSerializers.object})
     const params = reactive<paramsInt>({
         currentDate: '',
@@ -36,7 +37,7 @@ export const useEventPublicStore = defineStore(title, () => {
     async function GetAPI() {
         config.loading = true
         try {
-            let { data: { data }} = await axios.get('/api/public/event', { params: params })
+            let { data: { data }} = await axios.get(url, { params: params })
             content.value = data.map(row => {
                 return {
                     title: `${row.event_category.name} - ${row.title}`,
@@ -60,8 +61,8 @@ export const useEventPublicStore = defineStore(title, () => {
 
     async function GetCountAPI() {
         try {
-            let { data: { count}} = await axios.get('/api/public/event', { params: { count: 1 }})
-            count.value = count
+            let { data: { count}} = await axios.get(url, { params: { count: 1 }})
+            countEvent.value = count
         }
         catch(err) {
             console.log(err)
@@ -69,7 +70,7 @@ export const useEventPublicStore = defineStore(title, () => {
     }
 
     return {
-        count,
+        countEvent,
         params,
         config,
         content,

@@ -39,6 +39,7 @@ class RoleAndPermissionsSeeder extends Seeder
 
         // NOTE AUTH
         Permission::create(['name' => 'index auth']);
+        Permission::create(['name' => 'dashboard auth']);
         Permission::create(['name' => 'update auth']);
 
         // NOTE DASHBOARD
@@ -50,37 +51,37 @@ class RoleAndPermissionsSeeder extends Seeder
         // NOTE ADMIN
         $role = Role::create(['name' => 'Admin']);
         $role->givePermissionTo([
-            'index auth', 'update auth',
+            'index auth', 'dashboard auth', 'update auth',
         ]);
 
         // NOTE REGIONAL MANAGER
         $role = Role::create(['name' => 'Regional Manager']);
         $role->givePermissionTo([
-            'index auth', 'update auth',
+            'index auth', 'dashboard auth', 'update auth',
         ]);
 
         // NOTE BRANCH MANAGER
         $role = Role::create(['name' => 'Branch Manager']);
         $role->givePermissionTo([
-            'index auth', 'update auth',
+            'index auth', 'dashboard auth', 'update auth',
         ]);
 
         // NOTE STAFF
         $role = Role::create(['name' => 'Staff']);
         $role->givePermissionTo([
-            'index auth', 'update auth',
+            'index auth', 'dashboard auth', 'update auth',
         ]);
 
         // NOTE AGENT
         $role = Role::create(['name' => 'Agent']);
         $role->givePermissionTo([
-            'index auth', 'update auth',
+            'index auth', 'dashboard auth', 'update auth',
         ]);
 
         // NOTE CLIENT
         $role = Role::create(['name' => 'Client']);
         $role->givePermissionTo([
-            'index auth', 'update auth',
+            'index auth', 'dashboard auth', 'update auth',
         ]);
     }
 }

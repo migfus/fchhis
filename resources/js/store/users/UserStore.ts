@@ -1,81 +1,77 @@
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { defineStore} from 'pinia'
 import { useStorage, StorageSerializers } from '@vueuse/core'
 import axios from 'axios'
+import type { TGQuery } from '../GlobalType'
 
 interface configInt {
-  loading: boolean
-  loadingDestroy: boolean
-  open: boolean
-  deleteID: number
-}
-interface paramsInt {
-  search: string
-  dateRange: Array<string>,
-  filter: string,
+    loading: boolean
+    open: boolean
+    deleteID: number
 }
 
-export const useUserStore = defineStore('users/UserStore', () => {
-  const config = reactive<configInt>({
-    loading: false,
-    loadingDestroy: false,
-    open: false,
-    deleteID: null,
-  })
-  const content = useStorage('users/UserStore/content', [], sessionStorage, {serializer: StorageSerializers.object})
-  const params = reactive<paramsInt>({
-    search: '',
-    dateRange: ['', ''],
-    filter: 'Name',
-  })
+const title = 'users/UserStore'
+const url = '/api/users'
+export const useUserStore = defineStore(title, () => {
+    const config = reactive<configInt>({
+        loading: false,
+        open: false,
+        deleteID: null,
+    })
+    const content = useStorage(`${title}/content`, null, sessionStorage, {serializer: StorageSerializers.object})
+    const params = reactive<TGQuery>({
+        search: '',
+        sort: 'ASC',
+        start: null,
+        end: null,
+        filter: 'Name',
+    })
 
-  async function GetAPI() {
-    config.loading = true
-    try {
-      let { data: {data}} = await axios.get('/api/users', {params: params})
-      // NOTE Insert [open] value for open/close details toggle
-      const contentData = data.data
-      contentData.map(row => {
-        row.open = config.open
-        return {
-          ...row,
+    async function GetAPI() {
+        config.loading = true
+        try {
+            let { data: {data}} = await axios.get(url, {params: params})
+            // NOTE Insert [open] value for open/close details toggle
+            const contentData = data.data
+            contentData.map(row => {
+                row.open = config.open
+                return {
+                    ...row,
+                }
+            })
+            content.value = data
+            content.value.data = contentData
         }
-      })
-      content.value = data
-      content.value.data = contentData
+        catch(err) {
+            console.log(err)
+        }
+        config.loading = false
     }
-    catch(err) {
-      console.log(err)
+
+    async function DestroyAPI() {
+        try {
+            let { data: {data}} = await axios.delete(`/api/users/${config.deleteID}`)
+            console.log(data)
+            config.deleteID = null
+            GetAPI()
+        }
+        catch(err) {
+            console.log(err)
+        }
     }
-    config.loading = false
-  }
 
-  async function DestroyAPI() {
-    config.loadingDestroy = true
-    try {
-      let { data: {data}} = await axios.delete(`/api/users/${config.deleteID}`)
-      console.log(data)
-      config.deleteID = null
-      GetAPI()
+    const toggleOpen = () => {
+        config.open = !config.open
+        content.value.data.map(row => row.open = config.open)
     }
-    catch(err) {
-      console.log(err)
+
+    return {
+        config,
+        content,
+        params,
+
+        GetAPI,
+        toggleOpen,
+        DestroyAPI
     }
-    config.loadingDestroy = false
-  }
-
-  const toggleOpen = () => {
-    config.open = !config.open
-    content.value.data.map(row => row.open = config.open)
-  }
-
-  return {
-    config,
-    content,
-    params,
-
-    GetAPI,
-    toggleOpen,
-    DestroyAPI
-  }
 });

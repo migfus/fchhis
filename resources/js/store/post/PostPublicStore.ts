@@ -2,53 +2,51 @@ import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { useStorage, StorageSerializers } from '@vueuse/core'
 import axios from 'axios'
+import type { TGConfig, TGQuery } from '../GlobalType'
 
 interface contentInt {
-  id: number
-  title: string
-  cover: string
-  category: { name: string }
-  content: string
-  user: {
     id: number
-    email: string
-    avatar: string
-  }
-  created_at: string
-}
-interface configInt {
-  loading: boolean
-}
-interface paramsInt {
-  search: string
-}
-
-export const usePostPublicStore = defineStore('post/PostPublicStore', () => {
-  const content = useStorage<Array<contentInt>>('post/PostPublicStore/content', [], sessionStorage, {serializer: StorageSerializers.object});
-  const config = reactive<configInt>({
-    loading: false
-  });
-  const params = reactive<paramsInt>({
-    search: ''
-  })
-
-  async function GetAPI() {
-    config.loading = true
-    try {
-      let { data: { data }} = await axios.get('/api/public/post', { params: params})
-      content.value = data;
+    title: string
+    cover: string
+    category: { name: string }
+    content: string
+    user: {
+        id: number
+        email: string
+        avatar: string
     }
-    catch(err) {
-      console.log('error');
+    created_at: string
+}
+
+const title = 'post/PostPublicStore'
+const url = '/api/public/post'
+export const usePostPublicStore = defineStore(title, () => {
+    const content = useStorage<Array<contentInt>>(`${title}/content`, [], sessionStorage, {serializer: StorageSerializers.object});
+    const config = reactive<TGConfig>({
+        loading: false
+    });
+    const query = reactive<TGQuery>({
+        search: '',
+        sort: 'ASC'
+    })
+
+    async function GetAPI() {
+        config.loading = true
+        try {
+            let { data: { data }} = await axios.get(url, { params: query})
+            content.value = data;
+        }
+        catch(err) {
+            console.log('error');
+        }
+        config.loading = false
     }
-    config.loading = false
-  }
 
-  return {
-    config,
-    content,
-    params,
+    return {
+        config,
+        content,
+        query,
 
-    GetAPI,
-  }
+        GetAPI,
+    }
 });

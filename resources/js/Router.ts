@@ -7,161 +7,161 @@ import { $Log } from '@/helpers/Debug';
 import { useFaqPublicStore } from "@/store/faq/FaqPublicStore";
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    // NOTE PAGES
-    {
-      path: "/",
-      name: 'home',
-      component: () => import('@/views/pages/home/@HomePage.vue'),
-      meta: {
-        title: 'Home',
-      }
-    },
-    {
-      path: "/about",
-      name: 'about',
-      component: () => import('@/views/pages/about/@AboutPage.vue'),
-      meta: {
-        title: 'About',
-      }
-    },
-    {
-      path: '/calendar',
-      name: 'calendar',
-      component: () => import('@/views/pages/calendar/CalendarPage.vue'),
-      meta: {
-        title: 'Calendar'
-      }
-    },
-    {
-      path: '/faqs',
-      name: 'faqs',
-      component: () => import('@/views/pages/faqs/FaqsPage.vue'),
-      meta: {
-        title: 'FAQs'
-      }
-    },
-    {
-    path: '/news',
-    name: 'news',
-      component: () => import('@/views/pages/news/NewsUpdates.vue'),
-      meta: {
-        title: 'News & Updates'
-      }
-    },
-    {
-    path: '/news/:id',
-    name: 'post',
-      component: () => import('@/views/pages/news/PostPage.vue'),
-      meta: {
-        title: 'Post'
-      }
-    },
+    history: createWebHistory(),
+    routes: [
+        // NOTE PAGES
+        {
+            path: "/",
+            name: 'home',
+            component: () => import('@/views/pages/home/@HomePage.vue'),
+            meta: {
+                title: 'Home',
+            }
+        },
+        {
+            path: "/about",
+            name: 'about',
+            component: () => import('@/views/pages/about/@AboutPage.vue'),
+            meta: {
+                title: 'About',
+            }
+        },
+        {
+            path: '/calendar',
+            name: 'calendar',
+            component: () => import('@/views/pages/calendar/CalendarPage.vue'),
+            meta: {
+                title: 'Calendar'
+            }
+        },
+        {
+            path: '/faqs',
+            name: 'faqs',
+                component: () => import('@/views/pages/faqs/FaqsPage.vue'),
+                meta: {
+                    title: 'FAQs'
+                }
+        },
+        {
+            path: '/news',
+            name: 'news',
+            component: () => import('@/views/pages/news/NewsUpdates.vue'),
+            meta: {
+                title: 'News & Updates'
+            }
+        },
+        {
+            path: '/news/:id',
+            name: 'post',
+            component: () => import('@/views/pages/news/PostPage.vue'),
+            meta: {
+                title: 'Post'
+            }
+        },
 
-    // NOTE AUTH =================================================================
-    {
-      path: "/login",
-      name: "login",
-      component: () => import("@/views/auth/LoginPage.vue"),
-      meta: {
-        title: "Login",
-      },
-    },
-    {
-      path: "/register",
-      name: "register",
-      component: () => import("@/views/auth/RegisterPage.vue"),
-      meta: {
-        title: "Register",
-      },
-    },
-    {
-      path: "/forgot",
-      name: "forgot",
-      component: () => import("@/views/auth/ForgotPage.vue"),
-      meta: {
-        title: "Forgot Password",
-      },
-    },
-    // {
-    //   path: "/forgot/fill",
-    //   name: "forgot-recovery",
-    //   component: () => import("@/views/auth/RecoveryPage.vue"),
-    //   meta: {
-    //     title: "Recovery",
-    //   },
-    // },
-    // {
-    //   path: "/register",
-    //   name: "register",
-    //   component: () => import("@/views/auth/RegisterPage.vue"),
-    //   meta: {
-    //     title: "Register",
-    //   },
-    // },
-    // {
-    //   path: "/register/fill",
-    //   name: "register-fill",
-    //   component: () => import("@/views/auth/RegisterFillPage.vue"),
-    //   meta: {
-    //     title: "Register",
-    //   },
-    // },
-    // NOTE DASHBOARD
-    {
-      path: "/dashboard",
-      name: "dashboard",
-      component: () => import("@/views/dashboard/DashboardPage.vue"),
-      meta: {
-        sideBar: true,
-        title: "Dashboard",
-        auth: true,
-      },
-    },
+        // NOTE AUTH =================================================================
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("@/views/auth/LoginPage.vue"),
+            meta: {
+                title: "Login",
+            },
+        },
+        {
+            path: "/register",
+            name: "register",
+            component: () => import("@/views/auth/RegisterPage.vue"),
+            meta: {
+                title: "Register",
+            },
+        },
+        {
+        path: "/forgot",
+        name: "forgot",
+        component: () => import("@/views/auth/ForgotPage.vue"),
+        meta: {
+            title: "Forgot Password",
+        },
+        },
+        // {
+        //   path: "/forgot/fill",
+        //   name: "forgot-recovery",
+        //   component: () => import("@/views/auth/RecoveryPage.vue"),
+        //   meta: {
+        //     title: "Recovery",
+        //   },
+        // },
+        // {
+        //   path: "/register",
+        //   name: "register",
+        //   component: () => import("@/views/auth/RegisterPage.vue"),
+        //   meta: {
+        //     title: "Register",
+        //   },
+        // },
+        // {
+        //   path: "/register/fill",
+        //   name: "register-fill",
+        //   component: () => import("@/views/auth/RegisterFillPage.vue"),
+        //   meta: {
+        //     title: "Register",
+        //   },
+        // },
+        // NOTE DASHBOARD
+        {
+        path: "/dashboard",
+        name: "dashboard",
+        component: () => import("@/views/dashboard/DashboardPage.vue"),
+        meta: {
+            sideBar: true,
+            title: "Dashboard",
+            auth: true,
+        },
+        },
 
-    // NOTE AUTH
-    {
-      path: "/account-settings",
-      name: "account-settings",
-      component: () => import("@/views/dashboard/AccountSettingsPage.vue"),
-      meta: {
-        sideBar: true,
-        title: "Dashboard",
-        auth: true,
-      },
-    },
+        // NOTE AUTH
+        {
+        path: "/account-settings",
+        name: "account-settings",
+        component: () => import("@/views/dashboard/AccountSettingsPage.vue"),
+        meta: {
+            sideBar: true,
+            title: "Dashboard",
+            auth: true,
+        },
+        },
 
 
-    // NOTE SPECIAL
-    {
-      path: "/:pathMatch(.*)*",
-      name: 'error',
-      component: () => import("@/views/pages/ErrorPage.vue"),
-      meta: {
-        title: "Page not Found!",
-      },
-    },
-  ],
+        // NOTE SPECIAL
+        {
+        path: "/:pathMatch(.*)*",
+        name: 'error',
+        component: () => import("@/views/pages/ErrorPage.vue"),
+        meta: {
+            title: "Page not Found!",
+        },
+        },
+    ],
 });
 const TITLE = "FCHHIS";
 
 router.beforeEach(async (to, from, next) => {
-  const $load = usePreLoader();
-  const $auth = useAuthStore();
+    const $load = usePreLoader();
+    const $auth = useAuthStore();
 
-  $load.config.loading = true
-  $load.config.to = to.name
+    $load.config.loading = true
+    $load.config.to = to.name
 
-  $auth.UpdateAbility()
+    $auth.UpdateAbility()
 
-  const canNavigate = to.matched.some(row => {
-    if(row.meta.resource) {
-      // @ts-ignore
-      return ability.can(row.meta.action || 'index', row.meta.resource)
-    }
-    return true;
-  })
+    const canNavigate = to.matched.some(row => {
+        if(row.meta.resource) {
+            // @ts-ignore
+            return ability.can(row.meta.action || 'index', row.meta.resource)
+        }
+        return true;
+    })
 
   // const $auth = useAuthStore();
 
@@ -183,18 +183,18 @@ router.beforeEach(async (to, from, next) => {
   //     return false
   //   }
   // }
-  if(!canNavigate) {
-    next(new Error('Route Disabled (no permission)'))
-  }
+    if(!canNavigate) {
+        next(new Error('Route Disabled (no permission)'))
+    }
 
-  next()
+    next()
 });
 
 router.afterEach((to) => {
-  const $load = usePreLoader()
-  $load.config.loading = false
+    const $load = usePreLoader()
+    $load.config.loading = false
 
-  document.title = to.meta.title ? `${to.meta.title} | ${TITLE}` : "";
+    document.title = to.meta.title ? `${to.meta.title} | ${TITLE}` : "";
 });
 
 export default router;
