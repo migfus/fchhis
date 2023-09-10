@@ -12,7 +12,6 @@ export const useAddressStore = defineStore('system/AddressStore', () => {
         try {
             let { data } = await axios.get(url)
             content.value = data
-            console.log(data)
         }
         catch(err) {
             console.log(err)

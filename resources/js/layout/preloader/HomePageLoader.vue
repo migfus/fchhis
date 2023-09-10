@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <CardLoader />
-  </div>
+    <div>
+        <CardLoader />
+    </div>
 </template>
 
 <script setup lang='ts'>

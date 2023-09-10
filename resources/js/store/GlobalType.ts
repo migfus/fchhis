@@ -53,6 +53,9 @@ export type TGAuthContent = {
     role: string //DEBUG UNSORE
     name: string
     info?: TUserInfo
+    roles: Array<{
+        name: string
+    }>
 }
 
 type TUserInfo = {

@@ -19,6 +19,9 @@ interface contentInt {
 const title = 'faq/FaqPublicStore'
 const url = '/api/public/faq'
 export const useFaqPublicStore = defineStore(title, () => {
+    const CancelToken = axios.CancelToken
+    let cancel;
+
     const content = useStorage<Array<contentInt>>(`${title}/content`, null, sessionStorage, { serializer: StorageSerializers.object })
     const config = reactive<TGConfig>({
         loading: false,
@@ -31,7 +34,10 @@ export const useFaqPublicStore = defineStore(title, () => {
     async function GetAPI() {
         config.loading = true
         try {
-            let { data: { data }} = await axios.get(url, { params: query})
+            let { data: { data }} = await axios.get(url, {
+                params: query,
+                cancelToken: new CancelToken(function executor(c) { cancel = c; })
+            })
             content.value = data
         }
         catch(err) {
@@ -40,11 +46,17 @@ export const useFaqPublicStore = defineStore(title, () => {
         config.loading = false
     }
 
+    function CancelAPI() {
+        cancel()
+        content.value = null
+    }
+
     return {
         content,
         config,
         query,
 
         GetAPI,
+        CancelAPI,
     }
 });

@@ -31,4 +31,5 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::apiResource('/users', \App\Http\Controllers\UserController::class)->only(['index', 'destroy']);
+    Route::apiResource('/statistic', \App\Http\Controllers\StatisticController::class)->only(['index']);
 });

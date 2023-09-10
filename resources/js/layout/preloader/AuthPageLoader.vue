@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <AuthLoader />
-  </div>
+    <div>
+        <AuthLoader />
+    </div>
 </template>
 
 <script setup lang='ts'>
