@@ -15,7 +15,8 @@
                         <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
                     </svg>
                     <RouterLink v-if="$route.name != 'dashboard'" :to="{name: $route.name}" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
-                        {{ $route.name.toString().charAt(0).toUpperCase() + $route.name.toString().slice(1) }}
+                        <!-- {{ $route.name.toString().charAt(0).toUpperCase() + $route.name.toString().slice(1) }} -->
+                        {{ $route.meta.title }}
                     </RouterLink>
                 </div>
             </li>

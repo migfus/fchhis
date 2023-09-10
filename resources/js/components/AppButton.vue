@@ -57,8 +57,8 @@ const color = computed(() => {
             return 'btn-secondary'
         case 'danger':
             return 'btn-danger'
-        case 'success':
-            return 'btn-success'
+        case 'white':
+            return 'bg-white hover:bg-gray-50 focus:ring-gray-100 text-black'
         default:
             return 'bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 text-white'
     }

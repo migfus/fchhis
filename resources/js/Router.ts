@@ -2,9 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "@/store/auth/AuthStore";
 import { usePreLoader } from "@/store/system/PreLoader";
 import ability from '@/Ability';
-import { $Log } from '@/helpers/Debug';
-
-import { useFaqPublicStore } from "@/store/faq/FaqPublicStore";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -124,10 +121,10 @@ const router = createRouter({
         {
         path: "/account-settings",
         name: "account-settings",
-        component: () => import("@/views/dashboard/AccountSettingsPage.vue"),
+        component: () => import("@/views/account-settings/AccountSettingsPage.vue"),
         meta: {
             sideBar: true,
-            title: "Dashboard",
+            title: "Account Settings",
             auth: true,
         },
         },
