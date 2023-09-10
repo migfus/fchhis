@@ -14,6 +14,9 @@ class RoleAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // NOTE USERS
+        Permission::create(['name' => 'index beneficiary']);
+
+        // NOTE USERS
         // Permission::create(['name' => 'index user']);
         // Permission::create(['name' => 'store user']);
         // Permission::create(['name' => 'update user']);
@@ -52,36 +55,42 @@ class RoleAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'Admin']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth',
+            'index beneficiary',
         ]);
 
         // NOTE REGIONAL MANAGER
         $role = Role::create(['name' => 'Regional Manager']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth',
+            'index beneficiary',
         ]);
 
         // NOTE BRANCH MANAGER
         $role = Role::create(['name' => 'Branch Manager']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth',
+            'index beneficiary',
         ]);
 
         // NOTE STAFF
         $role = Role::create(['name' => 'Staff']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth',
+            'index beneficiary',
         ]);
 
         // NOTE AGENT
         $role = Role::create(['name' => 'Agent']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth',
+            'index beneficiary',
         ]);
 
         // NOTE CLIENT
         $role = Role::create(['name' => 'Client']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth',
+            'index beneficiary',
         ]);
     }
 }
