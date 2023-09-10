@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
-import { useBeneficiaryStore } from '@/store/@client/BeneficiaryStore'
+import { useBeneficiaryStore } from '@/store/@client/BeneficiaryClientStore'
 
 import DataTransition from '@/components/transitions/DataTransition.vue'
 

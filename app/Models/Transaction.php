@@ -19,4 +19,20 @@ class Transaction extends Model
         'pay_type_id',
         'amount'
     ];
+
+    public function plan_details() {
+        return $this->belongsTo(PlanDetail::class);
+    }
+
+    public function pay_type() {
+        return $this->belongsTo(PayType::class);
+    }
+
+    public function agent() {
+        return $this->belongsTo(User::class, 'agent_id');
+    }
+
+    public function staff() {
+        return $this->belongsTo(User::class, 'staff_id');
+    }
 }

@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
-import { useSummaryTrsansactionSore } from '@/store/@client/SummaryTransactionStore'
+import { useSummaryTrsansactionSore } from '@/store/@client/SummaryTransactionClientStore'
 import { NumberAddComma } from '@/helpers/Converter'
 
 import DataTransition from '@/components/transitions/DataTransition.vue'

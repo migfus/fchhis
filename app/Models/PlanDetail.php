@@ -24,4 +24,8 @@ class PlanDetail extends Model
         'querterly',
         'monthly',
     ];
+
+    public function plan() {
+        return $this->belongsTo(Plan::class);
+    }
 }

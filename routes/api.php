@@ -30,7 +30,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('/document', \App\Http\Controllers\DocumentAuthController::class)->only(['index', 'destroy', 'store']);
     });
 
+    Route::apiResource('/statistic', \App\Http\Controllers\StatisticController::class)->only(['index']);
     Route::apiResource('/beneficiary', \App\Http\Controllers\BeneficiaryController::class)->only(['index']);
     Route::apiResource('/users', \App\Http\Controllers\UserController::class)->only(['index', 'destroy']);
-    Route::apiResource('/statistic', \App\Http\Controllers\StatisticController::class)->only(['index']);
+    Route::apiResource('/transaction', \App\Http\Controllers\TransactionController::class)->only(['index']);
 });
