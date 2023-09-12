@@ -7,6 +7,12 @@ Route::get('/test', function() {
     return response()->json(['test' => 'test']);
 });
 
+Route::group(['prefix' => 'email', 'as' => 'email.'], function() {
+    Route::post('/forgot', [\App\Http\Controllers\EmailController::class, 'registration']);
+    Route::post('/recovery-code', [\App\Http\Controllers\EmailController::class, 'sendRecoveryCode']);
+});
+
+
 Route::controller(\App\Http\Controllers\AuthController::class)->group(function () {
     Route::post('/login', 'Login');
     Route::post('/register', 'Register');

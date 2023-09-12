@@ -50,13 +50,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { usePostPublicStore } from '@/store/post/PostPublicStore';
-import moment from 'moment';
+import { onMounted, onUnmounted } from 'vue'
+import { usePostPublicStore } from '@/store/post/PostPublicStore'
+import moment from 'moment'
 
-const $post = usePostPublicStore();
+const $post = usePostPublicStore()
 
 onMounted(() => {
-    $post.GetAPI();
+    $post.GetAPI()
 });
+onUnmounted(() => {
+    $post.CancelAPI()
+})
 </script>

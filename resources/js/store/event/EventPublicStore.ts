@@ -7,6 +7,10 @@ import type { TGConfig } from '../GlobalType';
 interface paramsInt {
     currentDate: String
 }
+type TConfig = {
+    loading: boolean
+    count: number
+}
 interface contentInt {
     event_category: { name: String }
     title: String
@@ -25,19 +29,26 @@ interface contentInt {
 const title = 'event/EventPublicStore'
 const url = '/api/public/event'
 export const useEventPublicStore = defineStore(title, () => {
+    const CancelToken = axios.CancelToken
+    let cancel;
+
     const countEvent = useStorage<Number>(`${title}/count`, 0, sessionStorage)
-    const content = useStorage<Array<contentInt>>('event/EventPublic/content', [], sessionStorage, {serializer: StorageSerializers.object})
+    const content = useStorage<Array<contentInt>>('event/EventPublic/content', null, sessionStorage, {serializer: StorageSerializers.object})
     const params = reactive<paramsInt>({
         currentDate: '',
     })
-    const config = reactive<TGConfig>({
-        loading: false
+    const config = reactive<TConfig>({
+        loading: false,
+        count: 0
     })
 
     async function GetAPI() {
         config.loading = true
         try {
-            let { data: { data }} = await axios.get(url, { params: params })
+            let { data: { data }} = await axios.get(url, {
+                params: params,
+                cancelToken: new CancelToken(function executor(c) { cancel = c; })
+            })
             content.value = data.map(row => {
                 return {
                     title: `${row.event_category.name} - ${row.title}`,
@@ -59,6 +70,11 @@ export const useEventPublicStore = defineStore(title, () => {
         config.loading = false
     }
 
+    function CancelAPI() {
+        cancel()
+        content.value = null
+    }
+
     async function GetCountAPI() {
         try {
             let { data: { count}} = await axios.get(url, { params: { count: 1 }})
@@ -76,6 +92,7 @@ export const useEventPublicStore = defineStore(title, () => {
         content,
 
         GetCountAPI,
+        CancelAPI,
         GetAPI,
     }
 })

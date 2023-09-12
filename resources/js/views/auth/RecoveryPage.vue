@@ -3,7 +3,7 @@
         <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 col-start-1 col-span-3 lg:col-span-1 lg:col-start-2">
             <div class="sm:mx-auto sm:w-full sm:max-w-md">
                 <img class="mx-auto h-24 w-auto" src="http://127.0.0.1:8000/images/logo.png" alt="Your Company" />
-                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Recover your account</h2>
+                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Change your Password</h2>
             </div>
 
             <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">

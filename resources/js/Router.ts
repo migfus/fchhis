@@ -74,70 +74,56 @@ const router = createRouter({
             },
         },
         {
-        path: "/forgot",
-        name: "forgot",
-        component: () => import("@/views/auth/ForgotPage.vue"),
-        meta: {
-            title: "Forgot Password",
+            path: "/forgot",
+            name: "forgot",
+            component: () => import("@/views/auth/ForgotPage.vue"),
+            meta: {
+                title: "Forgot Password",
+            },
         },
+        {
+            path: "/forgot/fill",
+            name: "forgot-recovery",
+            component: () => import("@/views/auth/RecoveryPage.vue"),
+            meta: {
+                title: "Recovery",
+            },
         },
-        // {
-        //   path: "/forgot/fill",
-        //   name: "forgot-recovery",
-        //   component: () => import("@/views/auth/RecoveryPage.vue"),
-        //   meta: {
-        //     title: "Recovery",
-        //   },
-        // },
-        // {
-        //   path: "/register",
-        //   name: "register",
-        //   component: () => import("@/views/auth/RegisterPage.vue"),
-        //   meta: {
-        //     title: "Register",
-        //   },
-        // },
-        // {
-        //   path: "/register/fill",
-        //   name: "register-fill",
-        //   component: () => import("@/views/auth/RegisterFillPage.vue"),
-        //   meta: {
-        //     title: "Register",
-        //   },
-        // },
         // NOTE DASHBOARD
         {
-        path: "/dashboard",
-        name: "dashboard",
-        component: () => import("@/views/dashboard/DashboardPage.vue"),
-        meta: {
-            sideBar: true,
-            title: "Dashboard",
-            auth: true,
-        },
+            path: "/dashboard",
+            name: "dashboard",
+            component: () => import("@/views/dashboard/DashboardPage.vue"),
+            meta: {
+                sideBar: true,
+                title: "Dashboard",
+                auth: true,
+                resource: 'auth'
+            },
         },
 
         // NOTE AUTH
         {
-        path: "/account-settings",
-        name: "account-settings",
-        component: () => import("@/views/account-settings/AccountSettingsPage.vue"),
-        meta: {
-            sideBar: true,
-            title: "Account Settings",
-            auth: true,
-        },
+            path: "/account-settings",
+            name: "account-settings",
+            component: () => import("@/views/account-settings/AccountSettingsPage.vue"),
+            meta: {
+                sideBar: true,
+                title: "Account Settings",
+                auth: true,
+                resource: 'auth'
+            },
         },
 
 
         // NOTE SPECIAL
         {
-        path: "/:pathMatch(.*)*",
-        name: 'error',
-        component: () => import("@/views/pages/ErrorPage.vue"),
-        meta: {
-            title: "Page not Found!",
-        },
+            path: "/:pathMatch(.*)*",
+            name: 'error',
+            component: () => import("@/views/pages/ErrorPage.vue"),
+            meta: {
+                title: "Page not Found!",
+            },
         },
     ],
 });

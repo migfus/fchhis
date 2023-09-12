@@ -33,7 +33,6 @@
                             Sign out
                         </a>
                     </MenuItem>
-                    <MenuButton>test</MenuButton>
                 </MenuItems>
             </transition>
         </Menu>

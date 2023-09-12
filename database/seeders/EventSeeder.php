@@ -22,7 +22,7 @@ class EventSeeder extends Seeder
                 'id' => 549717636175937,
                 'user_id' => $_ENV['SEEDER_USER_ADMIN_ID'], //admin [first user],
                 'event_category_id' => \App\Models\EventCategory::where('id', 549717375753077)->first()->id, // Event
-                'title' => 'CMU Event',
+                'title' => 'FCHHIS Event',
                 'start' => Carbon::now()->add(1, 'day'),
                 'end' => Carbon::now()->add(3, 'day'),
             ],
