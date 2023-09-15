@@ -9,7 +9,7 @@ Route::get('/test', function() {
 
 Route::group(['prefix' => 'email', 'as' => 'email.'], function() {
     Route::post('/forgot', [\App\Http\Controllers\EmailController::class, 'registration']);
-    Route::post('/recovery-code', [\App\Http\Controllers\EmailController::class, 'sendRecoveryCode']);
+    Route::post('/recovery', [\App\Http\Controllers\EmailController::class, 'recovery']);
 });
 
 

@@ -60,4 +60,8 @@ class Controller extends BaseController
 
         return $location;
     }
+
+    public function G_Test($req) : JsonResponse {
+        return response()->json($req);
+    }
 }

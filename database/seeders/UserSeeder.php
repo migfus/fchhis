@@ -90,7 +90,7 @@ class UserSeeder extends Seeder
             'id' => env('SEEDER_USER_CLIENT_ID', 'no id'),
             'region_id' => env('SEEDER_REGION_X_ID', 'no id'),
             'branch_id' => env('SEEDER_BRANCH_VALENCIA_ID', 'no id'),
-            'email' => 'client@gmail.com',
+            'email' => 'migfus20@gmail.com',
             'name' => '[client]',
             'password'=> Hash::make('12345678'),
             'avatar'   => 'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80',

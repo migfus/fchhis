@@ -1,14 +1,15 @@
 <template>
+    <h1>tsete</h1>
     <div class='h-full'>
         <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 col-start-1 col-span-3 lg:col-span-1 lg:col-start-2">
             <div class="sm:mx-auto sm:w-full sm:max-w-md">
-                <img class="mx-auto h-24 w-auto" src="http://127.0.0.1:8000/images/logo.png" alt="Your Company" />
+                <img class="mx-auto h-24 w-auto" src="http://fchhis.migfus.net/images/logo.png" alt="Your Company" />
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Update your Password</h2>
             </div>
 
             <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                    <Form v-slot="{ errors }" :validation-schema="schema" @submit="$pass.ConfirmAPI()" class="space-y-6">
+                    <Form v-slot="{ errors }" :validation-schema="schema" @submit="$pass.ConfirmAPI()" validate-on-mount class="space-y-6">
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">New Password</label>
                             <div class="mt-1">
@@ -32,7 +33,10 @@
                         </div>
 
                         <div>
-                            <AppButton @click="$pass.StoreAPI()" :loading="$pass.config.loading" block :disabled="Object.keys(errors).length != 0" type="submit">
+                            <AppButton v-if="$pass.config.approved" :loading="$pass.config.loading" block color="success">
+                                Link Sent! Please check your email.
+                            </AppButton>
+                            <AppButton v-else @click="$pass.ChangePasswordAPI()" :loading="$pass.config.loading" block :disabled="Object.keys(errors).length != 0" type="submit">
                                 Change Password
                             </AppButton>
                             <!-- <button @click="$pass.StoreAPI()" type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Send Recovery Link</button> -->
@@ -48,10 +52,9 @@
 import { useForgotPassword } from '@/store/auth/ForgotPasswordStore'
 import * as Yup from 'yup'
 import { Form, Field, configure, ErrorMessage, } from 'vee-validate'
-import { useRouter } from 'vue-router'
 import { onMounted, onUnmounted } from 'vue'
 
-import AppButton from '@/components/AppButton.vue';
+import AppButton from '@/components/AppButton.vue'
 
 configure({
     validateOnInput: true,
@@ -62,16 +65,11 @@ const schema = Yup.object({
 })
 
 const $pass = useForgotPassword()
-const $router = useRouter()
 
 onMounted(() => {
-    if($pass.params.email == null) {
-        $router.push({ name: 'forgot'})
-    }
+    $pass.ConfirmAPI()
 })
 onUnmounted(() => {
-    Object.assign($pass.params, {
-
-    })
+    $pass.ResetParams
 })
 </script>

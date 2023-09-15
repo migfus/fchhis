@@ -84,20 +84,25 @@
     </style>
 </head>
 <body>
-<div id="box">
-    <div id="header">
-        <img id="image" src="{{ $logo }}">
-    </div>
-    <div class="spacing"></div>
-    <div id ="rightbar">
-        <h1 class="heading"></h1>
-        <p >Hi {{$name}} ,</p>
-        <p>Thank you for registered your business with FCHHIS.</p>
-        <p>Please view the inbox for more details or contact FCHHIS for further instructions.</p>
+    <div id="box">
+        <div id="header">
+            <img id="image" src="{{ $logo }}">
+            <p>Future Care and Helping Hands</p>
+        </div>
+        <div class="spacing"></div>
+        <div id ="rightbar">
+            <h1 class="heading"></h1>
+            <p>Hi {{$name}} ,</p>
+            <p>It seems, you attempt to recover your account.</p>
+            <p>If you didn't attempt this recovery, please ignore this email, perhaps someone accidentaly recovery their account using your email.</p>
+            <p>If you intentionally recovery your account, you can proceed by opening the link in below.</p>
+            <p>Recovery Link: <a href="{{ $link }}" target="_blank">{{ $link }}</a></p>
 
-        <div class="text-div">Thanks,</div>
-        <div class="text-div">FCHHIS Team.</div>
+            <div class="text-div">Thanks,</div>
+            <div class="text-div">FCHHIS System.</div>
+
+            <div class="text-div">FCHHIS System.</div>
+        </div>
     </div>
-</div>
 </body>
 </html>

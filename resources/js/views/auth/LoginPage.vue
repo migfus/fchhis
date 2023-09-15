@@ -8,19 +8,21 @@
 
             <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                    <form class="space-y-6" action="#" method="POST" @submit.prevent="$auth.LoginAPI(input)">
+                    <Form v-slot="{ errors }" :validation-schema="schema" @submit="$auth.LoginAPI(input)" class="space-y-6" >
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                             <div class="mt-1">
-                                <input v-model="input.email" id="email" name="email" type="email" autocomplete="email" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm" />
+                                <Field v-model="input.email" name="email" type="email" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm" />
                             </div>
+                            <ErrorMessage name="email" class="text-red-500"/>
                         </div>
 
                         <div>
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                             <div class="mt-1">
-                                <input v-model="input.password" id="password" name="password" type="password" autocomplete="current-password" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm" />
+                                <Field v-model="input.password" name="password" type="password" class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm" />
                             </div>
+                            <ErrorMessage name="password" class="text-red-500"/>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -35,11 +37,11 @@
                         </div>
 
                         <div>
-                            <AppButton :loading="$auth.config.loading" size="sm" block type="submit">
+                            <AppButton :loading="$auth.config.loading" :disabled="Object.keys(errors).length != 0" size="sm" block type="submit">
                                 Sign In
                             </AppButton>
                         </div>
-                    </form>
+                    </Form>
 
                 </div>
             </div>
@@ -49,12 +51,22 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/store/auth/AuthStore';
-import { reactive } from 'vue';
+import { useAuthStore } from '@/store/auth/AuthStore'
+import { reactive } from 'vue'
+import * as Yup from 'yup'
+import { Form, Field, configure, ErrorMessage } from 'vee-validate'
 
 import AppButton from '@/components/AppButton.vue'
 
 const $auth = useAuthStore();
+
+configure({
+    validateOnInput: true
+})
+const schema = Yup.object({
+    email: Yup.string().required('Email is required').email('Invalid Email'),
+    password: Yup.string().required('Password is required')
+})
 
 interface InputInt {
     email: string
