@@ -14,19 +14,19 @@
             </div>
 
             <div>
-            <div class="-mt-px flex divide-x divide-gray-200">
-                <div class="flex w-0 flex-1">
-                    <a :href="`mailto:`" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                        {{ $auth.content.auth.info.plan_detail }}
-                    </a>
-                </div>
-                <div class="-ml-px flex w-0 flex-1">
-                    <a :href="`tel:`" class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
-                    Plan
-                    </a>
+                <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                        <a :href="`mailto:`" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                            {{ $auth.content.auth.info.plan_detail }}
+                        </a>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                        <a :href="`tel:`" class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                        Plan
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
         </div>
     </div>
