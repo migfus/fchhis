@@ -2,7 +2,6 @@
     <div>
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
 
-
             <div class="flex flex-1 flex-col text-center">
                 <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSrdB8rRgA1qgkw0ckcTrhIa0kpV2ILvbMWg&usqp=CAU" alt="" />
                 <h3 class="mt-6 text-sm font-medium text-gray-900">{{  $auth.content.auth.name }}</h3>
