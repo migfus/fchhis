@@ -21,7 +21,7 @@ export type TGAddress = {
     }>
 }
 
-export type TGPlanDetails = {
+export type TGPlanDetail = {
     plan: { name: string }
     monthly: number,
     quarterly: number,
@@ -73,7 +73,7 @@ type TUserInfo = {
     pay_type: TGPayType
 
     plan_details_id: bigint
-    plan_details: TGPlanDetails
+    plan_detail: TGPlanDetail
 
     bday: dateFns
     bplace_id: bigint

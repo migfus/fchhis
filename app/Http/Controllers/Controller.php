@@ -21,7 +21,7 @@ class Controller extends BaseController
             ];
         }
 
-        $auth = User::where('id', $req->user()->id)->with(['info', 'region', 'branch'])->first();
+        $auth = User::where('id', $req->user()->id)->with(['info.plan_detail.plan', 'region', 'branch'])->first();
 
         return [
             'status' => true,

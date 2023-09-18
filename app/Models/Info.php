@@ -18,4 +18,8 @@ class Info extends Model
     public function user() {
         return $this->belongsTo(Info::class);
     }
+
+    public function plan_detail() {
+        return $this->belongsTo(PlanDetail::class);
+    }
 }

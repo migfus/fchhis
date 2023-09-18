@@ -20,7 +20,7 @@ class AuthController extends Controller
             return $this->G_ValidatorFailResponse($val);
         }
 
-        $user = User::where('email', $req->email)->with(['info', 'region', 'branch'])->first();
+        $user = User::where('email', $req->email)->with(['info.plan_detail.plan', 'region', 'branch'])->first();
         if(!$user || !Hash::check($req->password, $user->password)) {
             return response()->json(['status' => false, 'message' => 'Invalid Credentials!'], 401);
         }
