@@ -100,7 +100,7 @@
             <main class="flex-1">
                 <BreadCrumbs />
                 <div class="py-6">
-                    <div class="mx-auto max-w-full px-4 sm:px-6 md:px-8">
+                    <div class="mx-auto max-w-full sm:px-6 md:px-8">
                         <PreLoader v-if="$preLoader.config.loading"/>
                         <RouterView v-else></RouterView>
                     </div>

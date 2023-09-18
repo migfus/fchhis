@@ -15,10 +15,6 @@ Route::group(['prefix' => 'email', 'as' => 'email.'], function() {
 
 Route::controller(\App\Http\Controllers\AuthController::class)->group(function () {
     Route::post('/login', 'Login');
-    Route::post('/register', 'Register');
-    Route::post('/recovery', 'Recovery');
-    Route::post('/recovery-confirm', 'ConfirmRecovery');
-    Route::post('/change-password-recovery', 'ChangePasswordRecovery');
 });
 
 // NOTE PUBLICS API
@@ -34,6 +30,7 @@ Route::group(['prefix' => 'public', 'as' => 'public.'], function() {
 Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'auth', 'as' => 'auth.'], function() {
         Route::apiResource('/document', \App\Http\Controllers\DocumentAuthController::class)->only(['index', 'destroy', 'store']);
+        Route::post('change-password', [\App\Http\Controllers\AuthController::class, 'ChangePassword']);
     });
 
     Route::apiResource('/statistic', \App\Http\Controllers\StatisticController::class)->only(['index']);

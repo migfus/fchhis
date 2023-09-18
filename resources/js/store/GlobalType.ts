@@ -56,6 +56,11 @@ export type TGAuthContent = {
     roles: Array<{
         name: string
     }>
+    logs: Array<{
+        content: string
+        created_at: Date
+        id: number
+    }>
 }
 
 type TUserInfo = {

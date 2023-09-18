@@ -101,10 +101,5 @@ class EmailController extends Controller
 
             return response()->json([...$this->G_ReturnDefault(), 'data' => true]);
 
-
-
-            if($val->fails()) {
-                return $this->G_ValidatorFailResponse($val);
-            }
         }
 }

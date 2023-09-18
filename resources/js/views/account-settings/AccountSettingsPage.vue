@@ -1,31 +1,19 @@
 <template>
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
-        <AvatarCard />
-        <AvatarCard class="col-span-2"/>
+    <div class="min-h-full">
+        <main class="">
+            <!-- Page header -->
+            <HeaderAccountSettings />
+
+            <div class="mx-auto mt-8 grid grid-cols-1 gap-6 sm:px-6 lg:grid-flow-col-dense lg:grid-cols-3">
+                <ChangePasswordAccountSettings />
+                <TimelineAccountSettings />
+            </div>
+        </main>
     </div>
 </template>
 
 <script setup lang="ts">
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/20/solid'
-import { useAuthStore } from '@/store/auth/AuthStore'
-import { ref } from 'vue'
-
-import AppButton from '@/components/AppButton.vue'
-import AvatarCard from '@/views/account-settings/cards/AvatarCard.vue'
-
-const $auth = useAuthStore();
-
-const people = [
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-    // More people...
-]
-const open = ref(false)
+import HeaderAccountSettings from '@/views/account-settings/cards/HeaderAccountSettings.vue'
+import ChangePasswordAccountSettings from './cards/ChangePasswordAccountSettings.vue'
+import TimelineAccountSettings from './cards/TimelineAccountSettings.vue'
 </script>

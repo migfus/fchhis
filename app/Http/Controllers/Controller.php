@@ -21,7 +21,15 @@ class Controller extends BaseController
             ];
         }
 
-        $auth = User::where('id', $req->user()->id)->with(['info.plan_detail.plan', 'region', 'branch'])->first();
+        $auth = User::where('id', $req->user()->id)->with([
+                'info.plan_detail.plan',
+                'region',
+                'branch',
+                'logs' => function($q) {
+                    return $q->orderBy('created_at', 'DESC')->limit(5);
+                }
+            ])
+            ->first();
 
         return [
             'status' => true,

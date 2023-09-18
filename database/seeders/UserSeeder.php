@@ -137,6 +137,13 @@ class UserSeeder extends Seeder
                 'due_at'    => Carbon::today()->addDays(rand(0, 90))
             ]);
         }
+
+
+        \App\Models\Log::create([
+            'user_id' => env('SEEDER_USER_CLIENT_ID', 'no id'),
+            'log_category_id' => 1,
+            'content' => 'Registered'
+        ]);
     }
 
 }

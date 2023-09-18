@@ -16,6 +16,12 @@ interface TInput {
     password: string;
 }
 
+type TChangePassword = {
+    currentPassword: string
+    newPassword: string
+    confirmPassword: string
+}
+
 export const useAuthStore = defineStore("auth/AuthStore", () => {
     const _token = useStorage<String>('auth/AuthStore/token', null, localStorage);
     const _content = useStorage<TContent>('auth/AuthStore/content', null, localStorage, {serializer: StorageSerializers.object});
@@ -25,6 +31,12 @@ export const useAuthStore = defineStore("auth/AuthStore", () => {
     const config = reactive<TGConfig>({
         loading: false,
     })
+    const changePassword = reactive<TChangePassword>({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+    })
+    const errors = ref(null)
 
     // SECTION API
     async function LoginAPI(input: TInput) {
@@ -50,37 +62,31 @@ export const useAuthStore = defineStore("auth/AuthStore", () => {
         config.loading = false
     }
 
-    async function RecoveryAPI(input: TInput) {
-        config.loading = true
+    async function ChangePasswordAPI() {
         try {
-            let { data: { data }} = await axios.post('/api/recovery', input)
-            // config.status = data
-        }
-        catch(e) {
-            console.log('RecoveryAPI Error', {e})
-        }
-        config.loading = false
-    }
-
-    async function ConfirmRecoveryAPI(input: TInput) {
-        try {
-            let { data: { data }} = await axios.post('/api/recovery-confirm', input)
-                // config.confirm = data
-            }
-        catch(e) {
-            console.log('ConfirmRecoveryAPI Error', {e})
-        }
-    }
-
-    async function ChangePasswordAPI(input: TInput) {
-        try {
-            let { data: { data }} = await axios.post('/api/change-password-recovery', input)
+            let { data: { data }} = await axios.post('/api/auth/change-password', changePassword)
             if(data) {
+                Object.assign(changePassword, {
+                    currentPassword: '',
+                    newPassword: '',
+                    confirmPassword: ''
+                })
+                notify({
+                    group: "error",
+                    title: "Success",
+                    text: 'Successfuly Updated'
+                }, 5000)
                 //@ts-ignore
-                this.router.push({name: 'login'})
+                this.router.push({name: 'dashboard'})
             }
         }
         catch(e) {
+            notify({
+                group: "error",
+                title: "Incorrect Password",
+                text: 'Please retype again.'
+            }, 5000)
+            errors.value = e.response.data.errors
             console.log('ChangePasswordAPI Error', {e})
         }
     }
@@ -121,11 +127,11 @@ export const useAuthStore = defineStore("auth/AuthStore", () => {
         content,
         config,
         token,
+        changePassword,
+        errors,
 
-        ConfirmRecoveryAPI,
         ChangePasswordAPI,
         LoginAPI,
-        RecoveryAPI,
         Logout,
         UpdateData,
         UpdateAbility,
