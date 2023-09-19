@@ -20,18 +20,45 @@
             </div>
             <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
                 <div class="text-gray-500 my-1 mr-2">{{ $auth.content.auth.roles[0].name }}</div>
-                <AppButton size="sm">Change Avatar</AppButton>
+                <AppButton @click="show = true" size="sm">Change Avatar</AppButton>
             </div>
         </div>
     </div>
+
+    <AvatarUpload v-model="$auth.content.auth.avatar" v-model:show="show" @update="ChangeAvatarAPI"/>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '@/store/auth/AuthStore'
 import moment from 'moment'
+import { ref, reactive } from 'vue'
+import axios from 'axios'
 
-import AppButton from '@/components/AppButton.vue';
+import AppButton from '@/components/AppButton.vue'
+import AvatarUpload from '@/components/modals/AvatarUpload.vue'
+import { notify } from 'notiwind'
 
 const $auth = useAuthStore()
 
+const show = ref(false)
+const config = reactive({
+    loading: false
+})
+
+async function ChangeAvatarAPI() {
+    config.loading = true
+    try {
+        let {data : { data }} = await axios.post('/api/auth/change-avatar', {avatar: $auth.content.auth.avatar})
+        $auth.content.auth.avatar = data
+        notify({
+            group: "success",
+            title: "Success",
+            text: 'New Avatar on display 👍'
+        }, 5000)
+    }
+    catch(e) {
+        console.log('ChangeAvatarAPI ERROR', {e})
+    }
+    config.loading = false
+}
 </script>

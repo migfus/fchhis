@@ -8,7 +8,7 @@ Route::get('/test', function() {
 });
 
 Route::group(['prefix' => 'email', 'as' => 'email.'], function() {
-    Route::post('/forgot', [\App\Http\Controllers\EmailController::class, 'registration']);
+    Route::post('/forgot',   [\App\Http\Controllers\EmailController::class, 'registration']);
     Route::post('/recovery', [\App\Http\Controllers\EmailController::class, 'recovery']);
 });
 
@@ -31,10 +31,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'auth', 'as' => 'auth.'], function() {
         Route::apiResource('/document', \App\Http\Controllers\DocumentAuthController::class)->only(['index', 'destroy', 'store']);
         Route::post('change-password', [\App\Http\Controllers\AuthController::class, 'ChangePassword']);
+        Route::post('change-avatar',   [\App\Http\Controllers\AuthController::class, 'ChangeAvatar']);
     });
 
-    Route::apiResource('/statistic', \App\Http\Controllers\StatisticController::class)->only(['index']);
+    Route::apiResource('/statistic',   \App\Http\Controllers\StatisticController::class)->only(['index']);
     Route::apiResource('/beneficiary', \App\Http\Controllers\BeneficiaryController::class)->only(['index']);
-    Route::apiResource('/users', \App\Http\Controllers\UserController::class)->only(['index', 'destroy']);
+    Route::apiResource('/users',       \App\Http\Controllers\UserController::class)->only(['index', 'destroy']);
     Route::apiResource('/transaction', \App\Http\Controllers\TransactionController::class)->only(['index']);
 });

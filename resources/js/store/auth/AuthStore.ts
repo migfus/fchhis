@@ -72,7 +72,7 @@ export const useAuthStore = defineStore("auth/AuthStore", () => {
                     confirmPassword: ''
                 })
                 notify({
-                    group: "error",
+                    group: "success",
                     title: "Success",
                     text: 'Successfuly Updated'
                 }, 5000)

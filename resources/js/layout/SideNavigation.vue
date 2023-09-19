@@ -25,6 +25,7 @@
 
                                     <!-- SECTION MOBILE NAV -->
                                     <AppSidebarNav linkName="dashboard" :icon="WindowIcon"> Dashboard </AppSidebarNav>
+                                    <AppSidebarNav linkName="clients" :icon="UsersIcon" :disabled="!can('index', 'client')"> Clients </AppSidebarNav>
                                     <AppSidebarNav linkName="account-settings" :icon="WindowIcon"> Account Settings </AppSidebarNav>
 
                                     <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
@@ -58,6 +59,7 @@
                     <nav class="flex-1 px-2 pb-4">
                         <!-- SECTION DESKTOP NAV -->
                         <AppSidebarNav linkName="dashboard" :icon="WindowIcon" :disabled="!can('dashboard', 'auth')"> Dashboard </AppSidebarNav>
+                        <AppSidebarNav linkName="clients" :icon="UsersIcon" :disabled="!can('index', 'client')"> Clients </AppSidebarNav>
                         <AppSidebarNav linkName="account-settings" :icon="Cog6ToothIcon" :disabled="!can('index', 'auth')"> Account Settings </AppSidebarNav>
 
                         <h3 class="mb-1 px-3 text-sm font-medium text-gray-100 mt-4" id="projects-headline">Pages</h3>
@@ -131,7 +133,8 @@ import {
     CheckCircleIcon,
     MegaphoneIcon,
     WindowIcon,
-    Cog6ToothIcon
+    Cog6ToothIcon,
+    UsersIcon,
 } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import { usePreLoader } from '@/store/system/PreLoader'

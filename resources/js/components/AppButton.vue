@@ -52,6 +52,8 @@ const color = computed(() => {
         return 'bg-gray-400 text-black cursor-not-allowed'
     }
     switch ($props.color) {
+        case 'danger':
+            return 'bg-red-400 hover:bg-red-500 focus:ring-red-400 text-white'
         case 'success' :
             return 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500 text-white'
         case 'white':

@@ -27,9 +27,6 @@ class AuthController extends Controller
                     return $q->orderBy('created_at', 'DESC')->limit(5);
                 }
             ])
-        ->whereHas('logs', function ($q) {
-            return $q->orderBy('created_at', 'DESC')->limit(10);
-        })
         ->first();
         if(!$user || !Hash::check($req->password, $user->password)) {
             return response()->json(['status' => false, 'message' => 'Invalid Credentials!'], 401);
@@ -79,5 +76,23 @@ class AuthController extends Controller
         ]);
 
         return response()->json([...$this->G_ReturnDefault($req), 'data' => true ]);
+    }
+
+    public function ChangeAvatar(Request $req) {
+        if(!$req->user()->can('update auth'))
+            return $this->G_UnauthorizedResponse();
+
+        $val = Validator::make($req->all(), [
+            'avatar' => 'required'
+        ]);
+
+        if($val->fails())
+            return $this->G_ValidatorFailResponse($val);
+
+        $user = User::find($req->user()->id);
+        $user->avatar =  $this->G_AvatarUpload($req->avatar, 'avatars/');
+        $user->save();
+
+        return response()->json([...$this->G_ReturnDefault($req), 'data' => $user->avatar]);
     }
 }

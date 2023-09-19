@@ -20,7 +20,7 @@ class RoleAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'index transaction']);
 
         // NOTE USERS
-        // Permission::create(['name' => 'index user']);
+        Permission::create(['name' => 'index client']);
         // Permission::create(['name' => 'store user']);
         // Permission::create(['name' => 'update user']);
         // Permission::create(['name' => 'destroy user']);
@@ -60,6 +60,7 @@ class RoleAndPermissionsSeeder extends Seeder
             'index auth', 'dashboard auth', 'update auth',
             'index beneficiary',
             'index transaction',
+            'index client',
         ]);
 
         // NOTE REGIONAL MANAGER
@@ -68,6 +69,7 @@ class RoleAndPermissionsSeeder extends Seeder
             'index auth', 'dashboard auth', 'update auth',
             'index beneficiary',
             'index transaction',
+            'index client',
         ]);
 
         // NOTE BRANCH MANAGER
@@ -76,6 +78,7 @@ class RoleAndPermissionsSeeder extends Seeder
             'index auth', 'dashboard auth', 'update auth',
             'index beneficiary',
             'index transaction',
+            'index client',
         ]);
 
         // NOTE STAFF
@@ -84,6 +87,7 @@ class RoleAndPermissionsSeeder extends Seeder
             'index auth', 'dashboard auth', 'update auth',
             'index beneficiary',
             'index transaction',
+            'index client',
         ]);
 
         // NOTE AGENT
