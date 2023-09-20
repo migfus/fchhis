@@ -61,4 +61,8 @@ class User extends Authenticatable
     public function logs() {
         return $this->hasMany(Log::class);
     }
+
+    public function client_transactions() {
+        return $this->hasMany(Transaction::class, 'client_id');
+    }
 }

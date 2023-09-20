@@ -22,4 +22,19 @@ class Info extends Model
     public function plan_detail() {
         return $this->belongsTo(PlanDetail::class);
     }
+
+    public function pay_type() {
+        return $this->belongsTo(PayType::class, 'pay_type_id');
+    }
+
+
+    public function agent() {
+        return $this->belongsTo(User::class, 'agent_id');
+    }
+
+
+    public function staff() {
+        return $this->belongsTo(User::class, 'staff_id');
+    }
+
 }
