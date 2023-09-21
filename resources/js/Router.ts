@@ -114,6 +114,17 @@ const router = createRouter({
                 resource: 'client'
             }
         },
+            {
+                path: '/user/:id',
+                name: 'user',
+                component: () => import('@/views/users/client/ClientPage.vue'),
+                meta: {
+                    sideBar: true,
+                    title: 'Clients',
+                    auth: true,
+                    resource: 'client'
+                }
+            },
 
         // NOTE AUTH
         {

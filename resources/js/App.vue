@@ -1,13 +1,13 @@
 <template>
-  <div style="background-color: #F3F4F6;">
-    <NotificationsSection />
+    <div style="background-color: #F3F4F6;">
+        <NotificationsSection />
 
 
-    <SideNavigation v-if="$route.meta.sideBar"/>
-    <TopNavigation v-else/>
+        <SideNavigation v-if="$route.meta.sideBar"/>
+        <TopNavigation v-else/>
 
 
-  </div>
+    </div>
 </template>
 
 <script setup>
@@ -26,7 +26,7 @@ const $event = useEventPublicStore();
 const $address = useAddressStore();
 
 onMounted(() => {
-  $event.GetCountAPI()
-  $address.GetAPI()
+    $event.GetCountAPI()
+    $address.GetAPI()
 });
 </script>

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { reactive } from 'vue'
 import type { TGConfig, TGQuery } from '@/store/GlobalType'
 
-const title = '@staff/ClientStaffStore'
+const title = 'users/client/ClientStaffStore'
 const url = '/api/users/client'
 export const useClientStaffStore = defineStore(title, () => {
     const CancelToken = axios.CancelToken;
@@ -14,7 +14,7 @@ export const useClientStaffStore = defineStore(title, () => {
     const config = reactive<TGConfig>({ loading: false })
     const query = reactive<TGQuery>({
         search: '',
-        filter: null,
+        filter: 'name',
         sort: 'DESC',
         start: null,
         end: null,
@@ -26,12 +26,12 @@ export const useClientStaffStore = defineStore(title, () => {
         content.value = null
     }
 
-    async function GetAPI() {
+    async function GetAPI(page = 1) {
         config.loading = true
         try {
             let { data: {data}} = await axios.get(url, {
                 cancelToken: new CancelToken(function executor(c) { cancel = c; }),
-                params: { ...query, }
+                params: { ...query, page: page }
             })
             content.value = data
         }
@@ -41,6 +41,11 @@ export const useClientStaffStore = defineStore(title, () => {
         config.loading = false
     }
 
+    // SECTION FUNCTIONS
+    function ScrollUp() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     return {
         content,
         config,
@@ -48,5 +53,7 @@ export const useClientStaffStore = defineStore(title, () => {
 
         GetAPI,
         CancelAPI,
+
+        ScrollUp,
     }
 })

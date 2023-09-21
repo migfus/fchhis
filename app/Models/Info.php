@@ -12,7 +12,7 @@ class Info extends Model
 
     protected $fillable = [
         'user_id', 'staff_id', 'agent_id', 'bday', 'bplace_id', 'sex', 'address_id', 'address',
-        'pay_type_id', 'plan_details_id', 'due_at', 'cell', 'or'
+        'pay_type_id', 'plan_detail_id', 'due_at', 'cell', 'or'
     ];
 
     public function user() {

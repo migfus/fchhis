@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
             'user_id' => $user->id,
             'staff_id' => env('SEEDER_USER_STAFF_ID', 'no id'),
             'agent_id' => env('SEEDER_USER_ADMIN_ID', 'no id'),
-            'plan_details_id' => env('SEEDER_PLAN_BERYL_ID', 'no id'),
+            'plan_detail_id' => env('SEEDER_PLAN_BERYL_ID', 'no id'),
             'pay_type_id'=> env("SEEDER_PAY_TYPE_MONTHLY_ID", null),
             'bday' => '2022-02-02',
             'bplace_id' => 64,
@@ -99,7 +99,7 @@ class UserSeeder extends Seeder
             'user_id' => $user->id,
             'staff_id' => env('SEEDER_USER_STAFF_ID', 'no id'),
             'agent_id' => env('SEEDER_USER_AGENT_ID', 'no id'),
-            'plan_details_id' => env('SEEDER_PLAN_BERYL_ID', 'no id'),
+            'plan_detail_id' => env('SEEDER_PLAN_BERYL_ID', 'no id'),
             'pay_type_id'=> env("SEEDER_PAY_TYPE_MONTHLY_ID", null),
             'bday' => '2022-02-02',
             'bplace_id' => 64,
@@ -132,7 +132,7 @@ class UserSeeder extends Seeder
                 'address_id' => rand(1, 1000),
                 'address' => $idx . '] address',
                 'pay_type_id'=> env("SEEDER_PAY_TYPE_MONTHLY_ID", null),
-                'plan_details_id'    => env('SEEDER_PLAN_JASPER_ID', null),
+                'plan_detail_id'    => env('SEEDER_PLAN_JASPER_ID', null),
                 'cell' => rand(111111111, 999999999),
                 'due_at'    => Carbon::today()->addDays(rand(0, 90))
             ]);

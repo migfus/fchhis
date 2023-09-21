@@ -42,7 +42,7 @@ class ClientUserController extends Controller
                 }
             }
 
-            $data->with(['info.plan_detail.plan', 'info.pay_type', 'info.agent', 'info.staff']);
+            $data->with(['info.plan_detail.plan', 'info.pay_type', 'info.agent', 'info.staff', 'roles']);
 
             switch($req->filter) {
                 case 'plans':
