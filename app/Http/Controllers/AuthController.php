@@ -11,15 +11,14 @@ use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
-    public function Login(Request $req) {
+    public function Login(Request $req) : JsonResponse {
         $val = Validator::make($req->all(), [
             'email' => 'required|email',
             'password' => 'required|min:8',
         ]);
 
-        if($val->fails()) {
+        if($val->fails())
             return $this->G_ValidatorFailResponse($val);
-        }
 
         $user = User::where('email', $req->email)->with([
                 'info.plan_detail.plan', 'region', 'branch',
@@ -27,10 +26,9 @@ class AuthController extends Controller
                     return $q->orderBy('created_at', 'DESC')->limit(5);
                 }
             ])
-        ->first();
-        if(!$user || !Hash::check($req->password, $user->password)) {
+            ->first();
+        if(!$user || !Hash::check($req->password, $user->password))
             return response()->json(['status' => false, 'message' => 'Invalid Credentials!'], 401);
-        }
 
         $permissions = $user->getAllPermissions()->pluck('name');
 
@@ -44,19 +42,17 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function ChangePassword(Request $req) {
-        if(!$req->user()->can('update auth')) {
+    public function ChangePassword(Request $req) : JsonResponse {
+        if(!$req->user()->can('update auth'))
             return $this->G_UnauthorizedResponse();
-        }
 
         $val = Validator::make($req->all(), [
             'currentPassword' => 'required',
             'newPassword' => 'required',
         ]);
 
-        if($val->fails()) {
+        if($val->fails())
             return $this->G_ValidatorFailResponse($val);
-        }
 
         if(!Hash::check($req->currentPassword, $req->user()->password)) {
             return response()->json([
@@ -69,16 +65,13 @@ class AuthController extends Controller
         User::where('id', $req->user()->id)->update([
             'password' => Hash::make($req->newPassword)
         ]);
-        Log::create([
-            'user_id' => $req->user()->id,
-            'log_category_id' => 1,
-            'content' => 'Changed Password'
-        ]);
+
+        $this->G_Log($req, 'Login', 'Login Success');
 
         return response()->json([...$this->G_ReturnDefault($req), 'data' => true ]);
     }
 
-    public function ChangeAvatar(Request $req) {
+    public function ChangeAvatar(Request $req) : JsonResponse {
         if(!$req->user()->can('update auth'))
             return $this->G_UnauthorizedResponse();
 

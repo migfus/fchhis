@@ -6,8 +6,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
+
+use App\Models\User;
+use App\Models\Log;
+use App\Models\LogCategory;
 
 class Controller extends BaseController
 {
@@ -69,7 +72,20 @@ class Controller extends BaseController
         return $location;
     }
 
-    public function G_Test($req) : JsonResponse {
-        return response()->json($req);
+    public function G_Log($req, $categorynName, $content) : Boolean {
+        // SECTION AUTHENTICATED
+        if($req->user()) {
+            $logCategory = LogCategory::firstOrNew(['name' => $categorynName]);
+
+            Log::create([
+                'user_id' => $req->user()->id,
+                'log_category_id' => $logCategory->id,
+                'content' => $content
+            ]);
+
+            return true;
+        }
+
+        return false;
     }
 }

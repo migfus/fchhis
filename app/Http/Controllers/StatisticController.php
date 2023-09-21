@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Transaction;
+use Illuminate\Http\JsonResponse;
 
 class StatisticController extends Controller
 {
-    public function index(Request $req) {
-        if($req->user()->hasRole('Client')) {
+    public function index(Request $req) : JsonResponse {
+        if($req->user()->hasRole('Client'))
             return $this->ClientIndex($req);
-        }
 
         return $this->G_UnauthorizedResponse('unauthorized to Statistic[index]');
     }
-        private function ClientIndex($req) {
+        private function ClientIndex($req) : JsonResponse{
             if(Transaction::where('client_id', $req->user()->id)->count() > 0) {
                 $start = Carbon::parse(
                     Transaction::where('client_id', $req->user()->id)

@@ -8,20 +8,20 @@ use Kra8\Snowflake\HasShortflakePrimary;
 
 class Post extends Model
 {
-  use HasFactory, HasShortflakePrimary;
+    use HasFactory, HasShortflakePrimary;
 
-  protected $fillable = [
-    'post_category_id',
-    'title' ,
-    'content',
-    'cover',
-  ];
+    protected $fillable = [
+        'post_category_id',
+        'title' ,
+        'content',
+        'cover',
+    ];
 
-  public function category() {
-    return $this->belongsTo(PostCategory::class, 'post_category_id');
-  }
+    public function category() {
+        return $this->belongsTo(PostCategory::class, 'post_category_id');
+    }
 
-  public function user() {
-    return $this->belongsTo(User::class, 'user_id');
-  }
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

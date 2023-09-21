@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+
+use App\Models\Transaction;
 
 class TransactionController extends Controller
 {
@@ -28,9 +28,8 @@ class TransactionController extends Controller
                 'search' => '',
             ]);
 
-            if($val->fails()) {
+            if($val->fails())
                 return $this->G_ValidatorFailResponse($val);
-            }
 
             $data = Transaction::with(['plan_details.plan', 'pay_type', 'agent', 'staff'])->where('client_id', $req->user()->id)
                 ->whereHas('plan_details.plan', function($q) use($req) {

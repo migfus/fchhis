@@ -11,13 +11,11 @@ use Illuminate\Support\Facades\Validator;
 class BeneficiaryController extends Controller
 {
     public function index(Request $req) : JsonResponse {
-        if(!$req->user()->hasPermissionTo('index beneficiary')) {
+        if(!$req->user()->hasPermissionTo('index beneficiary'))
             return $this->G_UnauthorizedResponse('unauthorized to [index beneficiary]');
-        }
 
-        if($req->user()->hasRole('Client')) {
+        if($req->user()->hasRole('Client'))
             return $this->ClientIndex($req);
-        }
 
         return $this->G_UnauthorizedResponse('unauthorized [no role available]');
     }
@@ -26,9 +24,8 @@ class BeneficiaryController extends Controller
                 'search' => '',
             ]);
 
-            if($val->fails()) {
+            if($val->fails())
                 return $this->G_ValidatorFailResponse($val);
-            }
 
             $data = Beneficiary::where('user_id', $req->user()->id)
                 ->where('name', 'LIKE', $req->search)

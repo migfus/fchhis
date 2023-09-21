@@ -8,13 +8,11 @@ use Illuminate\Http\JsonResponse;
 
 class FAQPublicController extends Controller
 {
-    public function index(Request $req) {
-        if($req->search) {
+    public function index(Request $req) : JsonResponse {
+        if($req->search)
             $data = FAQ::whereNotNull('approved_user_id')->where('question', 'LIKE', '%'.$req->search.'%')->orderBy('points', 'DESC')->limit(4)->get();
-        }
-        else {
+        else
             $data = FAQ::whereNotNull('approved_user_id')->orderBy('points', 'DESC')->limit(4)->get();
-        }
 
         return response()->json([
             ...$this->G_ReturnDefault(),

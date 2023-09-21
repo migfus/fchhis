@@ -6,8 +6,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
+
+use App\Models\User;
+use App\Models\Log;
+use App\Models\LogCategory;
 
 class Controller extends BaseController
 {
@@ -21,7 +24,15 @@ class Controller extends BaseController
             ];
         }
 
-        $auth = User::where('id', $req->user()->id)->with(['info', 'region', 'branch'])->first();
+        $auth = User::where('id', $req->user()->id)->with([
+                'info.plan_detail.plan',
+                'region',
+                'branch',
+                'logs' => function($q) {
+                    return $q->orderBy('created_at', 'DESC')->limit(5);
+                }
+            ])
+            ->first();
 
         return [
             'status' => true,
@@ -59,5 +70,22 @@ class Controller extends BaseController
         file_put_contents('uploads/'.$path.$imageName, $image);
 
         return $location;
+    }
+
+    public function G_Log($req, $categorynName, $content) : Boolean {
+        // SECTION AUTHENTICATED
+        if($req->user()) {
+            $logCategory = LogCategory::firstOrNew(['name' => $categorynName]);
+
+            Log::create([
+                'user_id' => $req->user()->id,
+                'log_category_id' => $logCategory->id,
+                'content' => $content
+            ]);
+
+            return true;
+        }
+
+        return false;
     }
 }

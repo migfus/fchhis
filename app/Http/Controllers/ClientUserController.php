@@ -34,12 +34,11 @@ class ClientUserController extends Controller
             $data = User::select('*');
 
             if((bool)strtotime($req->start) OR (bool)strtotime($req->end)) {
-                if((bool)strtotime($req->start)) {
+                if((bool)strtotime($req->start))
                     $data->where('created_at', '>=', $req->start);
-                }
-                if((bool)strtotime($req->end)) {
+
+                if((bool)strtotime($req->end))
                     $data->where('created_at', '<=', $req->end);
-                }
             }
 
             $data->with(['info.plan_detail.plan', 'info.pay_type', 'info.agent', 'info.staff', 'roles']);

@@ -22,9 +22,8 @@ class EmailController extends Controller
             'name' => 'required',
         ]);
 
-        if($val->fails()) {
+        if($val->fails())
             return $this->G_ValidatorFailResponse($val);
-        }
 
         Mail::to('migfus20@gmail.com')->send(new RegistrationMail(
             $req->email, $req->name
@@ -34,29 +33,26 @@ class EmailController extends Controller
     }
     // ✅
     public function recovery(Request $req) : JsonResponse {
-        if($req->confirmPass) {
+        if($req->confirmPass)
             return $this->confirmPass($req);
-        }
-        else if($req->code) {
+        else if($req->code)
             return $this->checkCode($req);
-        }
+
         return $this->sendCode($req);
     }
         // ✅
         private function sendCode($req) : JsonResponse{
             $val = Validator::make($req->all(), [
-            'email' => 'required|email',
+                'email' => 'required|email',
             ]);
 
-            if($val->fails()) {
+            if($val->fails())
                 return $this->G_ValidatorFailResponse($val);
-            }
 
             $user = User::where('email', $req->email)->first();
 
-            if(!$user) {
+            if(!$user)
                 return $this->G_UnauthorizedResponse('no email available');
-            }
 
             $recovery = PasswordRecovery::create([
                 'user_id' => $user->id,
@@ -73,9 +69,8 @@ class EmailController extends Controller
         private function checkCode($req) : JsonResponse {
             $recovery = PasswordRecovery::where('code', $req->code)->whereNull('approved_at')->first();
 
-            if(!$recovery) {
+            if(!$recovery)
                 return response()->json([...$this->G_ReturnDefault(), 'data' => false]);
-            }
 
             return response()->json([...$this->G_ReturnDefault(), 'data' => true]);
         }
@@ -95,11 +90,9 @@ class EmailController extends Controller
                 'approved_at' => Carbon::now()
             ]);
 
-            if(!$user) {
+            if(!$user)
                 return response()->json([...$this->G_ReturnDefault(), 'data' => false]);
-            }
 
             return response()->json([...$this->G_ReturnDefault(), 'data' => true]);
-
         }
 }

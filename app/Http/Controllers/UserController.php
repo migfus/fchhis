@@ -12,13 +12,11 @@ use Illuminate\Http\JsonResponse;
 class UserController extends Controller
 {
     public function index(Request $req) : JsonResponse {
-        if(!$req->user()->hasPermissionTo('index user')) {
+        if(!$req->user()->hasPermissionTo('index user'))
             return $this->G_UnauthorizedResponse('unauthorized to [index user]');
-        }
 
-        if($req->user()->hasRole('Staff')) {
+        if($req->user()->hasRole('Staff'))
             return $this->StaffIndex($req);
-        }
 
         return $this->G_UnauthorizedResponse('unauthorized [no role available]');
     }
@@ -28,9 +26,8 @@ class UserController extends Controller
                 'filter' => 'required',
             ]);
 
-            if($val->fails()) {
+            if($val->fails())
                 return $this->G_ValidatorFailResponse($val);
-            }
 
             $data = User::whereHas('person', function($q) use($req) {
                 $q->where('last_name', 'LIKE', '%'.$req->search.'%')

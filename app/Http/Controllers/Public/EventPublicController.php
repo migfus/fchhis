@@ -9,9 +9,8 @@ use Illuminate\Http\JsonResponse;
 class EventPublicController extends Controller
 {
     public function index(Request $req) : JsonResponse {
-        if($req->count) {
+        if($req->count)
             return $this->getCount($req);
-        }
 
         return $this->get($req);
     }
