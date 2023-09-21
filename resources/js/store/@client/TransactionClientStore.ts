@@ -2,13 +2,13 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useStorage, StorageSerializers } from '@vueuse/core'
 import { reactive } from 'vue'
-import type { TGConfig, TGQuery, TGPlanDetails, TGPayType } from '../GlobalType'
+import type { TGConfig, TGQuery, TGPlanDetail, TGPayType } from '../GlobalType'
 
 type IContent = {
     id: number
     or: string
     amount: number
-    plan_details: TGPlanDetails
+    plan_details: TGPlanDetail
     pay_type: TGPayType
     created_at: Date
     staff: {

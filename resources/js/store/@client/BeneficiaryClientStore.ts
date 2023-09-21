@@ -2,7 +2,7 @@ import { useStorage, StorageSerializers } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { reactive } from 'vue'
-import type { TGConfig, TGQuery } from '@/store/GlobalTypes'
+import type { TGConfig, TGQuery } from '../GlobalTypes'
 
 const title = '@client/BeneficiariesStore'
 const url = '/api/beneficiary'

@@ -140,13 +140,13 @@
 </template>
 
 <script setup lang='ts'>
-import { Disclosure, DisclosureButton, DisclosurePanel, Popover, PopoverPanel, PopoverButton } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
 import { useNavigationStore } from '@/store/system/NavigationStore'
 import { useRoute } from 'vue-router';
 import { usePreLoader } from '@/store/system/PreLoader';
 import { useEventPublicStore } from '@/store/event/EventPublicStore';
 
+import { Disclosure, DisclosureButton, DisclosurePanel, Popover, PopoverPanel, PopoverButton } from '@headlessui/vue'
+import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/vue/24/outline'
 import HeaderBanner from '@/layout/HeaderBanner.vue';
 import PreLoader from '@/layout/preloader/@PreLoader.vue';
 import ProfileDropdown from './ProfileDropdown.vue';

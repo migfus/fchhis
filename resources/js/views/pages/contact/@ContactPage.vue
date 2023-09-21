@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <Banner />
-    <AddressSection />
-  </div>
+    <div>
+        <Banner />
+        <AddressSection />
+    </div>
 </template>
 
 <script setup lang="ts">

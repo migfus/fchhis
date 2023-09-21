@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <Banner />
-    <AddressSection />
-    <TeamSection />
-  </div>
+    <div>
+        <Banner />
+        <AddressSection />
+        <TeamSection />
+    </div>
 </template>
 
 <script setup lang="ts">

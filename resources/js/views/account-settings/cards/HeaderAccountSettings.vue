@@ -33,10 +33,10 @@ import { useAuthStore } from '@/store/auth/AuthStore'
 import moment from 'moment'
 import { ref, reactive } from 'vue'
 import axios from 'axios'
+import { notify } from 'notiwind'
 
 import AppButton from '@/components/AppButton.vue'
 import AvatarUpload from '@/components/modals/AvatarUpload.vue'
-import { notify } from 'notiwind'
 
 const $auth = useAuthStore()
 

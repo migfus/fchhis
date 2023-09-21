@@ -1,4 +1,4 @@
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { TGConfig, TGQuery } from '../GlobalType'

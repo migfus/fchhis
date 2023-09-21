@@ -1,5 +1,4 @@
 <template>
-    <h1>tsete</h1>
     <div class='h-full'>
         <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8 col-start-1 col-span-3 lg:col-span-1 lg:col-start-2">
             <div class="sm:mx-auto sm:w-full sm:max-w-md">
@@ -39,7 +38,6 @@
                             <AppButton v-else @click="$pass.ChangePasswordAPI()" :loading="$pass.config.loading" block :disabled="Object.keys(errors).length != 0" type="submit">
                                 Change Password
                             </AppButton>
-                            <!-- <button @click="$pass.StoreAPI()" type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Send Recovery Link</button> -->
                         </div>
                     </Form>
                 </div>
@@ -51,9 +49,9 @@
 <script setup lang="ts">
 import { useForgotPassword } from '@/store/auth/ForgotPasswordStore'
 import * as Yup from 'yup'
-import { Form, Field, configure, ErrorMessage, } from 'vee-validate'
 import { onMounted, onUnmounted } from 'vue'
 
+import { Form, Field, configure, ErrorMessage, } from 'vee-validate'
 import AppButton from '@/components/AppButton.vue'
 
 configure({

@@ -27,11 +27,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction';
 import moment from 'moment'
 import { useEventPublicStore } from '@/store/event/EventPublicStore';
+
+import FullCalendar from '@fullcalendar/vue3'
 
 const $event = useEventPublicStore();
 const fullCalendar = ref(); // ref="fullCalendar"

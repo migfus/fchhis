@@ -25,8 +25,9 @@
 </template>
 
 <script setup lang="ts">
-import { WindowIcon } from '@heroicons/vue/20/solid'
 import { useRoute } from 'vue-router'
+
+import { WindowIcon } from '@heroicons/vue/20/solid'
 
 const $route = useRoute();
 </script>

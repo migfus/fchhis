@@ -2,7 +2,6 @@ import { reactive } from 'vue';
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useStorage, StorageSerializers } from '@vueuse/core'
-import type { TGConfig } from '../GlobalType';
 
 interface paramsInt {
     currentDate: String

@@ -39,11 +39,7 @@
 
 <script setup lang="ts">
 import { useAuthStore } from '@/store/auth/AuthStore';
-import {
-    CheckIcon,
-    HandThumbUpIcon,
-    UserIcon,
-} from '@heroicons/vue/20/solid'
+import { CheckIcon} from '@heroicons/vue/20/solid'
 import moment from 'moment'
 
 const $auth = useAuthStore()

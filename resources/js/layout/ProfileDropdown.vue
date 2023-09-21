@@ -49,11 +49,10 @@
 </template>
 
 <script setup lang='ts'>
-import { ref } from 'vue'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { useAuthStore } from '@/store/auth/AuthStore'
-import { BellIcon, WindowIcon, XMarkIcon, FolderIcon, SquaresPlusIcon } from '@heroicons/vue/24/outline'
 
+import { BellIcon, WindowIcon, XMarkIcon, SquaresPlusIcon } from '@heroicons/vue/24/outline'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import AppButton from '@/components/AppButton.vue';
 
 const $auth = useAuthStore();

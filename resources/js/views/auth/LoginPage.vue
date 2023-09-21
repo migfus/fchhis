@@ -54,8 +54,8 @@
 import { useAuthStore } from '@/store/auth/AuthStore'
 import { reactive } from 'vue'
 import * as Yup from 'yup'
-import { Form, Field, configure, ErrorMessage } from 'vee-validate'
 
+import { Form, Field, configure, ErrorMessage } from 'vee-validate'
 import AppButton from '@/components/AppButton.vue'
 
 const $auth = useAuthStore();

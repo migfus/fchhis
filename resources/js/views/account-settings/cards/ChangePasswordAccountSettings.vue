@@ -41,9 +41,9 @@
 <script setup lang="ts">
 import { watch } from 'vue'
 import { useAuthStore } from '@/store/auth/AuthStore'
-import { Form, Field, ErrorMessage, configure, } from 'vee-validate'
 import * as Yup from 'yup'
 
+import { Form, Field, ErrorMessage, configure, } from 'vee-validate'
 import AppButton from '@/components/AppButton.vue';
 
 configure({

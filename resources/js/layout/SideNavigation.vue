@@ -118,12 +118,12 @@
 
 <script setup lang='ts'>
 import { ref } from 'vue'
-import {
-    Dialog,
-    DialogPanel,
-    TransitionChild,
-    TransitionRoot,
-} from '@headlessui/vue'
+import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
+import { usePreLoader } from '@/store/system/PreLoader'
+import { useEventPublicStore } from '@/store/event/EventPublicStore';
+import { useAbility } from '@casl/vue'
+
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot, } from '@headlessui/vue'
 import {
     Bars3BottomLeftIcon,
     CalendarIcon,
@@ -136,11 +136,6 @@ import {
     Cog6ToothIcon,
     UsersIcon,
 } from '@heroicons/vue/24/outline'
-import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
-import { usePreLoader } from '@/store/system/PreLoader'
-import { useEventPublicStore } from '@/store/event/EventPublicStore';
-import { useAbility } from '@casl/vue'
-
 import BreadCrumbs from '@/layout/BreadCrumbs.vue'
 import HeaderBanner from '@/layout/HeaderBanner.vue'
 import PreLoader from '@/layout/preloader/@PreLoader.vue'

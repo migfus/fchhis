@@ -2,12 +2,12 @@ import { reactive } from "vue";
 import { defineStore } from "pinia";
 
 interface contentInt {
-  name: String
-  content: string
-  status: String
+    name: String
+    content: string
+    status: String
 }
 interface configInt {
-  show: Boolean
+    show: Boolean
 }
 
 const title = 'system/NotificationStore'

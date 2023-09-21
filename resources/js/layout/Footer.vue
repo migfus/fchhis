@@ -12,28 +12,28 @@
                     <p class="text-sm leading-6 text-gray-600 mt-0" style="margin-top: 0px">Contact: <a class="font-bold">0916-859-8192</a></p>
                     <div class="flex space-x-6">
                         <a v-for="item in $nav.social" :key="item.name" :href="item.href" class="text-gray-400 hover:text-gray-500">
-                        <span class="sr-only">{{ item.name }}</span>
-                        <component :is="item.icon" class="h-8 w-8" aria-hidden="true" />
+                            <span class="sr-only">{{ item.name }}</span>
+                            <component :is="item.icon" class="h-8 w-8" aria-hidden="true" />
                         </a>
                     </div>
                 </div>
                 <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
                     <div class="md:grid md:grid-cols-2 md:gap-8">
                         <div>
-                        <h3 class="text-sm font-semibold leading-6 text-gray-900">Pages</h3>
-                        <ul role="list" class="mt-6 space-y-4">
-                            <li v-for="item in navigation.pages" :key="`${item.name}`">
-                            <RouterLink :to="`${item.link}`" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</RouterLink>
-                            </li>
-                        </ul>
+                            <h3 class="text-sm font-semibold leading-6 text-gray-900">Pages</h3>
+                            <ul role="list" class="mt-6 space-y-4">
+                                <li v-for="item in navigation.pages" :key="`${item.name}`">
+                                <RouterLink :to="`${item.link}`" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</RouterLink>
+                                </li>
+                            </ul>
                         </div>
                         <div class="mt-10 md:mt-0">
-                        <h3 class="text-sm font-semibold leading-6 text-gray-900">FAQs</h3>
-                        <ul role="list" class="mt-6 space-y-4">
-                            <li v-for="item in $nav.faqs" :key="`${item.name}`">
-                            <RouterLink :to="`${item.link}`" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</RouterLink>
-                            </li>
-                        </ul>
+                            <h3 class="text-sm font-semibold leading-6 text-gray-900">FAQs</h3>
+                            <ul role="list" class="mt-6 space-y-4">
+                                <li v-for="item in $nav.faqs" :key="`${item.name}`">
+                                <RouterLink :to="`${item.link}`" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</RouterLink>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="md:grid md:grid-cols-2 md:gap-8">

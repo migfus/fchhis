@@ -85,11 +85,9 @@
 
 <script setup lang="ts">
 import { useClientStaffStore } from '@/store/@staff/ClientStaffStore'
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/20/solid'
 import { NumberAddComma } from '@/helpers/Converter'
 import moment from 'moment'
 
-import AppButton from '@/components/AppButton.vue'
 import DataTransition from '@/components/transitions/DataTransition.vue'
 
 const $users = useClientStaffStore()

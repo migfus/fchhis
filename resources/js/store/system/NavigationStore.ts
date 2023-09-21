@@ -5,12 +5,6 @@ interface pagesInt {
     name: String
     link: { name: String }
 }
-// BUG
-interface socialInt {
-    name: String
-    href: String
-    // icon: Component,
-}
 interface faqsInt {
     name: String
     link: String
@@ -45,7 +39,7 @@ export const useNavigationStore = defineStore(title, () => {
             link: { name: 'news'}
         },
     ]
-    // BUG
+
     const social = shallowRef([{
         name: 'Facebook',
         href: '#',

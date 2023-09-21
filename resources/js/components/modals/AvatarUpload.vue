@@ -60,11 +60,10 @@
 </template>
 
 <script setup lang="ts">
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { CheckIcon } from '@heroicons/vue/24/outline'
-import VuePictureCropper, { cropper } from 'vue-picture-cropper'
 import { ref } from 'vue'
-import { useAuthStore } from '@/store/auth/AuthStore'
+
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import VuePictureCropper, { cropper } from 'vue-picture-cropper'
 import AppButton from '@/components/AppButton.vue'
 
 const $props = defineProps({
@@ -88,7 +87,7 @@ const config = {
     }
 }
 
-function updateValue(val) {
+function updateValue(val: string) {
     $emit('update:modelValue', val)
 }
 
@@ -107,7 +106,6 @@ function SelectFile(event: Event) {
     }
 }
 
-// @ts-ignore
 async function GetResult() {
     if (!cropper) return
     const base64 = cropper.getDataURL({
