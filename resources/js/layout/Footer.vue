@@ -23,7 +23,7 @@
                             <h3 class="text-sm font-semibold leading-6 text-gray-900">Pages</h3>
                             <ul role="list" class="mt-6 space-y-4">
                                 <li v-for="item in navigation.pages" :key="`${item.name}`">
-                                <RouterLink :to="`${item.link}`" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</RouterLink>
+                                    <RouterLink :to="`${item.link}`" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</RouterLink>
                                 </li>
                             </ul>
                         </div>
@@ -56,8 +56,11 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
-                <p class="text-xs leading-5 text-gray-500">&copy; 2023 Future Care and Helping Hands.</p>
+            <div class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-16">
+                <p class="text-xs leading-5 text-gray-500">&copy; 2023 <strong class="text-primary-800">Future Care and Helping Hands.</strong></p>
+                <a href="https://trello.com/b/z24Lqzpm/fchhis" target="_blank" class="text-xs leading-5 text-primary-700">
+                    <span>Development</span>
+                </a>
             </div>
         </div>
     </footer>
@@ -65,6 +68,8 @@
 
 <script setup lang="ts">
 import { useNavigationStore } from '@/store/system/NavigationStore';
+
+import { DocumentTextIcon } from '@heroicons/vue/24/outline'
 
 const $nav = useNavigationStore();
 const $props = defineProps({
@@ -85,7 +90,6 @@ const navigation = {
     company: [
         { name: 'About', href: '#' },
         { name: 'Blog', href: '#' },
-        { name: 'Jobs', href: '#' },
         { name: 'Press', href: '#' },
         { name: 'Partners', href: '#' },
     ],

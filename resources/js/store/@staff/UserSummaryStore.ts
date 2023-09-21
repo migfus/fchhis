@@ -4,21 +4,14 @@ import axios from 'axios'
 import { reactive } from 'vue'
 import type { TGConfig, TGQuery } from '@/store/GlobalType'
 
-const title = '@staff/ClientStaffStore'
-const url = '/api/users/client'
-export const useClientStaffStore = defineStore(title, () => {
+const title = '@staff/UserSummary'
+const url = '/api/users'
+export const useUserSummaryStore = defineStore(title, () => {
     const CancelToken = axios.CancelToken;
     let cancel;
 
     const content = useStorage(`${title}/content`, null, sessionStorage, { serializer: StorageSerializers.object })
     const config = reactive<TGConfig>({ loading: false })
-    const query = reactive<TGQuery>({
-        search: '',
-        filter: 'name',
-        sort: 'DESC',
-        start: null,
-        end: null,
-    })
 
     // SECTION API
     function CancelAPI() {
@@ -31,29 +24,21 @@ export const useClientStaffStore = defineStore(title, () => {
         try {
             let { data: {data}} = await axios.get(url, {
                 cancelToken: new CancelToken(function executor(c) { cancel = c; }),
-                params: { ...query, page: page }
+                params: { summary: true }
             })
             content.value = data
         }
         catch(e) {
-            console.log('UsersStore GetAPI Error', {e})
+            console.log('UserSummary GetAPI Error', {e})
         }
         config.loading = false
-    }
-
-    // SECTION FUNCTIONS
-    function ScrollUp() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     return {
         content,
         config,
-        query,
 
         GetAPI,
         CancelAPI,
-
-        ScrollUp,
     }
 })

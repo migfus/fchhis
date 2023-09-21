@@ -15,12 +15,29 @@ class RoleAndPermissionsSeeder extends Seeder
 
         // NOTE USERS
         Permission::create(['name' => 'index beneficiary']);
+        Permission::create(['name' => 'download beneficiary']);
+        Permission::create(['name' => 'create beneficiary']);
+        Permission::create(['name' => 'update beneficiary']);
+        Permission::create(['name' => 'destroy beneficiary']);
 
         // NOTE TRANSACTIONS
         Permission::create(['name' => 'index transaction']);
+        Permission::create(['name' => 'show transaction']);
+        Permission::create(['name' => 'download transaction']);
+        Permission::create(['name' => 'create transaction']);
+        Permission::create(['name' => 'update transaction']);
+        Permission::create(['name' => 'destroy transaction']);
 
         // NOTE USERS
         Permission::create(['name' => 'index client']);
+        Permission::create(['name' => 'show client']);
+        Permission::create(['name' => 'download client']);
+        Permission::create(['name' => 'create client']);
+        Permission::create(['name' => 'update client']);
+        Permission::create(['name' => 'destroy client']);
+
+        // NOTE USERS
+        Permission::create(['name' => 'summary user']);
         // Permission::create(['name' => 'store user']);
         // Permission::create(['name' => 'update user']);
         // Permission::create(['name' => 'destroy user']);
@@ -57,53 +74,59 @@ class RoleAndPermissionsSeeder extends Seeder
         // NOTE ADMIN
         $role = Role::create(['name' => 'Admin']);
         $role->givePermissionTo([
-            'index auth', 'dashboard auth', 'update auth',
-            'index beneficiary',
-            'index transaction',
-            'index client',
+            'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index beneficiary', 'create beneficiary', 'update beneficiary', 'destroy beneficiary', 'download beneficiary',// [manage] beneficiary [all]
+            'index transaction', 'show transaction', 'create transaction', 'update transaction', 'destroy transaction', 'download transaction', // [manage] transactions [all]
+            'index client', 'show client', 'create client', 'update client', 'destroy client', 'download client', // [manage] of client [all]
+            'summary user', // get count in [staff, agent, client, beneficiary]
         ]);
 
         // NOTE REGIONAL MANAGER
         $role = Role::create(['name' => 'Regional Manager']);
         $role->givePermissionTo([
-            'index auth', 'dashboard auth', 'update auth',
-            'index beneficiary',
-            'index transaction',
-            'index client',
+            'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index beneficiary', 'create beneficiary', 'update beneficiary', 'destroy beneficiary', 'download beneficiary',// [manage] beneficiary [all]
+            'index transaction', 'show transaction', 'create transaction', 'update transaction', 'destroy transaction', 'download transaction', // [manage] transactions [all]
+            'index client', 'show client', 'create client', 'update client', 'destroy client', 'download client', // [manage] of client [all]
+            'summary user', // get count in [staff, agent, client, beneficiary]
         ]);
 
         // NOTE BRANCH MANAGER
         $role = Role::create(['name' => 'Branch Manager']);
         $role->givePermissionTo([
-            'index auth', 'dashboard auth', 'update auth',
-            'index beneficiary',
-            'index transaction',
-            'index client',
+            'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index beneficiary', 'create beneficiary', 'update beneficiary', 'destroy beneficiary', 'download beneficiary',// [manage] beneficiary [all]
+            'index transaction', 'show transaction', 'create transaction', 'update transaction', 'destroy transaction', 'download transaction', // [manage] transactions [all]
+            'index client', 'show client', 'create client', 'update client', 'destroy client', 'download client', // [manage] of client [all]
+            'summary user', // get count in [staff, agent, client, beneficiary]
         ]);
 
-        // NOTE STAFF
+        // NOTE ✅ STAFF
         $role = Role::create(['name' => 'Staff']);
         $role->givePermissionTo([
-            'index auth', 'dashboard auth', 'update auth',
-            'index beneficiary',
-            'index transaction',
-            'index client',
+            'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index beneficiary', 'create beneficiary', 'download beneficiary',// [list, create, update(self id), download] of beneficiary under [all]
+            'index transaction', 'show transaction', 'create transaction', 'update transaction', 'download transaction', // [list, show, create, update(self id), download] of transactions under [all]
+            'index client', 'show client', 'create client', 'update client', 'download client', // [list, show, create, update(self id), download] of client [all]
+            'summary user', // get count in [agent, client, beneficiary]
         ]);
 
-        // NOTE AGENT
+        // NOTE ✅ AGENT
         $role = Role::create(['name' => 'Agent']);
         $role->givePermissionTo([
-            'index auth', 'dashboard auth', 'update auth',
-            'index beneficiary',
-            'index transaction',
+            'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index beneficiary', 'download beneficiary',// list/ of beneficiary under [agent_id > user > beneficiary]
+            'index transaction', 'show transaction', 'download transaction', // [list, details, download] of transactions under [agent_id]
+            'index client', 'show client', 'download client', // [list, details, download] of client under [agent_id]
+            'summary user', // get count in [client, beneficiary],
         ]);
 
-        // NOTE CLIENT
+        // NOTE ✅ CLIENT
         $role = Role::create(['name' => 'Client']);
         $role->givePermissionTo([
-            'index auth', 'dashboard auth', 'update auth',
-            'index beneficiary',
-            'index transaction',
+            'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index beneficiary', // view list of beneficiary (own)
+            'index transaction', // view list of transactions (own)
         ]);
     }
 }

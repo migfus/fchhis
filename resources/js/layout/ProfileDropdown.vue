@@ -21,6 +21,12 @@
                             Dashboard
                         </RouterLink>
                     </MenuItem>
+                    <MenuItem v-if="can('index', 'client')" v-slot="{ active, close }">
+                        <RouterLink @click="close" :to="{name: 'clients'}" :class="[active || $route.name == 'clients' ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+                            <UsersIcon class="h-5 w-5 inline-block mr-1" aria-hidden="true" />
+                            Clients
+                        </RouterLink>
+                    </MenuItem>
                     <MenuItem v-slot="{ active, close }">
                         <RouterLink @click="close" :to="{name: 'account-settings'}" :class="[active || $route.name == 'account-settings' ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
                             <SquaresPlusIcon class="h-5 w-5 inline-block mr-1" aria-hidden="true" />
@@ -50,10 +56,12 @@
 
 <script setup lang='ts'>
 import { useAuthStore } from '@/store/auth/AuthStore'
+import { useAbility } from '@casl/vue'
 
-import { BellIcon, WindowIcon, XMarkIcon, SquaresPlusIcon } from '@heroicons/vue/24/outline'
+import { BellIcon, WindowIcon, XMarkIcon, SquaresPlusIcon, UsersIcon } from '@heroicons/vue/24/outline'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import AppButton from '@/components/AppButton.vue';
 
 const $auth = useAuthStore();
+const { can } =  useAbility();
 </script>

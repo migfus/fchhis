@@ -23,10 +23,6 @@ export const useNavigationStore = defineStore(title, () => {
             link: { name: 'about'}
         },
         {
-            name: 'Job Listing',
-            link: { name: 'job-listing'}
-        },
-        {
             name: 'Calendar',
             link: { name: 'calendar'}
         },

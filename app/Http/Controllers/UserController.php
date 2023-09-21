@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Beneficiary;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,14 +13,43 @@ use Illuminate\Http\JsonResponse;
 class UserController extends Controller
 {
     public function index(Request $req) : JsonResponse {
-        if(!$req->user()->hasPermissionTo('index user'))
+        if(!$req->user()->hasPermissionTo('summary user'))
             return $this->G_UnauthorizedResponse('unauthorized to [index user]');
 
-        if($req->user()->hasRole('Staff'))
-            return $this->StaffIndex($req);
+        if($req->user()->hasRole('Staff')) {
+            if($req->summary)
+                return $this->StaffSummary($req);
+            else
+                return $this->StaffIndex($req);
+        }
+
 
         return $this->G_UnauthorizedResponse('unauthorized [no role available]');
     }
+        private function StaffSummary($req) : JsonResponse {
+            $data = [
+                'client' => [
+                    'name' => 'Clients',
+                    'current' => User::where('created_at', '>=', Carbon::now()->startOfMonth())
+                        ->where('created_at', '<=', Carbon::now()->endOfMonth())
+                        ->role('client')
+                        ->count(),
+                    'total' => User::role('Client')->count(),
+                ],
+                'beneficiary' => [
+                    'name' => 'Beneficiaries',
+                    'current' => Beneficiary::where('created_at', '>=', Carbon::now()->startOfMonth())
+                        ->where('created_at', '<=', Carbon::now()->endOfMonth())
+                        ->count(),
+                    'total' => Beneficiary::count(),
+                ],
+            ];
+
+            return response()->json([
+                ...$this->G_ReturnDefault($req),
+                'data' => $data,
+            ]);
+        }
         private function StaffIndex($req) : JsonResponse {
             $val = Validator::make($req->all(), [
                 'search' => '',

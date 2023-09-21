@@ -1,5 +1,5 @@
 <template>
-    <div class="space-y-1 mt-2">
+    <div v-if="$users.content" class="space-y-1 mt-2">
         <DataTransition>
             <div v-for="row in $users.content.data" :key="row.id" class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6 sm:rounded-lg shadow">
                 <div class="-ml-4 -mt-4 justify-between grid grid-cols-4">
