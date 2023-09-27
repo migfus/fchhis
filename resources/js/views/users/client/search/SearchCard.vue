@@ -37,7 +37,7 @@
 
             <div class="col-span-6 flex justify-end gap-1">
                 <AppButton :loading="$users.config.loading">Print</AppButton>
-                <AppButton :loading="$users.config.loading" color='success'>Add</AppButton>
+                <AppButton @click="$users.config.form = 'add'" :loading="$users.config.loading" color='success'>Add</AppButton>
             </div>
 
 

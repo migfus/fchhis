@@ -13,6 +13,22 @@ class RoleAndPermissionsSeeder extends Seeder
     public function run(): void {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
+        // NOTE PAYMENT TYPE
+        Permission::create(['name' => 'index payment-type']);
+        Permission::create(['name' => 'show payment-type']);
+        Permission::create(['name' => 'download payment-type']);
+        Permission::create(['name' => 'create payment-type']);
+        Permission::create(['name' => 'update payment-type']);
+        Permission::create(['name' => 'destroy payment-type']);
+
+        // NOTE PLAN
+        Permission::create(['name' => 'index plan']);
+        Permission::create(['name' => 'show plan']);
+        Permission::create(['name' => 'download plan']);
+        Permission::create(['name' => 'create plan']);
+        Permission::create(['name' => 'update plan']);
+        Permission::create(['name' => 'destroy plan']);
+
         // NOTE USERS
         Permission::create(['name' => 'index beneficiary']);
         Permission::create(['name' => 'download beneficiary']);
@@ -35,6 +51,14 @@ class RoleAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'create client']);
         Permission::create(['name' => 'update client']);
         Permission::create(['name' => 'destroy client']);
+
+        // NOTE AGENTS
+        Permission::create(['name' => 'index agent']);
+        Permission::create(['name' => 'show agent']);
+        Permission::create(['name' => 'download agent']);
+        Permission::create(['name' => 'create agent']);
+        Permission::create(['name' => 'update agent']);
+        Permission::create(['name' => 'destroy agent']);
 
         // NOTE USERS
         Permission::create(['name' => 'summary user']);
@@ -75,8 +99,12 @@ class RoleAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'Admin']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index payment-type', 'create payment-type', 'update payment-type', 'destroy payment-type', 'download payment-type',// [manage] payment-type [all]
+            'index plan', 'create plan', 'update plan', 'destroy plan', 'download plan',// [manage] plan [all]
             'index beneficiary', 'create beneficiary', 'update beneficiary', 'destroy beneficiary', 'download beneficiary',// [manage] beneficiary [all]
             'index transaction', 'show transaction', 'create transaction', 'update transaction', 'destroy transaction', 'download transaction', // [manage] transactions [all]
+
+            'index agent', 'show agent', 'create agent', 'update agent', 'destroy agent', 'download agent', // [manage] of agent [all]
             'index client', 'show client', 'create client', 'update client', 'destroy client', 'download client', // [manage] of client [all]
             'summary user', // get count in [staff, agent, client, beneficiary]
         ]);
@@ -85,8 +113,13 @@ class RoleAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'Regional Manager']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index payment-type', 'create payment-type', 'update payment-type', 'destroy payment-type', 'download payment-type',// [manage] payment-type [all]
+            'index plan', 'create plan', 'update plan', 'destroy plan', 'download plan',// [manage] plan [all]
+
             'index beneficiary', 'create beneficiary', 'update beneficiary', 'destroy beneficiary', 'download beneficiary',// [manage] beneficiary [all]
             'index transaction', 'show transaction', 'create transaction', 'update transaction', 'destroy transaction', 'download transaction', // [manage] transactions [all]
+
+            'index agent', 'show agent', 'create agent', 'update agent', 'destroy agent', 'download agent', // [manage] of agent [all]
             'index client', 'show client', 'create client', 'update client', 'destroy client', 'download client', // [manage] of client [all]
             'summary user', // get count in [staff, agent, client, beneficiary]
         ]);
@@ -95,8 +128,12 @@ class RoleAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'Branch Manager']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index payment-type', 'create payment-type', 'update payment-type', 'destroy payment-type', 'download payment-type',// [manage] payment-type [all]
+            'index plan', 'create plan', 'update plan', 'destroy plan', 'download plan',// [manage] plan [all]
             'index beneficiary', 'create beneficiary', 'update beneficiary', 'destroy beneficiary', 'download beneficiary',// [manage] beneficiary [all]
             'index transaction', 'show transaction', 'create transaction', 'update transaction', 'destroy transaction', 'download transaction', // [manage] transactions [all]
+
+            'index agent', 'show agent', 'create agent', 'update agent', 'destroy agent', 'download agent', // [manage] of agent [all]
             'index client', 'show client', 'create client', 'update client', 'destroy client', 'download client', // [manage] of client [all]
             'summary user', // get count in [staff, agent, client, beneficiary]
         ]);
@@ -105,8 +142,12 @@ class RoleAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'Staff']);
         $role->givePermissionTo([
             'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
+            'index payment-type', // list only payment-type
+            'index plan',// list only plan
             'index beneficiary', 'create beneficiary', 'download beneficiary',// [list, create, update(self id), download] of beneficiary under [all]
             'index transaction', 'show transaction', 'create transaction', 'update transaction', 'download transaction', // [list, show, create, update(self id), download] of transactions under [all]
+
+            'index agent', 'show agent', 'create agent', 'update agent', 'download agent', // [list, show, create, update(self id), download] of agent [all]
             'index client', 'show client', 'create client', 'update client', 'download client', // [list, show, create, update(self id), download] of client [all]
             'summary user', // get count in [agent, client, beneficiary]
         ]);
@@ -117,6 +158,7 @@ class RoleAndPermissionsSeeder extends Seeder
             'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
             'index beneficiary', 'download beneficiary',// list/ of beneficiary under [agent_id > user > beneficiary]
             'index transaction', 'show transaction', 'download transaction', // [list, details, download] of transactions under [agent_id]
+
             'index client', 'show client', 'download client', // [list, details, download] of client under [agent_id]
             'summary user', // get count in [client, beneficiary],
         ]);

@@ -69,4 +69,8 @@ class User extends Authenticatable
     public function beneficiaries() {
         return $this->hasMany(Beneficiary::class);
     }
+
+    public function agent_client() {
+        return $this->hasMany(Info::class, 'agent_id');
+    }
 }

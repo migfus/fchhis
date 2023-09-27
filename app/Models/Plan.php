@@ -15,4 +15,8 @@ class Plan extends Model
         'avatar',
         'name'
     ];
+
+    public function plan_detail() {
+        return $this->hasMany(PlanDetail::class, 'plan_id');
+    }
 }

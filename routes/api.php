@@ -39,4 +39,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/users',       \App\Http\Controllers\UserController::class)->only(['index', 'destroy']);
     Route::apiResource('/users/client', \App\Http\Controllers\ClientUserController::class)->only(['index']);
     Route::apiResource('/transaction', \App\Http\Controllers\TransactionController::class)->only(['index']);
+
+    Route::group(['prefix' => 'select', 'as' => 'select.'], function() {
+        Route::get('payment-type', [\App\Http\Controllers\PaymentTypeSelectController::class, 'index']);
+        Route::get('agent',        [\App\Http\Controllers\AgentSelectController::class, 'index']);
+        Route::get('plan',         [\App\Http\Controllers\PlanSelectionController::class, 'index']);
+    });
 });

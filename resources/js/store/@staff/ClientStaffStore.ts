@@ -4,6 +4,26 @@ import axios from 'axios'
 import { reactive } from 'vue'
 import type { TGConfig, TGQuery } from '@/store/GlobalType'
 
+type TParams = {
+    email: string
+    password: string
+    name: string
+    sex: boolean
+    bplace_id: number
+    bday: Date
+    address: string
+    address_id: number
+    mobile: number
+
+    agent_id: number
+    plan_id: number
+    payment_type_id: number
+}
+type TConfig = {
+    loading: boolean
+    form?: 'add'
+}
+
 const title = '@staff/ClientStaffStore'
 const url = '/api/users/client'
 export const useClientStaffStore = defineStore(title, () => {
@@ -11,7 +31,10 @@ export const useClientStaffStore = defineStore(title, () => {
     let cancel;
 
     const content = useStorage(`${title}/content`, null, sessionStorage, { serializer: StorageSerializers.object })
-    const config = reactive<TGConfig>({ loading: false })
+    const config = reactive<TConfig>({
+        loading: false,
+        form: null
+    })
     const query = reactive<TGQuery>({
         search: '',
         filter: 'name',
@@ -19,6 +42,7 @@ export const useClientStaffStore = defineStore(title, () => {
         start: null,
         end: null,
     })
+    const params = reactive<TParams>(InitParams())
 
     // SECTION API
     function CancelAPI() {
@@ -46,10 +70,29 @@ export const useClientStaffStore = defineStore(title, () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    function InitParams() {
+        return {
+            email: null,
+            password: null,
+            name: null,
+            sex: true,
+            bplace_id: 258,
+            bday: null,
+            address: null,
+            address_id: 258,
+            mobile: null,
+
+            agent_id: null,
+            plan_id: null,
+            payment_type_id: null,
+        }
+    }
+
     return {
         content,
         config,
         query,
+        params,
 
         GetAPI,
         CancelAPI,

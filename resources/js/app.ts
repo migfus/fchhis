@@ -10,9 +10,9 @@ import type { Router } from 'vue-router';
 import 'pinia';
 
 declare module 'pinia' {
-  export interface PiniaCustomProperties {
-    router: Router;
-  }
+    export interface PiniaCustomProperties {
+        router: Router;
+    }
 }
 
 import Notifications from 'notiwind'
@@ -23,14 +23,14 @@ const pinia = createPinia();
 
 
 pinia.use(({ store }) => {
-  store.router = markRaw(router);
+    store.router = markRaw(router);
 });
 
 app.use(Notifications);
 app.use(pinia);
 app.use(router);
 app.use(abilitiesPlugin, ability, {
-  useGlobalProperties: true,
+    useGlobalProperties: true,
 });
 
 import JWTInterceptor from "@/helpers/JWTInterceptor";

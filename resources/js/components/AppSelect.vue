@@ -3,21 +3,24 @@
         :for="$props.name"
         :class="[
             'block text-sm font-medium text-gray-700',
-            error && 'text-red-500'
+            error ? 'text-red-500' : ''
         ]"
-    >{{ $props.placeholder }}</label>
+    >
+        {{  $props.placeholder }}
+    </label>
     <Field
-        @input="$emit('update:modelValue', $event.target.value)"
-        :placeholder="$props.placeholder"
+        as="select"
         :value="$props.modelValue"
-        :type="$props.type"
-        :name="$props.name"
+        @change="$emit('update:modelValue', $event.target.value)"
         :id="$props.name"
+        :name="$props.name"
         :class="[
-            'mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm',
-            error && 'border-red-500 focus:border-red-400 focus:ring-red-400'
+            'mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm',
+            error ? 'border-red-500 focus:border-red-400 focus:ring-red-400' : ''
         ]"
-    />
+    >
+        <slot></slot>
+    </Field>
     <ErrorMessage :name="$props.name" class="text-sm font-medium text-red-500"/>
 </template>
 
@@ -28,7 +31,6 @@ import { Field, ErrorMessage } from 'vee-validate'
 const $props = defineProps<{
     placeholder: string
     name: string
-    type?: string
     modelValue: any | null
     errors?: any
 }>()
@@ -42,4 +44,11 @@ const error = computed(() => {
     }
     return null
 })
+
+function alarm() {
+    alert()
+}
+
+// @select="$emit('update:modelValue', $event.target.value)"
+
 </script>

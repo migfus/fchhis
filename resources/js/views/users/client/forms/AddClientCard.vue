@@ -1,6 +1,6 @@
 <template>
-    <form class="space-y-6 mb-2" action="#" method="POST">
-        <div class="bg-white border-2 border-green-300 px-4 py-5 shadow sm:rounded-lg sm:p-6">
+    <Form v-slot="{ errors }" :validation-schema="schema" @submit="ChangeAvatarAPI()">
+        <div class="bg-white border-2 border-green-300 px-4 py-5 shadow sm:rounded-lg sm:p-6 mb-2">
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="md:col-span-1">
                     <h3 class="text-lg font-medium leading-6 text-gray-900">User Credential</h3>
@@ -23,11 +23,11 @@
 
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
-                            <AppInput v-model="_data" placeholder="Email" name="email" type="email"/>
+                            <AppInput v-model="$user.params.email" placeholder="Email" name="email" type="email" :errors="errors"/>
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <AppInput v-model="_data" placeholder="Password" name="password"/>
+                            <AppInput v-model="$user.params.password" placeholder="Password" name="password" :errors="errors"/>
                         </div>
                     </div>
 
@@ -45,68 +45,60 @@
 
                     <div class="grid grid-cols-6 gap-6">
                         <div class="col-span-6 sm:col-span-3">
-                            <AppInput v-model="_data" placeholder="Name" name="name"/>
+                            <AppInput v-model="$user.params.name" placeholder="Name" name="name" :errors="errors"/>
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="country" class="block text-sm font-medium text-gray-700">Sex</label>
-                            <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
+                            <AppSelect v-model="$user.params.sex" placeholder="Sex" name="sex" :errors="errors">
+                                <option :value="true">Male</option>
+                                <option :value="false">Female</option>
+                            </AppSelect>
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
                             <label for="country" class="block text-sm font-medium text-gray-700">Birth Place (Province)</label>
-                            <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option>United States</option>
-                                <option>Canada</option>
-                                <option>Mexico</option>
+                            <select v-model="bday_province_id" id="bday_province" name="bday_province" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm">
+                                <option v-for="row in $address.content" :key="row.id" :value="row.id">{{ row.name }}</option>
                             </select>
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="country" class="block text-sm font-medium text-gray-700">Birth Place (City)</label>
-                            <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option>United States</option>
-                                <option>Canada</option>
-                                <option>Mexico</option>
-                            </select>
+                            <AppSelect v-model="$user.params.address_id" placeholder="Birth Place (City)" name="bplace_city" :errors="errors">
+                                <option v-if="!bday_province_id" value="1">Select Province</option>
+                                <option v-for="row in $address.content.find(item => item.id === bday_province_id).cities" :key="row.id" :value="row.id">{{ row.name }}</option>
+                            </AppSelect>
                         </div>
 
                         <div class="col-span-6 sm:col-span-6">
-                            <AppInput v-model="_data" placeholder="Birth Day" name="bday"/>
+                            <AppInput v-model="$user.params.bday" placeholder="Birth Day" name="bday" type="date" :errors="errors"/>
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
                             <label for="country" class="block text-sm font-medium text-gray-700">Address (Province)</label>
-                            <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option>United States</option>
-                                <option>Canada</option>
-                                <option>Mexico</option>
+                            <select v-model="address_province_id" id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                <option v-for="row in $address.content" :key="row.id" :value="row.id">{{ row.name }}</option>
                             </select>
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="country" class="block text-sm font-medium text-gray-700">Address (City)</label>
-                            <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                <option>United States</option>
-                                <option>Canada</option>
-                                <option>Mexico</option>
-                            </select>
+                            <AppSelect v-model="$user.params.address_id" placeholder="Address (City)" name="address_city" :errors="errors">
+                                <option v-if="!address_province_id" value="1">Select Province</option>
+                                <option v-for="row in $address.content.find(item => item.id === address_province_id).cities" :key="row.id" :value="row.id">{{ row.name }}</option>
+                            </AppSelect>
                         </div>
 
                         <div class="col-span-6">
-                            <AppInput v-model="_data" placeholder="Address (Specific)" name="address"/>
+                            <AppInput v-model="$user.params.address" placeholder="Address (Specific)" name="address" :errors="errors"/>
                         </div>
 
                         <div class="col-span-6">
-                            <AppInput v-model="_data" placeholder="Mobile Phone" name="mobile" type="number"/>
+                            <AppInput v-model="$user.params.mobile" placeholder="Mobile Phone" name="mobile" type="number" :errors="errors"/>
                         </div>
 
                     </div>
                 </div>
             </div>
+
             <hr class="my-8"/>
 
             <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -117,53 +109,73 @@
                 <div class="mt-5 space-y-6 md:col-span-2 md:mt-0">
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="country" class="block text-sm font-medium text-gray-700">Agent</label>
+                        <AppComboBoxAgent />
+                        <!-- <label for="country" class="block text-sm font-medium text-gray-700">Agent</label>
                         <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                             <option>United States</option>
                             <option>Canada</option>
                             <option>Mexico</option>
-                        </select>
+                        </select> -->
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="country" class="block text-sm font-medium text-gray-700">Plan</label>
-                        <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                            <option>United States</option>
-                            <option>Canada</option>
-                            <option>Mexico</option>
-                        </select>
+                        <AppComboBoxPlan />
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="country" class="block text-sm font-medium text-gray-700">Payment Type</label>
-                        <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                            <option>United States</option>
-                            <option>Canada</option>
-                            <option>Mexico</option>
-                        </select>
+                        <AppComboBoxPaymentType />
                     </div>
                 </div>
             </div>
 
             <div class="flex justify-end mt-8 gap-1">
-                <AppButton type="submit">Save</AppButton>
-                <AppButton color="white">Cancel</AppButton>
+                <AppButton type="submit" :disabled="Object.keys(errors).length != 0">Save</AppButton>
+                <AppButton @click="$user.config.form = null" color="danger">Cancel</AppButton>
             </div>
 
+            <div v-if="Object.keys(errors).length != 0" class="text-red-500">ERRORS!</div>
+            <div v-for="row, index in errors" :key="index" class="text-red-600">{{ `[${index.toUpperCase()}] = ${row}!` }}</div>
+
         </div>
-    </form>
+    </Form>
     <AvatarUpload v-model:show="show" v-model="_data" @update="ChangeAvatarAPI"/>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import * as Yup from 'yup'
+import { useAddressStore } from '@/store/system/AddressStore'
+import { useClientStaffStore } from '@/store/@staff/ClientStaffStore'
 
+import { Form, configure } from 'vee-validate'
 import AppButton from '@/components/AppButton.vue'
 import AppInput from '@/components/AppInput.vue'
+import AppSelect from '@/components/AppSelect.vue'
 import AvatarUpload from '@/components/modals/AvatarUpload.vue'
+import AppComboBoxAgent from '@/components/AppComboBoxAgent.vue'
+import AppComboBoxPlan from '@/components/AppComboBoxPlan.vue'
+import AppComboBoxPaymentType from '@/components/AppComboBoxPaymentType.vue'
+
+configure({
+    validateOnInput: true
+})
 
 const show = ref(false)
 const _data = ref('http://127.0.0.1:8000/images/logo.png')
+const $address = useAddressStore()
+const $user = useClientStaffStore()
+
+const schema = Yup.object({
+    email: Yup.string().required('Email is Required').email('Invalid Email'),
+    password: Yup.string().required('Password is required').min(8, 'Minimum of 8 characters'),
+    name: Yup.string().required('Name is required'),
+    bday: Yup.date().typeError('Invalid Date').required('Date is Required'),
+    address: Yup.string().required('Address is required'),
+    mobile: Yup.string().required('Mobile phone is required')
+})
+
+const bday_province_id = ref(16)
+const address_province_id = ref(16)
 
 function ChangeAvatarAPI() {
     alert()
