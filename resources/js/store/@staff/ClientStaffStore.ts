@@ -2,7 +2,8 @@ import { useStorage, StorageSerializers } from '@vueuse/core'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { reactive } from 'vue'
-import type { TGConfig, TGQuery } from '@/store/GlobalType'
+import { notify } from 'notiwind'
+import type { TGQuery } from '@/store/GlobalType'
 
 type TParams = {
     email: string
@@ -15,9 +16,9 @@ type TParams = {
     address_id: number
     mobile: number
 
-    agent_id: number
-    plan_id: number
-    payment_type_id: number
+    agent: { id: number }
+    plan: {id: number }
+    payment_type: { id: number }
 }
 type TConfig = {
     loading: boolean
@@ -65,6 +66,27 @@ export const useClientStaffStore = defineStore(title, () => {
         config.loading = false
     }
 
+    async function PostAPI() {
+        try {
+            let { data: { data }} = await axios.post(url, params)
+            console.log('postapi', {data})
+
+            if(data === true) {
+                notify({
+                    group: "success",
+                    title: "Success",
+                    text: 'New client has been added'
+                }, 5000)
+            }
+
+            ChangeForm()
+            GetAPI()
+        }
+        catch(e) {
+            console.log('UsersStore PostAPI Error', {e})
+        }
+    }
+
     // SECTION FUNCTIONS
     function ScrollUp() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -82,10 +104,18 @@ export const useClientStaffStore = defineStore(title, () => {
             address_id: 258,
             mobile: null,
 
-            agent_id: null,
-            plan_id: null,
-            payment_type_id: null,
+            agent: null,
+            plan: null,
+            payment_type: null,
         }
+    }
+
+    function ChangeForm(form = null) {
+        if(!form) {
+            ScrollUp()
+            Object.assign(params, InitParams())
+        }
+        config.form = form
     }
 
     return {
@@ -96,7 +126,8 @@ export const useClientStaffStore = defineStore(title, () => {
 
         GetAPI,
         CancelAPI,
+        PostAPI,
 
-        ScrollUp,
+        ChangeForm,
     }
 })

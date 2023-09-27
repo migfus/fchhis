@@ -20,7 +20,7 @@
             </div>
             <div class="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
                 <div class="text-gray-500 my-1 mr-2">{{ $auth.content.auth.roles[0].name }}</div>
-                <AppButton @click="show = true" size="sm">Change Avatar</AppButton>
+                <AppButton @click="show = true" size="sm" color="white">Change Avatar</AppButton>
             </div>
         </div>
     </div>

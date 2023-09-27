@@ -27,7 +27,7 @@
                                 <ErrorMessage name="confirmPassword" class="text-sm font-medium text-red-500"/>
                             </div>
 
-                            <AppButton size="sm" type="submit" :disabled="Object.keys(errors).length != 0" class="col-end-4" >Update</AppButton>
+                            <AppButton size="sm" type="submit" :disabled="Object.keys(errors).length != 0" class="col-end-4" color="white">Update</AppButton>
                         </dl>
                     </Form>
 

@@ -44,7 +44,7 @@ type TInput = {
     agent_client_count: number
 }
 
-import { watch, ref, onMounted } from 'vue'
+import { watch, onMounted } from 'vue'
 import { throttle } from 'lodash'
 import { useAgentSelectionStore } from '@/store/selection/AgentSelectionStore'
 

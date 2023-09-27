@@ -78,7 +78,7 @@
 
                     <div class="ml-4 mt-4 flex flex-shrink-0 justify-end">
                         <RouterLink :to="{ name: 'user', params: { id: row.id}}">
-                            <AppButton size="sm">Info</AppButton>
+                            <AppButton color="white" size="sm">Info</AppButton>
                         </RouterLink>
                     </div>
                 </div>

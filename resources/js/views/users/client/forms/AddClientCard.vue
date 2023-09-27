@@ -1,5 +1,5 @@
 <template>
-    <Form v-slot="{ errors }" :validation-schema="schema" @submit="ChangeAvatarAPI()">
+    <Form v-slot="{ errors }" :validation-schema="schema" @submit="$user.PostAPI()">
         <div class="bg-white border-2 border-green-300 px-4 py-5 shadow sm:rounded-lg sm:p-6 mb-2">
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="md:col-span-1">
@@ -109,6 +109,7 @@
                 <div class="mt-5 space-y-6 md:col-span-2 md:mt-0">
 
                     <div class="col-span-6 sm:col-span-3">
+                        <!-- <AppInput v-model="$user.params.agent_id" placeholder="" name="agent_id" type="hidden" :errors="errors"/> -->
                         <AppComboBoxAgent />
                         <!-- <label for="country" class="block text-sm font-medium text-gray-700">Agent</label>
                         <select id="country" name="country" autocomplete="country-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
@@ -130,7 +131,7 @@
 
             <div class="flex justify-end mt-8 gap-1">
                 <AppButton type="submit" :disabled="Object.keys(errors).length != 0">Save</AppButton>
-                <AppButton @click="$user.config.form = null" color="danger">Cancel</AppButton>
+                <AppButton @click="$user.ChangeForm()" color="white">Cancel</AppButton>
             </div>
 
             <div v-if="Object.keys(errors).length != 0" class="text-red-500">ERRORS!</div>
@@ -146,6 +147,9 @@ import { ref } from 'vue'
 import * as Yup from 'yup'
 import { useAddressStore } from '@/store/system/AddressStore'
 import { useClientStaffStore } from '@/store/@staff/ClientStaffStore'
+import { useAgentSelectionStore } from '@/store/selection/AgentSelectionStore'
+import { usePaymentTypeSelectionStore } from '@/store/selection/PaymentTypeSelectionStore'
+import { usePlanSelectionStore } from '@/store/selection/PlanSelectionStore'
 
 import { Form, configure } from 'vee-validate'
 import AppButton from '@/components/AppButton.vue'
@@ -164,6 +168,13 @@ const show = ref(false)
 const _data = ref('http://127.0.0.1:8000/images/logo.png')
 const $address = useAddressStore()
 const $user = useClientStaffStore()
+const $agent = useAgentSelectionStore()
+const $plan = usePlanSelectionStore()
+const $payment = usePaymentTypeSelectionStore()
+
+$user.params.agent = $agent.selected
+$user.params.plan = $plan.selected
+$user.params.payment_type = $payment.selected
 
 const schema = Yup.object({
     email: Yup.string().required('Email is Required').email('Invalid Email'),
@@ -171,7 +182,8 @@ const schema = Yup.object({
     name: Yup.string().required('Name is required'),
     bday: Yup.date().typeError('Invalid Date').required('Date is Required'),
     address: Yup.string().required('Address is required'),
-    mobile: Yup.string().required('Mobile phone is required')
+    mobile: Yup.string().required('Mobile phone is required').min(10, 'Invalid Number').max(10, 'Invalid Number'),
+    // agent_id: Yup.string().required('Agent is requird')
 })
 
 const bday_province_id = ref(16)
