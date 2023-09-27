@@ -41,7 +41,7 @@ class ClientUserController extends Controller
                     $data->where('created_at', '<=', $req->end);
             }
 
-            $data->with(['info.plan_detail.plan', 'info.pay_type', 'info.agent', 'info.staff', 'roles']);
+            $data->with(['info.plan_detail.plan', 'info.pay_type', 'info.agent', 'info.staff', 'roles', 'branch', 'region', 'beneficiaries']);
 
             switch($req->filter) {
                 case 'plans':

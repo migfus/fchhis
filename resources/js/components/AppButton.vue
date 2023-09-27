@@ -57,7 +57,7 @@ const color = computed(() => {
         case 'success' :
             return 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500 text-white'
         case 'white':
-            return 'bg-white hover:bg-gray-50 focus:ring-gray-100 text-black'
+            return 'border-1 border-gray-400 bg-white hover:bg-gray-50 focus:ring-gray-100 text-black'
         default:
             return 'bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 text-white'
     }
