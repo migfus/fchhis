@@ -66,14 +66,6 @@ const router = createRouter({
             },
         },
         {
-            path: "/register",
-            name: "register",
-            component: () => import("@/views/auth/RegisterPage.vue"),
-            meta: {
-                title: "Register",
-            },
-        },
-        {
             path: "/forgot",
             name: "forgot",
             component: () => import("@/views/auth/ForgotPage.vue"),
@@ -117,10 +109,10 @@ const router = createRouter({
             {
                 path: '/user/:id',
                 name: 'user',
-                component: () => import('@/views/users/client/ClientPage.vue'),
+                component: () => import('@/views/user/UserPage.vue'),
                 meta: {
                     sideBar: true,
-                    title: 'Clients',
+                    title: 'User',
                     auth: true,
                     resource: 'client'
                 }

@@ -6,28 +6,18 @@ import { notify } from 'notiwind'
 import type { TGQuery } from '@/store/GlobalType'
 
 type TParams = {
-    email: string
-    password: string
     name: string
-    sex: boolean
-    bplace_id: number
     bday: Date
-    address: string
-    address_id: number
-    mobile: number
-
-    agent: { id: number }
-    plan: {id: number }
-    payment_type: { id: number }
+    user_id: number
 }
 type TConfig = {
     loading: boolean
-    form?: 'add'
+    form?: 'add' | 'edit'
 }
 
-const title = '@staff/ClientStaffStore'
-const url = '/api/users/client'
-export const useClientStaffStore = defineStore(title, () => {
+const title = '@staff/BeneficiaryStaffStore'
+const url = '/api/beneficiary'
+export const useBeneficiaryStaffStore = defineStore(title, () => {
     const CancelToken = axios.CancelToken;
     let cancel;
 
@@ -94,19 +84,9 @@ export const useClientStaffStore = defineStore(title, () => {
 
     function InitParams() {
         return {
-            email: null,
-            password: null,
             name: null,
-            sex: true,
-            bplace_id: 258,
             bday: null,
-            address: null,
-            address_id: 258,
-            mobile: null,
-
-            agent: null,
-            plan: null,
-            payment_type: null,
+            user_id: null
         }
     }
 

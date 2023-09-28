@@ -12,6 +12,7 @@ use App\Models\Info;
 class ClientUserController extends Controller
 {
     public function index(Request $req) : JsonResponse {
+        // return response()->json(['working' => true]);
         if(!$req->user()->can('index client'))
             return $this->G_UnauthorizedResponse();
 

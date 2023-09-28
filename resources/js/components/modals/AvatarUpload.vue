@@ -46,9 +46,9 @@
 
                             </div>
                             <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-1">
-                                <AppButton block color="danger" @click="$emit('update:show', false)" class="mt-1">Cancel</AppButton>
-                                <AppButton block @click="GetResult()" class="mt-1">Save</AppButton>
-                                <AppButton block @click="Reset()" class="mt-1">Reset</AppButton>
+                                <AppButton block color="white" @click="$emit('update:show', false)" class="mt-1">Cancel</AppButton>
+                                <AppButton block color="white" @click="GetResult()" class="mt-1">Save</AppButton>
+                                <AppButton block color="white" @click="Reset()" class="mt-1">Reset</AppButton>
                             </div>
 
                         </DialogPanel>

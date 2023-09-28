@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import { reactive } from 'vue'
 import { notify } from 'notiwind'
-import type { TGQuery } from '@/store/GlobalType'
+import type { TGAuthContent } from '../GlobalType'
+import { useRoute } from 'vue-router'
 
 type TParams = {
     email: string
@@ -22,26 +23,20 @@ type TParams = {
 }
 type TConfig = {
     loading: boolean
-    form?: 'add'
+    form?: 'edit'
 }
 
-const title = '@staff/ClientStaffStore'
-const url = '/api/users/client'
-export const useClientStaffStore = defineStore(title, () => {
+const title = '@staff/UserStaffStore'
+const url = '/api/users'
+export const useUserStaffStore = defineStore(title, () => {
+    const $route = useRoute()
     const CancelToken = axios.CancelToken;
     let cancel;
 
-    const content = useStorage(`${title}/content`, null, sessionStorage, { serializer: StorageSerializers.object })
+    const content = useStorage<TGAuthContent>(`${title}/content`, null, sessionStorage, { serializer: StorageSerializers.object })
     const config = reactive<TConfig>({
         loading: false,
         form: null
-    })
-    const query = reactive<TGQuery>({
-        search: '',
-        filter: 'name',
-        sort: 'DESC',
-        start: null,
-        end: null,
     })
     const params = reactive<TParams>(InitParams())
 
@@ -51,22 +46,19 @@ export const useClientStaffStore = defineStore(title, () => {
         content.value = null
     }
 
-    async function GetAPI(page = 1) {
+    async function ShowAPI() {
         config.loading = true
         try {
-            let { data: {data}} = await axios.get(url, {
-                cancelToken: new CancelToken(function executor(c) { cancel = c; }),
-                params: { ...query, page: page }
-            })
+            let { data: {data} } = await axios.get(`${url}/${$route.params.id}`, { cancelToken: new CancelToken(function executor(c) { cancel = c; }), })
             content.value = data
         }
         catch(e) {
-            console.log('UsersStore GetAPI Error', {e})
+            console.log(`${title} GetAPI Error`, {e})
         }
         config.loading = false
     }
 
-    async function PostAPI() {
+    async function UpdateAPI() {
         try {
             let { data: { data }} = await axios.post(url, params)
             console.log('postapi', {data})
@@ -80,16 +72,11 @@ export const useClientStaffStore = defineStore(title, () => {
             }
 
             ChangeForm()
-            GetAPI()
+            ShowAPI()
         }
         catch(e) {
             console.log('UsersStore PostAPI Error', {e})
         }
-    }
-
-    // SECTION FUNCTIONS
-    function ScrollUp() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function InitParams() {
@@ -115,18 +102,16 @@ export const useClientStaffStore = defineStore(title, () => {
             Object.assign(params, InitParams())
         }
         config.form = form
-        ScrollUp()
     }
 
     return {
         content,
         config,
-        query,
         params,
 
-        GetAPI,
+        ShowAPI,
         CancelAPI,
-        PostAPI,
+        UpdateAPI,
 
         ChangeForm,
     }

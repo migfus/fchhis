@@ -36,6 +36,14 @@ class UserController extends Controller
                         ->count(),
                     'total' => User::role('Client')->count(),
                 ],
+                'agent' => [
+                    'name' => 'Agents',
+                    'current' => User::where('created_at', '>=', Carbon::now()->startOfMonth())
+                        ->where('created_at', '<=', Carbon::now()->endOfMonth())
+                        ->role('Agent')
+                        ->count(),
+                    'total' => User::role('Agent')->count(),
+                ],
                 'beneficiary' => [
                     'name' => 'Beneficiaries',
                     'current' => Beneficiary::where('created_at', '>=', Carbon::now()->startOfMonth())
@@ -94,9 +102,24 @@ class UserController extends Controller
     }
 
 
-    public function show(string $id) : JsonResponse {
+    public function show(Request $req, string $id) : JsonResponse {
+        if(!$req->user()->hasPermissionTo('show client'))
+            return $this->G_UnauthorizedResponse('unauthorized to [show user]');
 
+        if($req->user()->hasRole('Staff')) {
+            return $this->StaffShow($req, $id);
+        }
+
+        return $this->G_UnauthorizedResponse('no authorization to access');
     }
+        private function StaffShow($req, $id) : JsonResponse {
+            $user = User::where('id', $id)->with(['roles'])->first();
+
+            return response()->json([
+                ...$this->G_ReturnDefault($req),
+                'data' => $user,
+            ]);
+        }
 
 
     public function update(Request $request, string $id) : JsonResponse {

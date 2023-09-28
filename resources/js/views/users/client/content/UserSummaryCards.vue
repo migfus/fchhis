@@ -55,7 +55,7 @@ const config = {
             snapAlign: 'center',
         },
         700: {
-            itemsToShow: 2,
+            itemsToShow: 3,
             snapAlign: 'center',
         },
     }

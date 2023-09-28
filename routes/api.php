@@ -36,8 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('/statistic',   \App\Http\Controllers\StatisticController::class)->only(['index']);
     Route::apiResource('/beneficiary', \App\Http\Controllers\BeneficiaryController::class)->only(['index']);
-    Route::apiResource('/users',       \App\Http\Controllers\UserController::class)->only(['index', 'destroy']);
     Route::apiResource('/users/client', \App\Http\Controllers\ClientUserController::class)->only(['index', 'store']);
+    Route::apiResource('/users',       \App\Http\Controllers\UserController::class)->only(['index', 'destroy', 'show']);
     Route::apiResource('/transaction', \App\Http\Controllers\TransactionController::class)->only(['index']);
 
     Route::group(['prefix' => 'select', 'as' => 'select.'], function() {

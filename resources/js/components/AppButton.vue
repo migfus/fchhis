@@ -12,7 +12,8 @@
             'flex justify-center rounded-md border border-transparent py-2 px-4 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
             color,
             size,
-            $props.block ? 'w-full' : '',
+            $props.block && 'w-full',
+            $props.disabled && 'text-gray-600'
         ]"
         :disabled="$props.loading || $props.disabled"
         :type="type"
@@ -25,6 +26,7 @@
             </svg>
             <span class="sr-only">Loading...</span>
         </div>
+        <XMarkIcon v-if="$props.disabled" class="h-5 w-5 text-gray-700 mr-2 ml-0" aria-hidden="true" style="margin-top: 2px;"/>
 
         <slot></slot>
     </button>
@@ -32,6 +34,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+
+import { XMarkIcon } from '@heroicons/vue/24/outline'
 
 const $props = defineProps<{
     color?: string
@@ -57,7 +61,7 @@ const color = computed(() => {
         case 'success' :
             return 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500 text-white'
         case 'white':
-            return 'border-1 border-slate-300 bg-gray-300 hover:bg-gray-50 focus:ring-slate-400 text-black'
+            return 'border-1 border-slate-300 bg-gray-300 hover:bg-gray-200 focus:ring-slate-400 text-black shadow-lg'
         default:
             return 'bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 text-white'
     }
