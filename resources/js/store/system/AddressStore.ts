@@ -32,10 +32,25 @@ export const useAddressStore = defineStore('system/AddressStore', () => {
         return null;
     };
 
+    function CityIDToProvinceID(id: number | bigint) {
+        if(id) {
+            for (let i = 0; content.value.length > i; i++) {
+                const province = content.value[i];
+                for (let f = 0; province.cities.length > f; f++) {
+                    if (province.cities[f].id == id) {
+                        return province.id;
+                    }
+                }
+            }
+        }
+        return null
+    };
+
     return {
         content,
 
         GetAPI,
-        CityIDToFullAddress
+        CityIDToFullAddress,
+        CityIDToProvinceID,
     }
 })

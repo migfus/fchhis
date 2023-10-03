@@ -71,9 +71,9 @@
                     </div>
 
                     <div class="ml-4 mt-4 flex flex-shrink-0 col-span-3">
-                        <div v-for="ben in row.beneficiaries" :key="ben.id"  class="mr-1 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none">
+                        <span v-for="ben in row.beneficiaries" :key="ben.id" class="mr-1 inline-flex items-center rounded-full bg-primary-200 px-3 py-0.5 text-sm font-medium text-primary-800">
                             {{ ben.name }}
-                        </div>
+                        </span>
                     </div>
 
                     <div class="ml-4 mt-4 flex flex-shrink-0 justify-end">

@@ -123,8 +123,8 @@
             </div>
 
             <div class="flex justify-end mt-8 gap-1">
-                <AppButton type="submit" color='white' :disabled="Object.keys(errors).length != 0">Save</AppButton>
-                <AppButton @click="$user.ChangeForm()" color="white">Cancel</AppButton>
+                <AppButton type="submit" color='success' :disabled="Object.keys(errors).length != 0">Save</AppButton>
+                <AppButton @click="$user.ChangeForm()" color="danger">Cancel</AppButton>
             </div>
 
             <div v-if="Object.keys(errors).length != 0" class="text-red-500">ERRORS!</div>

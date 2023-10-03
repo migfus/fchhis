@@ -36,6 +36,6 @@ import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 const $user = useUserStaffStore()
 
 onMounted(() => {
-    $user.ShowAPI()
+    // $user.ShowAPI()
 })
 </script>

@@ -109,7 +109,7 @@ const router = createRouter({
             {
                 path: '/user/:id',
                 name: 'user',
-                component: () => import('@/views/user/UserPage.vue'),
+                component: () => import('@/views/individual/UserPage.vue'),
                 meta: {
                     sideBar: true,
                     title: 'User',

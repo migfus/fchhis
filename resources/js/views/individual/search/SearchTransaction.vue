@@ -1,5 +1,7 @@
 <template>
     <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+        <h2 class="font-semibold mb-4">Transactions</h2>
+
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 lg:col-span-1">
                 <label for="first-name" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
@@ -37,7 +39,7 @@
 
             <div class="col-span-6 flex justify-end gap-1">
                 <AppButton :loading="$users.config.loading" color="white">Print</AppButton>
-                <AppButton @click="$users.ChangeForm('add')" :loading="$users.config.loading" color='white'>Add</AppButton>
+                <AppButton @click="$users.ChangeForm('add')" :loading="$users.config.loading" color='success'>Add</AppButton>
             </div>
 
 

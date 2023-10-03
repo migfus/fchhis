@@ -9,7 +9,7 @@
     <Field
         @input="$emit('update:modelValue', $event.target.value)"
         :placeholder="$props.placeholder"
-        :value="$props.modelValue"
+        v-model="$props.modelValue"
         :type="$props.type"
         :name="$props.name"
         :id="$props.name"

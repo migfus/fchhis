@@ -88,4 +88,5 @@ type TUserInfo = {
     due_at?: bigint // null = no due
     fulfilled_at?: dateFns // null = not claimed
     or?: string // null = no initial OR number
+    cell: number
 }

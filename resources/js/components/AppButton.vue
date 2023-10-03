@@ -9,7 +9,7 @@
 
     <button
         :class="[
-            'flex justify-center rounded-md border border-transparent py-2 px-4 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
+            'flex justify-center rounded-md border border-transparent py-2 px-4 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md',
             color,
             size,
             $props.block && 'w-full',
@@ -56,12 +56,14 @@ const color = computed(() => {
         return 'bg-gray-400 text-black cursor-not-allowed'
     }
     switch ($props.color) {
+        case 'warning':
+            return 'bg-yellow-400 hover:bg-yellow-500 focus:ring-yellow-500 text-yellow-800'
         case 'danger':
-            return 'bg-red-400 hover:bg-red-500 focus:ring-red-400 text-white'
+            return 'bg-red-300 hover:bg-red-400 focus:ring-red-400 text-red-800'
         case 'success' :
-            return 'bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500 text-white'
+            return 'bg-green-300 hover:bg-green-400 focus:ring-emerald-500 text-green-800'
         case 'white':
-            return 'border-1 border-slate-300 bg-gray-300 hover:bg-gray-200 focus:ring-slate-400 text-black shadow-lg'
+            return 'border-1 border-slate-300 bg-gray-300 hover:bg-gray-200 focus:ring-slate-400 text-black'
         default:
             return 'bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 text-white'
     }

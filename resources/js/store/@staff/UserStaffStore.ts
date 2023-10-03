@@ -51,6 +51,7 @@ export const useUserStaffStore = defineStore(title, () => {
         try {
             let { data: {data} } = await axios.get(`${url}/${$route.params.id}`, { cancelToken: new CancelToken(function executor(c) { cancel = c; }), })
             content.value = data
+            Object.assign(params, data)
         }
         catch(e) {
             console.log(`${title} GetAPI Error`, {e})

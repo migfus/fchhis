@@ -15,7 +15,7 @@ export default function JWTInterceptor() {
     axios.interceptors.response.use(
         (response) => {
             if (response.data.auth) {
-                console.log(response.data.auth)
+                // console.log(response.data.auth)
                 $auth.UpdateData(response.data.auth)
             }
             return response;

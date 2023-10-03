@@ -3,31 +3,31 @@
         <div class="mt-5 md:col-span-2 md:mt-0">
             <Form v-slot="{errors}" action="#" method="POST">
                 <div class="shadow sm:overflow-hidden sm:rounded-md">
-                    <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
+                    <div class="space-y-6 bg-white px-4 py-5 sm:p-6 border-1 border-yellow-600">
+                        <h2 class="font-semibold mb-2">User Info</h2>
+
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Photo</label>
                             <div class="mt-1 flex items-center">
                                 <span class="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                                    <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
+                                    <img :src="$user.content.avatar ?? 'http://127.0.0.1:8000/images/logo.png'" />
                                 </span>
-                                <AppButton color="white" class="ml-5" size="sm">Change</AppButton>
+                                <AppButton @click="show = true" color="white" class="ml-5" size="sm">Change</AppButton>
                             </div>
                         </div>
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
-                                <AppInput v-model="form.email" placeholder="Email" name="email"/>
+                                <AppInput v-model="$user.content.email" placeholder="Email" name="email"/>
                             </div>
                             <div class="col-span-6 sm:col-span-3">
-                                <AppInput v-model="form.name" placeholder="Name" name="name"/>
+                                <AppInput v-model="$user.content.name" placeholder="Name" name="name"/>
                             </div>
 
                             <div class="col-span-6 sm:col-span-6">
-                                <AppSelect v-model="form.sex" placeholder="Sex" name="sex" :errors="errors">
-                                    <option :value="1">Male</option>
-                                    <option :value="2">Female</option>
+                                <AppSelect v-model="$user.content.info.sex" placeholder="Sex" name="sex" :errors="errors">
+                                    <option :value="true">Male</option>
+                                    <option :value="false">Female</option>
                                 </AppSelect>
                             </div>
 
@@ -39,14 +39,14 @@
                             </div>
 
                             <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                <AppSelect v-model="form.bplace_id" placeholder="Birth Place (City)" name="bplace_city" :errors="errors">
+                                <AppSelect v-model="$user.content.info.bplace_id" placeholder="Birth Place (City)" name="bplace_city" :errors="errors">
                                     <option v-if="!bday_province_id" value="1">Select Province</option>
                                     <option v-for="row in $address.content.find(item => item.id === bday_province_id).cities" :key="row.id" :value="row.id">{{ row.name }}</option>
                                 </AppSelect>
                             </div>
 
                             <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                <AppInput v-model="form.bday" placeholder="Birth day" type="date" name="bday"/>
+                                <AppInput v-model="$user.content.info.bday" placeholder="Birth day" type="date" name="bday"/>
                             </div>
 
                             <div class="col-span-6 sm:col-span-6 lg:col-span-2">
@@ -57,56 +57,54 @@
                             </div>
 
                             <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                <AppSelect v-model="form.address_id" placeholder="Address (City)" name="address_city" :errors="errors">
+                                <AppSelect v-model="$user.content.info.address_id" placeholder="Address (City)" name="address_city" :errors="errors">
                                     <option v-if="!address_province_id" value="1">Select Province</option>
                                     <option v-for="row in $address.content.find(item => item.id === address_province_id).cities" :key="row.id" :value="row.id">{{ row.name }}</option>
                                 </AppSelect>
                             </div>
 
                             <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                <AppInput v-model="form.address" placeholder="Address (Specific)" name="address" :errors="errors"/>
+                                <AppInput v-model="$user.content.info.address" placeholder="Address (Specific)" name="address" :errors="errors"/>
                             </div>
 
                             <div class="col-span-6">
-                                <AppInput v-model="form.mobile" placeholder="Mobile Phone" name="mobile" type="number" :errors="errors"/>
+                                <AppInput v-model="$user.content.info.cell" placeholder="Mobile Phone" name="mobile" type="number" :errors="errors"/>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                        <AppButton color="white" class="inline-flex">Change</AppButton>
+                    <div class="bg-white px-4 py-3 pb-6 text-right sm:px-6">
+                        <AppButton color="warning" class="inline-flex">Change</AppButton>
                     </div>
                 </div>
             </Form>
         </div>
     </div>
+    <AvatarUpload v-model="$user.content.avatar" v-model:show="show"/>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
-import { useAddressStore } from '@/store/system/AddressStore';
+import { ref, onMounted } from 'vue'
+import { useAddressStore } from '@/store/system/AddressStore'
+import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 
 import { Form, configure } from 'vee-validate'
 import AppButton from '@/components/AppButton.vue'
-import AppInput from '@/components/AppInput.vue';
-import AppSelect from '@/components/AppSelect.vue';
+import AppInput from '@/components/AppInput.vue'
+import AppSelect from '@/components/AppSelect.vue'
+import AvatarUpload from '@/components/modals/AvatarUpload.vue'
+
+configure({
+    validateOnInput: true
+})
 
 const $address = useAddressStore()
+const $user = useUserStaffStore()
 
-const form = reactive({
-    avatar: '',
-    name: '',
-    email: '',
-    sex: false,
-    bplace_id: 258,
-    bday: '',
-    address_id: 258,
-    address: '',
-    mobile: '',
-})
-const bday_province_id = ref(16)
-const address_province_id = ref(16)
+const bday_province_id = $address.CityIDToProvinceID($user.content.info.bplace_id)
+const address_province_id = $address.CityIDToProvinceID($user.content.info.bplace_id)
+const show = ref(false)
 
-onMounted(async () => {
-    await $address.GetAPI()
+onMounted(() => {
+    $address.GetAPI()
 })
 </script>

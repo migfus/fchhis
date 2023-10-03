@@ -20,5 +20,4 @@ import UserSummaryCards from './content/UserSummaryCards.vue'
 import AddClientPage from './forms/AddClientCard.vue'
 
 const $user = useClientStaffStore()
-
 </script>

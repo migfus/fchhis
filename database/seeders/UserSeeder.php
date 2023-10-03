@@ -121,7 +121,7 @@ class UserSeeder extends Seeder
                 'email' => $faker->email,
                 'name' => $faker->name,
                 'password' => Hash::make('12345678'),
-            ])->assignRole('Agent');
+            ])->assignRole('Client');
             Info::create([
                 'user_id' => $user->id,
                 'staff_id'  => env('SEEDER_USER_STAFF_ID', null),
