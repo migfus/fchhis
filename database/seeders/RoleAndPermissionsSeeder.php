@@ -144,7 +144,7 @@ class RoleAndPermissionsSeeder extends Seeder
             'index auth', 'dashboard auth', 'update auth', // full access of account-settings (own)
             'index payment-type', // list only payment-type
             'index plan',// list only plan
-            'index beneficiary', 'create beneficiary', 'download beneficiary',// [list, create, update(self id), download] of beneficiary under [all]
+            'index beneficiary', 'create beneficiary', 'download beneficiary', 'destroy beneficiary', 'update beneficiary', // [list, create, update(self id), download, destroy] of beneficiary under [all]
             'index transaction', 'show transaction', 'create transaction', 'update transaction', 'download transaction', // [list, show, create, update(self id), download] of transactions under [all]
 
             'index agent', 'show agent', 'create agent', 'update agent', 'download agent', // [list, show, create, update(self id), download] of agent [all]

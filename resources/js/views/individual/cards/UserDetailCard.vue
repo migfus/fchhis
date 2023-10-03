@@ -6,16 +6,6 @@
                     <div class="space-y-6 bg-white px-4 py-5 sm:p-6 border-1 border-yellow-600">
                         <h2 class="font-semibold mb-2">User Info</h2>
 
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Photo</label>
-                            <div class="mt-1 flex items-center">
-                                <span class="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-                                    <img :src="$user.content.avatar ?? 'http://127.0.0.1:8000/images/logo.png'" />
-                                </span>
-                                <AppButton @click="show = true" color="white" class="ml-5" size="sm">Change</AppButton>
-                            </div>
-                        </div>
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
                                 <AppInput v-model="$user.content.email" placeholder="Email" name="email"/>
@@ -79,11 +69,11 @@
             </Form>
         </div>
     </div>
-    <AvatarUpload v-model="$user.content.avatar" v-model:show="show"/>
+
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useAddressStore } from '@/store/system/AddressStore'
 import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 
@@ -91,7 +81,6 @@ import { Form, configure } from 'vee-validate'
 import AppButton from '@/components/AppButton.vue'
 import AppInput from '@/components/AppInput.vue'
 import AppSelect from '@/components/AppSelect.vue'
-import AvatarUpload from '@/components/modals/AvatarUpload.vue'
 
 configure({
     validateOnInput: true
@@ -102,7 +91,6 @@ const $user = useUserStaffStore()
 
 const bday_province_id = $address.CityIDToProvinceID($user.content.info.bplace_id)
 const address_province_id = $address.CityIDToProvinceID($user.content.info.bplace_id)
-const show = ref(false)
 
 onMounted(() => {
     $address.GetAPI()

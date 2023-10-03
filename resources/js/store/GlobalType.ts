@@ -60,7 +60,8 @@ export type TGAuthContent = {
         content: string
         created_at: Date
         id: number
-    }>
+    }>,
+    beneficiaries: Array<TBeneficiary>
 }
 
 type TUserInfo = {
@@ -80,7 +81,7 @@ type TUserInfo = {
     plan_details_id: bigint
     plan_detail: TGPlanDetail
 
-    bday: dateFns
+    bday: Date
     bplace_id: bigint
     sex: boolean
     address_id: bigint
@@ -89,4 +90,10 @@ type TUserInfo = {
     fulfilled_at?: dateFns // null = not claimed
     or?: string // null = no initial OR number
     cell: number
+}
+
+type TBeneficiary = {
+    name: string
+    bday: Date
+    id: number
 }

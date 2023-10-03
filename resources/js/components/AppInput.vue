@@ -8,13 +8,13 @@
     >{{ $props.placeholder }}</label>
     <Field
         @input="$emit('update:modelValue', $event.target.value)"
-        :placeholder="$props.placeholder"
         v-model="$props.modelValue"
+        :placeholder="$props.placeholder"
         :type="$props.type"
         :name="$props.name"
         :id="$props.name"
         :class="[
-            'mt-1 block w-full rounded-md border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm',
+            'mt-1 block w-full rounded-xl border border-gray-300 py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm',
             error && 'border-red-500 focus:border-red-400 focus:ring-red-400'
         ]"
     />
@@ -29,7 +29,7 @@ const $props = defineProps<{
     placeholder: string
     name: string
     type?: string
-    modelValue: any | null
+    modelValue?: any
     errors?: any
 }>()
 const $emit = defineEmits(['update:modelValue'])

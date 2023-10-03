@@ -113,7 +113,7 @@ class UserController extends Controller
         return $this->G_UnauthorizedResponse('no authorization to access');
     }
         private function StaffShow($req, $id) : JsonResponse {
-            $user = User::where('id', $id)->with(['roles', 'info'])->first();
+            $user = User::where('id', $id)->with(['roles', 'info.agent'])->first();
 
             return response()->json([
                 ...$this->G_ReturnDefault($req),

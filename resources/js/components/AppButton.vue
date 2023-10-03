@@ -9,7 +9,7 @@
 
     <button
         :class="[
-            'flex justify-center rounded-md border border-transparent py-2 px-4 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md',
+            'flex justify-center rounded-xl border border-transparent py-2 px-4 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-sm',
             color,
             size,
             $props.block && 'w-full',

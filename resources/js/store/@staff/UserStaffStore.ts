@@ -19,11 +19,11 @@ type TParams = {
 
     agent: { id: number }
     plan: {id: number }
-    payment_type: { id: number }
+    payment_type: { id: number },
 }
 type TConfig = {
     loading: boolean
-    form?: 'edit'
+    beneficiaryFormID?: number
 }
 
 const title = '@staff/UserStaffStore'
@@ -36,7 +36,7 @@ export const useUserStaffStore = defineStore(title, () => {
     const content = useStorage<TGAuthContent>(`${title}/content`, null, sessionStorage, { serializer: StorageSerializers.object })
     const config = reactive<TConfig>({
         loading: false,
-        form: null
+        beneficiaryFormID: null,
     })
     const params = reactive<TParams>(InitParams())
 
@@ -72,7 +72,7 @@ export const useUserStaffStore = defineStore(title, () => {
                 }, 5000)
             }
 
-            ChangeForm()
+            // ChangeForm()
             ShowAPI()
         }
         catch(e) {
@@ -98,12 +98,12 @@ export const useUserStaffStore = defineStore(title, () => {
         }
     }
 
-    function ChangeForm(form = null) {
-        if(!form) {
-            Object.assign(params, InitParams())
-        }
-        config.form = form
-    }
+    // function ChangeForm(form = null) {
+    //     if(!form) {
+    //         Object.assign(params, InitParams())
+    //     }
+    //     config.form = form
+    // }
 
     return {
         content,
@@ -114,6 +114,6 @@ export const useUserStaffStore = defineStore(title, () => {
         CancelAPI,
         UpdateAPI,
 
-        ChangeForm,
+        // ChangeForm,
     }
 })

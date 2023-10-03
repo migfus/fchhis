@@ -4,27 +4,30 @@ import axios from 'axios'
 import { reactive } from 'vue'
 import { notify } from 'notiwind'
 import type { TGQuery } from '@/store/GlobalType'
+import { useRoute } from 'vue-router'
 
 type TParams = {
     name: string
     bday: Date
     user_id: number
+    id: number
 }
 type TConfig = {
     loading: boolean
-    form?: 'add' | 'edit'
+    formID?: number
 }
 
 const title = '@staff/BeneficiaryStaffStore'
 const url = '/api/beneficiary'
 export const useBeneficiaryStaffStore = defineStore(title, () => {
+    const $route = useRoute()
     const CancelToken = axios.CancelToken;
     let cancel;
 
     const content = useStorage(`${title}/content`, null, sessionStorage, { serializer: StorageSerializers.object })
     const config = reactive<TConfig>({
         loading: false,
-        form: null
+        formID: null
     })
     const query = reactive<TGQuery>({
         search: '',
@@ -41,24 +44,65 @@ export const useBeneficiaryStaffStore = defineStore(title, () => {
         content.value = null
     }
 
-    async function GetAPI(page = 1) {
+    async function GetAPI() {
         config.loading = true
         try {
             let { data: {data}} = await axios.get(url, {
                 cancelToken: new CancelToken(function executor(c) { cancel = c; }),
-                params: { ...query, page: page }
+                params: { ...query, user_id: $route.params.id }
             })
             content.value = data
         }
         catch(e) {
-            console.log('UsersStore GetAPI Error', {e})
+            console.log(`${title} GetAPI Error`, {e})
         }
         config.loading = false
     }
 
     async function PostAPI() {
         try {
-            let { data: { data }} = await axios.post(url, params)
+            let { data: { data }} = await axios.post(url, { ...params, user_id: $route.params.id})
+            console.log('postapi', {data})
+
+            if(data === true) {
+                notify({
+                    group: "success",
+                    title: "Success",
+                    text: 'New client has been added'
+                }, 5000)
+            }
+
+            ChangeForm()
+            GetAPI()
+        }
+        catch(e) {
+            console.log('UsersStore PostAPI Error', {e})
+        }
+    }
+    async function UpdateAPI() {
+        try {
+            let { data: { data }} = await axios.put(`${url}/${params.id}`, params)
+            console.log('postapi', {data})
+
+            if(data === true) {
+                notify({
+                    group: "success",
+                    title: "Success",
+                    text: 'Beneficiary has been updated'
+                }, 5000)
+            }
+
+            ChangeForm()
+            GetAPI()
+        }
+        catch(e) {
+            console.log('UsersStore PostAPI Error', {e})
+        }
+    }
+
+    async function DestroyAPI() {
+        try {
+            let { data: { data }} = await axios.delete(`${url}/${params.id}`)
             console.log('postapi', {data})
 
             if(data === true) {
@@ -86,7 +130,8 @@ export const useBeneficiaryStaffStore = defineStore(title, () => {
         return {
             name: null,
             bday: null,
-            user_id: null
+            user_id: null,
+            id: null,
         }
     }
 
@@ -94,8 +139,19 @@ export const useBeneficiaryStaffStore = defineStore(title, () => {
         if(!form) {
             Object.assign(params, InitParams())
         }
-        config.form = form
+        config.formID = form
         ScrollUp()
+    }
+
+    function SelectedItem(row: TParams = null) {
+        if(!row) {
+            Object.assign(params, InitParams())
+            config.formID = 0
+        }
+        else {
+            config.formID = row.id
+            Object.assign(params, row)
+        }
     }
 
     return {
@@ -107,7 +163,10 @@ export const useBeneficiaryStaffStore = defineStore(title, () => {
         GetAPI,
         CancelAPI,
         PostAPI,
+        UpdateAPI,
+        DestroyAPI,
 
         ChangeForm,
+        SelectedItem,
     }
 })
