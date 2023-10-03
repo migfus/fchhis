@@ -1,6 +1,6 @@
 <template>
     <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
-        <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+        <div class="bg-white px-4 py-5 shadow sm:rounded-xl sm:px-6">
             <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Timeline</h2>
 
             <!-- Activity Feed -->

@@ -7,10 +7,10 @@
             <Slide v-for="row in $users.content" :key="row.name" class="max-w-full">
 
                     <div class="max-w-full">
-                        <div class="max-w-full rounded-lg bg-white p-2 shadow-lg sm:p-3">
+                        <div class="max-w-full rounded-xl bg-white p-2 shadow-lg sm:p-3">
                             <div class="items-center justify-between">
                                 <div class="flex flex-1 items-center">
-                                    <span class="flex rounded-lg bg-gray-100 p-2">
+                                    <span class="flex rounded-xl bg-gray-100 p-2">
                                         <UsersIcon v-if="row.name == 'Clients'" class="h-6 w-6 text-gray-700" aria-hidden="true" />
                                         <PresentationChartLineIcon v-else class="h-6 w-6 text-gray-700" aria-hidden="true" />
                                     </span>

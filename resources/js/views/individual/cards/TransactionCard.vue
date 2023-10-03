@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$user.content" class="bg-white rounded-lg shadow">
+    <div v-if="$user.content" class="bg-white rounded-xl shadow">
         <div class="mx-auto max-w-7xl py-8 px-8">
             <div class="space-y-12 lg:grid">
                 <div class="lg:col-span-2">

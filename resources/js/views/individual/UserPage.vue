@@ -2,13 +2,14 @@
     <HeaderCard/>
     <div class="grid grid-cols-1 lg:grid-cols-4 mb-2 gap-2">
         <div class="col-span-3">
-            <BeneficiariesCard/>
-            <InfoCard />
+            <BeneficiariesCard v-if="$user.content.roles[0].name == 'Client'"/>
 
             <SearchTransaction />
         </div>
         <div>
             <StatusCard />
+            <InfoCard />
+
         </div>
     </div>
 
@@ -22,7 +23,7 @@
 <script setup lang="ts">
 import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 import { useBeneficiaryStaffStore } from '@/store/@staff/BeneficiaryStaffStore'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 
 import SearchTransaction from './search/SearchTransaction.vue'
 import HeaderCard from './cards/HeaderCard.vue'

@@ -73,6 +73,7 @@ type TUserInfo = {
     agent_id: bigint
     agent: {
         name: string
+        id: number
     }
 
     pay_type_id: bigint
@@ -87,7 +88,7 @@ type TUserInfo = {
     address_id: bigint
     address: string
     due_at?: bigint // null = no due
-    fulfilled_at?: dateFns // null = not claimed
+    fulfilled_at?: Date // null = not claimed
     or?: string // null = no initial OR number
     cell: number
 }

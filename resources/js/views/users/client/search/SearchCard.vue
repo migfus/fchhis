@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+    <div class="bg-white px-4 py-5 shadow sm:rounded-xl sm:p-6">
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 lg:col-span-1">
                 <label for="first-name" class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>

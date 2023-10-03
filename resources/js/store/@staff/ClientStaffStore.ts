@@ -129,5 +129,6 @@ export const useClientStaffStore = defineStore(title, () => {
         PostAPI,
 
         ChangeForm,
+        ScrollUp,
     }
 })

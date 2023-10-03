@@ -23,7 +23,7 @@ type TParams = {
 }
 type TConfig = {
     loading: boolean
-    beneficiaryFormID?: number
+    form?: 'update'
 }
 
 const title = '@staff/UserStaffStore'
@@ -36,7 +36,7 @@ export const useUserStaffStore = defineStore(title, () => {
     const content = useStorage<TGAuthContent>(`${title}/content`, null, sessionStorage, { serializer: StorageSerializers.object })
     const config = reactive<TConfig>({
         loading: false,
-        beneficiaryFormID: null,
+        form: null,
     })
     const params = reactive<TParams>(InitParams())
 

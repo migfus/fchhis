@@ -2,6 +2,18 @@
     <div class="pb-4 mb-2 shadow bg-white rounded-xl">
         <div>
             <img class="h-32 w-full object-cover lg:h-48 rounded-t-xl" src='https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80' alt="" />
+            <AppButton color="white" class="cursor-default absolute top-[150px] right-[18px] sm:right-[48px] md:right-[55px] opacity-75 backdrop-blur-xl">
+                {{ moment(String($user.content.created_at)).format('MMM D, YYYY hh:mm A') }}
+            </AppButton>
+            <RouterLink :to="{ name: 'user', params: { id: $user.content.info.agent.id }}">
+                <AppButton color="white" class="absolute top-[200px] right-[18px] sm:right-[48px] md:right-[55px] opacity-75 backdrop-blur-xl">
+                    {{ $user.content.info.agent.name }}
+                </AppButton>
+            </RouterLink>
+            <AppButton color="white" class="cursor-default absolute top-[150px] left-[15px] sm:left-[50px] md:left-[310px] opacity-75 backdrop-blur-xl">
+                {{ $user.content.roles[0].name }}
+            </AppButton>
+
         </div>
         <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
@@ -37,6 +49,7 @@
 <script setup lang="ts">
 import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 import { ref } from 'vue'
+import moment from 'moment'
 
 import AppButton from '@/components/AppButton.vue'
 import AvatarUpload from '@/components/modals/AvatarUpload.vue'
