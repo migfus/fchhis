@@ -3,10 +3,11 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import { reactive } from 'vue'
 import { notify } from 'notiwind'
-import type { TGAuthContent } from '../GlobalType'
+import type { TGAuthContent, TUserInfo } from '../GlobalType'
 import { useRoute } from 'vue-router'
 
 type TParams = {
+    id: number
     email: string
     password: string
     name: string
@@ -20,6 +21,7 @@ type TParams = {
     agent: { id: number }
     plan: {id: number }
     payment_type: { id: number },
+    info: TUserInfo
 }
 type TConfig = {
     loading: boolean
@@ -61,18 +63,18 @@ export const useUserStaffStore = defineStore(title, () => {
 
     async function UpdateAPI() {
         try {
-            let { data: { data }} = await axios.post(url, params)
+            let { data: { data }} = await axios.put(`${url}/${params.id}`, params)
             console.log('postapi', {data})
 
             if(data === true) {
                 notify({
                     group: "success",
                     title: "Success",
-                    text: 'New client has been added'
+                    text: 'Information has been updated'
                 }, 5000)
             }
 
-            // ChangeForm()
+            ChangeForm()
             ShowAPI()
         }
         catch(e) {
@@ -82,6 +84,7 @@ export const useUserStaffStore = defineStore(title, () => {
 
     function InitParams() {
         return {
+            id: null,
             email: null,
             password: null,
             name: null,
@@ -95,15 +98,13 @@ export const useUserStaffStore = defineStore(title, () => {
             agent: null,
             plan: null,
             payment_type: null,
+            info: null,
         }
     }
 
-    // function ChangeForm(form = null) {
-    //     if(!form) {
-    //         Object.assign(params, InitParams())
-    //     }
-    //     config.form = form
-    // }
+    function ChangeForm(form = null) {
+        config.form = form
+    }
 
     return {
         content,

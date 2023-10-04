@@ -3,9 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/test', function() {
-    return response()->json(['test' => 'test']);
-});
+Route::get('/test',   [\App\Http\Controllers\TestController::class, 'index']);
 
 Route::group(['prefix' => 'email', 'as' => 'email.'], function() {
     Route::post('/forgot',   [\App\Http\Controllers\EmailController::class, 'registration']);
@@ -37,8 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/statistic',   \App\Http\Controllers\StatisticController::class)->only(['index']);
     Route::apiResource('/beneficiary', \App\Http\Controllers\BeneficiaryController::class)->only(['index', 'store', 'destroy', 'update']);
     Route::apiResource('/users/client', \App\Http\Controllers\ClientUserController::class)->only(['index', 'store']);
-    Route::apiResource('/users',       \App\Http\Controllers\UserController::class)->only(['index', 'destroy', 'show']);
-    Route::apiResource('/transaction', \App\Http\Controllers\TransactionController::class)->only(['index']);
+    Route::apiResource('/users',       \App\Http\Controllers\UserController::class)->only(['index', 'destroy', 'show', 'update']);
+    Route::apiResource('/transaction', \App\Http\Controllers\TransactionController::class)->only(['index', 'show']);
 
     Route::group(['prefix' => 'select', 'as' => 'select.'], function() {
         Route::get('payment-type', [\App\Http\Controllers\PaymentTypeSelectController::class, 'index']);

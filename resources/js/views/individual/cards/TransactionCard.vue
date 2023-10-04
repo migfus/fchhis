@@ -1,41 +1,45 @@
 <template>
-    <div v-if="$user.content" class="bg-white rounded-xl shadow">
-        <div class="mx-auto max-w-7xl py-8 px-8">
-            <div class="space-y-12 lg:grid">
-                <div class="lg:col-span-2">
-                    <ul role="list" class="space-y-12 sm:-mt-8 sm:space-y-0 sm:divide-y sm:divide-gray-200 lg:gap-x-8 lg:space-y-0">
-                        <li class="sm:py-8">
-                            <div class="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
-                                <div class="aspect-w-3 aspect-h-2 sm:aspect-w-3 sm:aspect-h-4">
-                                    <img class="rounded-full w-28 h-auto shadow-lg" :src="$user.content.avatar ?? 'http://127.0.0.1:8000/images/logo.png'" alt="" />
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <div class="space-y-4">
-                                        <div class="space-y-1 text-lg font-medium leading-6">
-                                            <h3>{{ $user.content.name }}</h3>
-                                            <p class="text-primary-600">{{ $user.content.roles[0].name }}</p>
-                                        </div>
-                                        <div class="text-lg">
-                                            <!-- <p class="text-gray-500">{{ person.bio }}</p> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>24
-                        </li>
-                    </ul>
+    <div v-if="$trans.content" class="space-y-2 mt-2">
+        <DataTransition>
+            <div
+                v-for="row in $trans.content.data" :key="row.name"
+                :class="[
+                    'grid grid-cols-3 relative items-center space-x-3 rounded-xl bg-white px-6 py-5 shadow focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:border-gray-400',
+                ]"
+            >
+            <div class="flex">
+                <div class="flex-shrink-0 mr-2">
+                    <img class="h-10 w-10 rounded-full" :src='row.client.avatar' alt="" />
+                </div>
+                <div class="min-w-0 flex-1">
+                    <div class="focus:outline-none">
+                        <span class="absolute inset-0" aria-hidden="true" />
+                        <p class="text-sm font-medium text-green-900">+{{ NumberAddComma(row.amount) }}</p>
+                        <p class="truncate text-sm text-gray-500">{{ row.plan_details.plan.name }} ({{ row.pay_type.name }})</p>
+                    </div>
                 </div>
             </div>
+
+            <div>
+                <p class="text-sm font-medium text-gray-900">{{ moment(row.created_at).format('MMM D, YYYY hh:mm A') }}</p>
+                <p class="truncate text-sm text-gray-500">{{ row.agent.name }}</p>
+            </div>
+
+            <div class="flex justify-end">
+                <AppButton color="white" size="sm">Edit</AppButton>
+            </div>
         </div>
+        </DataTransition>
     </div>
 </template>
 
-<script setup lang='ts'>
-import { onMounted } from 'vue'
-import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
+<script setup lang="ts">
+import { useUserTransactionStaffStore } from '@/store/@staff/UserTransactionStaffStore'
+import { NumberAddComma } from '@/helpers/Converter'
+import moment from 'moment'
 
-const $user = useUserStaffStore()
+import DataTransition from '@/components/transitions/DataTransition.vue'
+import AppButton from '@/components/AppButton.vue'
 
-onMounted(() => {
-    // $user.ShowAPI()
-})
+const $trans = useUserTransactionStaffStore()
 </script>

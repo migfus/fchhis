@@ -3,14 +3,17 @@
         <div>
             <img class="h-32 w-full object-cover lg:h-48 rounded-t-xl" src='https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80' alt="" />
             <AppButton color="white" class="cursor-default absolute top-[150px] right-[18px] sm:right-[48px] md:right-[55px] opacity-75 backdrop-blur-xl">
+                <ClockIcon class="h-6 w-5 mr-2 text-black"/>
                 {{ moment(String($user.content.created_at)).format('MMM D, YYYY hh:mm A') }}
             </AppButton>
             <RouterLink :to="{ name: 'user', params: { id: $user.content.info.agent.id }}">
                 <AppButton color="white" class="absolute top-[200px] right-[18px] sm:right-[48px] md:right-[55px] opacity-75 backdrop-blur-xl">
+                    <UsersIcon class="h-6 w-5 mr-2 text-black"/>
                     {{ $user.content.info.agent.name }}
                 </AppButton>
             </RouterLink>
             <AppButton color="white" class="cursor-default absolute top-[150px] left-[15px] sm:left-[50px] md:left-[310px] opacity-75 backdrop-blur-xl">
+                <CheckBadgeIcon class="h-6 w-5 mr-2 text-blue-500"/>
                 {{ $user.content.roles[0].name }}
             </AppButton>
 
@@ -53,6 +56,8 @@ import moment from 'moment'
 
 import AppButton from '@/components/AppButton.vue'
 import AvatarUpload from '@/components/modals/AvatarUpload.vue'
+import { UsersIcon, ClockIcon, CheckBadgeIcon } from '@heroicons/vue/24/outline'
+
 
 const $user = useUserStaffStore()
 

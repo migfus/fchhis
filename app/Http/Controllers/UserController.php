@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Beneficiary;
+use App\Models\Info;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -113,7 +114,7 @@ class UserController extends Controller
         return $this->G_UnauthorizedResponse('no authorization to access');
     }
         private function StaffShow($req, $id) : JsonResponse {
-            $user = User::where('id', $id)->with(['roles', 'info.agent'])->first();
+            $user = User::where('id', $id)->with(['roles', 'info.agent', 'info.plan_detail.plan', 'info.pay_type'])->withSum('client_transactions', 'amount')->first();
 
             return response()->json([
                 ...$this->G_ReturnDefault($req),
@@ -122,7 +123,53 @@ class UserController extends Controller
         }
 
 
-    public function update(Request $request, string $id) : JsonResponse {
+    public function update(Request $req, string $id) : JsonResponse {
+        if(!$req->user()->hasPermissionTo('update client'))
+            return $this->G_UnauthorizedResponse('unauthorizaed to [update client]');
 
+        if($req->user()->hasRole('Staff'))
+            return $this->StaffUpdate($req, $id);
+
+        return $this->G_UnauthorizedResponse('no authorizeation to access');
     }
+        private function StaffUpdate($req, $id) : JsonResponse {
+            $val = Validator::make($req->all(), [
+                'email' => 'required|email|unique:users,email,'.$id,
+                'name' => 'required',
+                'info.sex' => 'required',
+                'info.bplace_id' => 'required',
+                'info.bday' => 'required',
+                'info.address_id' => 'required',
+                'info.address' => 'required',
+                'info.cell' => 'required',
+                'info.plan_detail_id' => 'required',
+                'info.pay_type_id' => 'required',
+            ]);
+
+            if($val->fails()) {
+                return $this->G_ValidatorFailResponse($val);
+            }
+
+            $user = User::where('id', $id)->first();
+            $user->update([
+                'email' => $req->email,
+                'name' => $req->name,
+            ]);
+
+            $info = Info::where('user_id', $user->id)->update([
+                'sex' => $req->info['sex'] ? true : false,
+                'bplace_id' => $req->info['bplace_id'],
+                'bday' => $req->info['bday'],
+                'address_id' => $req->info['address_id'],
+                'address' => $req->info['address'],
+                'cell' => $req->info['cell'],
+                'plan_detail_id' => $req->info['plan_detail_id'],
+                'pay_type_id' => $req->info['pay_type_id'],
+            ]);
+
+            return response()->json([
+                ...$this->G_ReturnDefault($req),
+                'data' => true,
+            ]);
+        }
 }

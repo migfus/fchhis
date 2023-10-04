@@ -17,7 +17,7 @@ type TParams = {
     mobile: number
 
     agent: { id: number }
-    plan: {id: number }
+    plan_detail: {id: number }
     payment_type: { id: number }
 }
 type TConfig = {
@@ -105,7 +105,7 @@ export const useClientStaffStore = defineStore(title, () => {
             mobile: null,
 
             agent: null,
-            plan: null,
+            plan_detail: null,
             payment_type: null,
         }
     }

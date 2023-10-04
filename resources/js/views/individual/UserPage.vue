@@ -5,6 +5,8 @@
             <BeneficiariesCard v-if="$user.content.roles[0].name == 'Client'"/>
 
             <SearchTransaction />
+
+            <TransactionCard />
         </div>
         <div>
             <StatusCard />
@@ -30,6 +32,7 @@ import HeaderCard from './cards/HeaderCard.vue'
 import BeneficiariesCard from './cards/BeneficiariesCard.vue'
 import StatusCard from './cards/StatusCards.vue'
 import InfoCard from './cards/InfoCard.vue'
+import TransactionCard from './cards/TransactionCard.vue'
 
 const $user = useUserStaffStore()
 const $ben = useBeneficiaryStaffStore()

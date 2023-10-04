@@ -166,7 +166,7 @@ const $plan = usePlanSelectionStore()
 const $payment = usePaymentTypeSelectionStore()
 
 $user.params.agent = $agent.selected
-$user.params.plan = $plan.selected
+$user.params.plan_detail = $plan.selected
 $user.params.payment_type = $payment.selected
 
 const schema = Yup.object({

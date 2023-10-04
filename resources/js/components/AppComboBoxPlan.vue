@@ -43,7 +43,6 @@ type TInput = {
 }
 
 import { watch, onMounted } from 'vue'
-import { NumberAddComma } from '@/helpers/Converter';
 import { throttle } from 'lodash'
 import { usePlanSelectionStore } from '@/store/selection/PlanSelectionStore'
 
@@ -61,6 +60,7 @@ const $plan = usePlanSelectionStore()
 
 onMounted(() => {
     $plan.GetAPI()
+    console.log('selected', $plan.selected)
 })
 watch($plan.query, throttle(() => {
     $plan.GetAPI()

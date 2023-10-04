@@ -35,4 +35,8 @@ class Transaction extends Model
     public function staff() {
         return $this->belongsTo(User::class, 'staff_id');
     }
+
+    public function client() {
+        return $this->belongsTo(User::class, 'client_id');
+    }
 }

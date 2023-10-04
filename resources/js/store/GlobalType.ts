@@ -62,9 +62,10 @@ export type TGAuthContent = {
         id: number
     }>,
     beneficiaries: Array<TBeneficiary>
+    client_transactions_sum_amount?: number
 }
 
-type TUserInfo = {
+export type TUserInfo = {
     staff_id: bigint
     staff: {
         name: string
@@ -79,7 +80,7 @@ type TUserInfo = {
     pay_type_id: bigint
     pay_type: TGPayType
 
-    plan_details_id: bigint
+    plan_detail_id: bigint
     plan_detail: TGPlanDetail
 
     bday: Date
