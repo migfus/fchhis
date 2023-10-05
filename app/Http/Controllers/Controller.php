@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use App\Models\User;
 use App\Models\Log;
 use App\Models\LogCategory;
+use Carbon\Carbon;
 
 class Controller extends BaseController
 {
@@ -87,5 +88,27 @@ class Controller extends BaseController
         }
 
         return false;
+    }
+
+    public function G_DueAdd($pay_type_name, $due_at) : string {
+        if(!$due_at) {
+            $due_at = Carbon::now()->format('Y-m-d');
+        }
+        switch($pay_type_name) {
+            case 'Monthly':
+                return Carbon::parse($due_at)->addMonths(1);
+            case 'Quarterly':
+                return Carbon::parse($due_at)->addMonths(3);
+            case 'Semi-Annual':
+                return Carbon::parse($due_at)->addMonths(6);
+            case 'Annual':
+                return Carbon::parse($due_at)->addYears(1);
+            case 'Spot Payment':
+                return null;
+            case 'Spot Service':
+                return null;
+            default:
+                return null;
+        }
     }
 }

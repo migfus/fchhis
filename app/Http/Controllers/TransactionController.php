@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
+use App\Models\Info;
+use App\Models\PayType;
 
 class TransactionController extends Controller
 {
@@ -68,11 +71,108 @@ class TransactionController extends Controller
             $data = Transaction::where('client_id', $id)
                 ->with(['client', 'plan_details.plan', 'pay_type', 'agent'])
                 ->orderBy('created_at', 'DESC')
-                ->paginate(10);
+                ->get();
+            $due_at = Info::where('user_id', $id)->first()->due_at;
 
             return response()->json([
                 ...$this->G_ReturnDefault($req),
-                'data' => $data,
+                'data' => $data, 'due_at' => $due_at
+            ]);
+        }
+
+    public function store(Request $req) : JsonResponse {
+        if(!$req->user()->hasPermissionTo('create transaction'))
+            return $this->G_UnauthorizedResponse('unauthorized to [create transaction]');
+
+        if($req->user()->hasRole('Staff')) {
+            return $this->StaffStore($req);
+        }
+
+        return $this->G_UnauthorizedResponse('unauthorized [no role available]');
+    }
+        private function StaffStore($req) : JsonResponse {
+            $val = Validator::make($req->all(), [
+                'or' => '',
+                'amount' => 'required',
+                'pay_type_id' => 'required',
+                'plan_detail_id' => 'required',
+                'client_id' => 'required',
+                'agent_id' => 'required'
+            ]);
+
+            $trans = Transaction::create([
+                'or' => $req->or,
+                'agent_id' => $req->agent_id,
+                'staff_id' => $req->user()->id,
+                'client_id' => $req->client_id,
+                'pay_type_id' => $req->pay_type_id,
+                'plan_detail_id' => $req->plan_detail_id,
+                'amount' => $req->amount,
+            ]);
+
+            // NOTE DUE
+            $info = Info::where('user_id', $req->client_id)->first();
+            $info->update([
+                'due_at' => $this->G_DueAdd(
+                    PayType::where('id', $req->pay_type_id)->first()->name,
+                    $info->due_at
+                )
+            ]);
+
+            return response()->json([
+                ...$this->G_ReturnDefault($req),
+                'data' => true,
+            ]);
+        }
+
+    public function update(Request $req, $id) : JsonResponse {
+        if(!$req->user()->hasPermissionTo('update transaction'))
+            return $this->G_UnauthorizedResponse('unauthorized to [upate transaction]');
+
+        if($req->user()->hasRole('Staff')) {
+            return $this->StaffUpdate($req, $id);
+        }
+
+        return $this->G_UnauthorizedResponse('unauthorized [no role available]');
+    }
+        private function StaffUpdate($req, $id) : JsonResponse {
+            $val = Validator::make($req->all(), [
+                'id' => 'required',
+                'or' => '',
+                'amount' => 'required',
+                'pay_type_id' => 'required',
+                'plan_detail_id' => 'required',
+            ]);
+
+            $trans = Transaction::where('id', $id)->update([
+                'or' => $req->or,
+                'pay_type_id' => $req->pay_type_id,
+                'plan_detail_id' => $req->plan_detail_id,
+                'amount' => $req->amount,
+            ]);
+
+            return response()->json([
+                ...$this->G_ReturnDefault($req),
+                'data' => true,
+            ]);
+        }
+
+    public function destroy(Request $req, $id) : JsonResponse {
+        if(!$req->user()->hasPermissionTo('destroy transaction'))
+            return $this->G_UnauthorizedResponse('unauthorized to [destroy transaction]');
+
+        if($req->user()->hasRole('Staff')) {
+            return $this->StaffDestroy($req, $id);
+        }
+
+        return $this->G_UnauthorizedResponse('unauthorized [no role available]');
+    }
+        private function StaffDestroy($req, $id) : JsonResponse {
+            $trans = Transaction::where('id', $id)->delete();
+
+            return response()->json([
+                ...$this->G_ReturnDefault($req),
+                'data' => true,
             ]);
         }
 }

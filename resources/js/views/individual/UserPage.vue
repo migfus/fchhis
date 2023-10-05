@@ -1,7 +1,7 @@
 <template>
-    <HeaderCard/>
-    <div class="grid grid-cols-1 lg:grid-cols-4 mb-2 gap-2">
-        <div class="col-span-3">
+    <HeaderCard v-if="$user.content"/>
+    <div v-if="$user.content" class="grid grid-cols-1 lg:grid-cols-4 mb-2 gap-2">
+        <div  class="col-span-3">
             <BeneficiariesCard v-if="$user.content.roles[0].name == 'Client'"/>
 
             <SearchTransaction />

@@ -145,7 +145,7 @@ class RoleAndPermissionsSeeder extends Seeder
             'index payment-type', // list only payment-type
             'index plan',// list only plan
             'index beneficiary', 'create beneficiary', 'download beneficiary', 'destroy beneficiary', 'update beneficiary', // [list, create, update(self id), download, destroy] of beneficiary under [all]
-            'index transaction', 'show transaction', 'create transaction', 'update transaction', 'download transaction', // [list, show, create, update(self id), download] of transactions under [all]
+            'index transaction', 'show transaction', 'create transaction', 'update transaction', 'download transaction', 'destroy transaction', // [list, show, create, update(self id), download] of transactions under [all]
 
             'index agent', 'show agent', 'create agent', 'update agent', 'download agent', // [list, show, create, update(self id), download] of agent [all]
             'index client', 'show client', 'create client', 'update client', 'download client', // [list, show, create, update(self id), download] of client [all]

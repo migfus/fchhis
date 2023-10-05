@@ -22,7 +22,10 @@ export type TGAddress = {
 }
 
 export type TGPlanDetail = {
-    plan: { name: string }
+    plan: {
+        name: string
+        id: number
+    }
     monthly: number,
     quarterly: number,
     semi_annual: number,
@@ -88,7 +91,7 @@ export type TUserInfo = {
     sex: boolean
     address_id: bigint
     address: string
-    due_at?: bigint // null = no due
+    due_at?: Date // null = no due
     fulfilled_at?: Date // null = not claimed
     or?: string // null = no initial OR number
     cell: number

@@ -1,5 +1,8 @@
 <template>
-    <AddTransaction />
+    <BasicTransition>
+        <AddTransaction v-if="$trans.config.form == 'add'"/>
+        <UpdateTransaction v-else-if="$trans.config.form == 'edit'"/>
+    </BasicTransition>
     <div class="bg-white px-4 py-5 shadow sm:rounded-xl sm:p-6">
         <h2 class="font-semibold mb-4">Transactions</h2>
 
@@ -11,6 +14,7 @@
                     :start-date="moment().startOf('month').format('YYYY-MM-DD')"
                     placeholder="Start Date"
                     auto-apply
+                    input-class="rounded-xl"
                 />
             </div>
 
@@ -44,6 +48,7 @@
             </div>
 
 
+
         </div>
     </div>
 </template>
@@ -51,6 +56,7 @@
 <script setup lang="ts">
 import { onMounted, watch } from 'vue'
 import { useUserTransactionStaffStore } from '@/store/@staff/UserTransactionStaffStore'
+import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 import { throttle } from 'lodash'
 import moment from 'moment'
 
@@ -60,6 +66,8 @@ import AppSelect from '@/components/AppSelect.vue'
 import AddTransaction from '../forms/AddTransaction.vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import BasicTransition from '@/components/transitions/BasicTransition.vue'
+import UpdateTransaction from '../forms/UpdateTransaction.vue'
 
 const $trans = useUserTransactionStaffStore()
 
@@ -71,3 +79,9 @@ watch($trans.query, throttle(() => {
     $trans.GetAPI()
 }, 1000))
 </script>
+
+<style scoped>
+.dp__pointer {
+    @apply rounded-xl
+}
+</style>

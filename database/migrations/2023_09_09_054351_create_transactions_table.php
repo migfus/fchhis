@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('or')->unique();
+            $table->string('or')->unique()->nullable();
             $table->unsignedBigInteger('agent_id')->index();
             $table->unsignedBigInteger('staff_id')->index();
             $table->unsignedBigInteger('client_id')->index();
             $table->unsignedBigInteger('pay_type_id')->index();
-            $table->unsignedBigInteger('plan_details_id')->index();
+            $table->unsignedBigInteger('plan_detail_id')->index();
 
             $table->decimal('amount', 15, 2);
 

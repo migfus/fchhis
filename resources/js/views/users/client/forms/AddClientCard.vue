@@ -1,6 +1,6 @@
 <template>
     <Form v-slot="{ errors }" :validation-schema="schema" @submit="$user.PostAPI()">
-        <div class="bg-white border-2 border-green-300 px-4 py-5 shadow sm:rounded-xl sm:p-6 mb-2">
+        <div class="bg-white px-4 py-5 shadow sm:rounded-xl sm:p-6 mb-2">
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="md:col-span-1">
                     <h3 class="text-lg font-medium leading-6 text-gray-900">User Credential</h3>
@@ -124,7 +124,7 @@
 
             <div class="flex justify-end mt-8 gap-1">
                 <AppButton type="submit" color='success' :disabled="Object.keys(errors).length != 0">Save</AppButton>
-                <AppButton @click="$user.ChangeForm()" color="danger">Cancel</AppButton>
+                <AppButton @click="$user.ChangeForm()" color="white">Cancel</AppButton>
             </div>
 
             <div v-if="Object.keys(errors).length != 0" class="text-red-500">ERRORS!</div>

@@ -7,7 +7,14 @@
                     <div class="ml-4 mt-4 col-span-4 md:col-span-2 xl:col-span-1">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <img class="h-12 w-12 rounded-full" :src="row.avatar ?? 'https://fchhis.migfus.net/images/logo.png'" alt="" />
+                                <img
+                                    :class="[
+                                        'h-12 w-12 rounded-full ring-4 ring-white',
+                                        DueStatusColor(row.info.due_at, 'ring')
+                                    ]"
+                                    :src="row.avatar ?? 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'"
+                                    alt=""
+                                />
                             </div>
                             <div class="ml-4">
                                 <h3 class="text-lg font-medium leading-6 text-gray-900">{{  row.name }}</h3>
@@ -71,7 +78,11 @@
                     </div>
 
                     <div class="ml-4 mt-4 flex flex-shrink-0 col-span-3">
-                        <span v-for="ben in row.beneficiaries" :key="ben.id" class="mr-1 inline-flex items-center rounded-full bg-primary-200 px-3 py-0.5 text-sm font-medium text-primary-800">
+                        <span v-for="ben in row.beneficiaries" :key="ben.id" class="mr-1 inline-flex items-center rounded-full bg-gray-200 shadow-md px-3 py-0.5 text-sm font-medium text-primary-800">
+                            <img
+                                :class="['h-6 w-6 mr-2 rounded-full']"
+                                :src="'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'"
+                            />
                             {{ ben.name }}
                         </span>
                     </div>
@@ -90,7 +101,7 @@
 <script setup lang="ts">
 import { useClientStaffStore } from '@/store/@staff/ClientStaffStore'
 import { useAddressStore } from '@/store/system/AddressStore'
-import { NumberAddComma } from '@/helpers/Converter'
+import { NumberAddComma, DueStatusColor } from '@/helpers/Converter'
 import moment from 'moment'
 
 import DataTransition from '@/components/transitions/DataTransition.vue'

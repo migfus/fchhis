@@ -1,4 +1,8 @@
 <template>
+    <BasicTransition>
+        <AddClientPage v-if="$users.config.form == 'add'"/>
+    </BasicTransition>
+
     <div class="bg-white px-4 py-5 shadow sm:rounded-xl sm:p-6">
         <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 lg:col-span-1">
@@ -55,6 +59,8 @@ import AppInput from '@/components/AppInput.vue'
 import AppButton from '@/components/AppButton.vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import AddClientPage from '../forms/AddClientCard.vue'
+import BasicTransition from '@/components/transitions/BasicTransition.vue'
 
 const $users = useClientStaffStore()
 

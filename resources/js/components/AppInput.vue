@@ -8,7 +8,7 @@
     >{{ $props.placeholder }}</label>
     <Field
         @input="$emit('update:modelValue', $event.target.value)"
-        v-model="input"
+        v-model="$props.modelValue"
         :placeholder="$props.placeholder"
         :type="$props.type"
         :name="$props.name"
@@ -33,8 +33,6 @@ const $props = defineProps<{
     errors?: any
 }>()
 const $emit = defineEmits(['update:modelValue'])
-
-const input = $props.modelValue
 
 const error = computed(() => {
     if($props.errors) {

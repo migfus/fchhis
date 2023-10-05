@@ -15,13 +15,13 @@ class Transaction extends Model
         'agent_id',
         'client_id',
         'staff_id',
-        'plan_details_id',
+        'plan_detail_id',
         'pay_type_id',
         'amount'
     ];
 
     public function plan_details() {
-        return $this->belongsTo(PlanDetail::class);
+        return $this->belongsTo(PlanDetail::class, 'plan_detail_id');
     }
 
     public function pay_type() {

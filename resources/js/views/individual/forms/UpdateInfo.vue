@@ -71,6 +71,10 @@
                                 <option v-for="row in $paytype.content" :key="row.id" :value="row.id">{{ row.name }}</option>
                             </AppSelect>
                         </div>
+
+                        <div class="col-span-6">
+                            <AppInput v-model="$user.params.info.due_at" placeholder="Due Date" type="date" name="due_at"/>
+                        </div>
                     </div>
                 </div>
                 <div class="bg-white px-4 py-3 pb-6 text-right sm:px-6 flex gap-2 justify-end">

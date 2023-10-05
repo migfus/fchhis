@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/beneficiary', \App\Http\Controllers\BeneficiaryController::class)->only(['index', 'store', 'destroy', 'update']);
     Route::apiResource('/users/client', \App\Http\Controllers\ClientUserController::class)->only(['index', 'store']);
     Route::apiResource('/users',       \App\Http\Controllers\UserController::class)->only(['index', 'destroy', 'show', 'update']);
-    Route::apiResource('/transaction', \App\Http\Controllers\TransactionController::class)->only(['index', 'show']);
+    Route::apiResource('/transaction', \App\Http\Controllers\TransactionController::class);
 
     Route::group(['prefix' => 'select', 'as' => 'select.'], function() {
         Route::get('payment-type', [\App\Http\Controllers\PaymentTypeSelectController::class, 'index']);

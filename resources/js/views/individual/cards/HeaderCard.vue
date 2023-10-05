@@ -21,7 +21,14 @@
         <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
                 <div class="flex">
-                    <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" :src="$user.content.avatar ?? 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'" alt="" />
+                    <img
+                        :class="[
+                            'h-24 w-24 rounded-full ring-4 sm:h-32 sm:w-32 ring-white',
+                            DueStatusColor($user.content.info.due_at, 'ring')
+                        ]"
+                        :src="$user.content.avatar ?? 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'"
+                        alt=""
+                    />
                 </div>
                 <div class="mt-6 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                     <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">
@@ -53,6 +60,7 @@
 import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 import { ref } from 'vue'
 import moment from 'moment'
+import { DueStatusColor } from '@/helpers/Converter'
 
 import AppButton from '@/components/AppButton.vue'
 import AvatarUpload from '@/components/modals/AvatarUpload.vue'

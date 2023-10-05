@@ -14,7 +14,7 @@ class TransactionSeeder extends Seeder
             'agent_id' => env('SEEDER_USER_AGENT_ID', 'no id'),
             'client_id' => env('SEEDER_USER_CLIENT_ID', 'no id'),
             'staff_id' => env('SEEDER_USER_STAFF_ID', 'no id'),
-            'plan_details_id' => env('SEEDER_PLAN_JASPER_ID', 'no id'),
+            'plan_detail_id' => env('SEEDER_PLAN_JASPER_ID', 'no id'),
             'pay_type_id' => env('SEEDER_PAY_TYPE_QUARTERLY_ID', 'no id'), // querterly
 
             'amount' => 1250,
@@ -24,7 +24,7 @@ class TransactionSeeder extends Seeder
             'or' => '[or number 2]',
             'agent_id' => env('SEEDER_USER_AGENT_ID', 'no id'),
             'client_id' => env('SEEDER_USER_CLIENT_ID', 'no id'),
-            'plan_details_id' => env('SEEDER_PLAN_JASPER_ID', 'no id'),
+            'plan_detail_id' => env('SEEDER_PLAN_JASPER_ID', 'no id'),
             'staff_id' => env('SEEDER_USER_STAFF_ID', 'no id'),
             'pay_type_id' => env('SEEDER_PAY_TYPE_QUARTERLY_ID', 'no id'), // querterly
 

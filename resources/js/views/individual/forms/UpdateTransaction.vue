@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="mt-5 md:col-span-2 md:mt-0 mb-2">
-            <Form v-slot="{ errors }" :validation-schema="schema" @submit="$trans.PostAPI()">
+            <Form v-slot="{ errors }" :validation-schema="schema" @submit="$trans.UpdateAPI()">
                 <div class="shadow sm:overflow-hidden sm:rounded-xl">
                     <div class="space-y-6 bg-white px-4 py-5 sm:p-6 border-1 border-green-500">
-                        <h2 class="font-semibold">Add Transaction</h2>
+                        <h2 class="font-semibold">Update Transaction</h2>
 
 
                         <div class="grid grid-cols-6 gap-6">
@@ -31,7 +31,8 @@
                         </div>
                     </div>
                     <div class="bg-white px-4 py-6 text-right sm:px-6 flex justify-end gap-2">
-                        <AppButton color="success" type="submit" :disabled="Object.keys(errors).length != 0">Add</AppButton>
+                        <AppButton @click="$trans.DestroyAPI()" color="danger">Remove</AppButton>
+                        <AppButton color="warning" type="submit" :disabled="Object.keys(errors).length != 0">Update</AppButton>
                         <AppButton @click="$trans.ChangeForm()" color="white">Cancel</AppButton>
                     </div>
                 </div>
