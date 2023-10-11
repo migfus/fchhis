@@ -30,10 +30,10 @@
 
             <div class="col-span-6 lg:col-span-2">
                 <AppSelect v-model="$trans.query.filter" name="filter" placeholder="Filter">
-                    <option value="name">Name</option>
-                    <option value="email">Email</option>
-                    <option value="address">Address</option>
-                    <option value="plans">Plans</option>
+                    <option value="agent">Agent</option>
+                    <option value="staff">Staff</option>
+                    <option value="or">OR</option>
+                    <option value="plan">Plans</option>
                 </AppSelect>
 
             </div>
@@ -43,7 +43,6 @@
             </div>
 
             <div class="col-span-6 flex justify-end gap-1">
-                <AppButton :loading="$trans.config.loading" color="white">Print</AppButton>
                 <AppButton @click="$trans.ChangeForm('add')" :loading="$trans.config.loading" color='success'>Add</AppButton>
             </div>
 

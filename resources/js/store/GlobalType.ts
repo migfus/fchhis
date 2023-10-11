@@ -50,7 +50,7 @@ export type TGAuthContent = {
     }
 
     avatar: string
-    created_at: dateFns
+    created_at: Date
     email: string
     id: bigint
     role: string //DEBUG UNSORE
@@ -66,6 +66,24 @@ export type TGAuthContent = {
     }>,
     beneficiaries: Array<TBeneficiary>
     client_transactions_sum_amount?: number
+    client_transactions? : Array<TGTransaction>
+}
+
+export type TGAgent = {
+    id: number
+    name: string
+    created_at: Date
+}
+
+export type TGTransaction = {
+    id: number
+    or: string
+    amount: number
+    created_at: string
+    plan_details: TGPlanDetail
+    pay_type: TGPayType
+    agent: TGAgent
+    staff: TGAgent
 }
 
 export type TUserInfo = {
@@ -101,4 +119,5 @@ type TBeneficiary = {
     name: string
     bday: Date
     id: number
+    created_at: Date
 }

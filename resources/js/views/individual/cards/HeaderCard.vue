@@ -35,13 +35,16 @@
                         <h1 class="truncate text-2xl font-bold text-gray-900">{{ $user.content.name }}</h1>
                         <p class="truncate font-bold text-gray-400">{{ $user.content.email }}</p>
                     </div>
-                    <div class="justify-stretch mt-6 flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                    <div class="justify-stretch mt-6 flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
                         <!-- <button type="button" class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
                             <EnvelopeIcon class="-ml-1 mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                             <span>Message</span>
                         </button> -->
 
-                        <AppButton @click="show = true" color="white" size="sm">
+                        <AppButton @click="$user.DownloadAPI()" :loading="$user.config.loading" color="white" size="sm">
+                            Download
+                        </AppButton>
+                        <AppButton @click="show = true" :loading="$user.config.loading" color="white" size="sm">
                             Change Avatar
                         </AppButton>
                     </div>

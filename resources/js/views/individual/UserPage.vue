@@ -1,7 +1,7 @@
 <template>
     <HeaderCard v-if="$user.content"/>
     <div v-if="$user.content" class="grid grid-cols-1 lg:grid-cols-4 mb-2 gap-2">
-        <div  class="col-span-3">
+        <div class="col-span-3">
             <BeneficiariesCard v-if="$user.content.roles[0].name == 'Client'"/>
 
             <SearchTransaction />
@@ -11,7 +11,6 @@
         <div>
             <StatusCard />
             <InfoCard />
-
         </div>
     </div>
 
@@ -26,6 +25,7 @@
 import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 import { useBeneficiaryStaffStore } from '@/store/@staff/BeneficiaryStaffStore'
 import { onMounted, onUnmounted } from 'vue'
+import { useTitle } from '@vueuse/core'
 
 import SearchTransaction from './search/SearchTransaction.vue'
 import HeaderCard from './cards/HeaderCard.vue'
@@ -36,9 +36,11 @@ import TransactionCard from './cards/TransactionCard.vue'
 
 const $user = useUserStaffStore()
 const $ben = useBeneficiaryStaffStore()
+const $title = useTitle()
 
 onMounted(async () => {
     $ben.GetAPI()
     await $user.ShowAPI()
+    $title.value = `${$user.content.name} | FCHHIS`
 })
 </script>

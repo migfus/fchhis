@@ -172,4 +172,30 @@ class UserController extends Controller
                 'data' => true,
             ]);
         }
+
+    public function download(Request $req, string $id) : JsonResponse {
+        if(!$req->user()->hasPermissionTo('download user'))
+            return $this->G_UnauthorizedResponse('unauthorizaed to [download user]');
+
+        if($req->user()->hasRole('Staff'))
+            return $this->StaffDownload($req, $id);
+
+        return $this->G_UnauthorizedResponse('no authorizeation to access');
+    }
+        private function StaffDownload($req, $id) : JsonResponse {
+            $user = User::where('id', $id)->with([
+                'info.pay_type',
+                'info.plan_detail.plan',
+                'beneficiaries',
+                'client_transactions.plan_details.plan',
+                'client_transactions.pay_type',
+                'client_transactions.agent',
+                'client_transactions.staff',
+            ])->first();
+
+            return response()->json([
+                ...$this->G_ReturnDefault($req),
+                'data' => $user,
+            ]);
+        }
 }

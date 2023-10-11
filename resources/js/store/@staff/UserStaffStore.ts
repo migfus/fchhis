@@ -5,6 +5,7 @@ import { reactive } from 'vue'
 import { notify } from 'notiwind'
 import type { TGAuthContent, TUserInfo } from '../GlobalType'
 import { useRoute } from 'vue-router'
+import { ClientAllPrint } from '@/helpers/PrintUser'
 
 type TParams = {
     id: number
@@ -82,6 +83,19 @@ export const useUserStaffStore = defineStore(title, () => {
         }
     }
 
+    async function DownloadAPI() {
+        config.loading = true
+        try {
+            let { data: {data} } = await axios.get(`${url}/download/${$route.params.id}`, { cancelToken: new CancelToken(function executor(c) { cancel = c; }), })
+            console.log(data)
+            ClientAllPrint(data)
+        }
+        catch(e) {
+            console.log(`${title} GetAPI Error`, {e})
+        }
+        config.loading = false
+    }
+
     function InitParams() {
         return {
             id: null,
@@ -114,6 +128,7 @@ export const useUserStaffStore = defineStore(title, () => {
         ShowAPI,
         CancelAPI,
         UpdateAPI,
+        DownloadAPI,
 
         // ChangeForm,
     }

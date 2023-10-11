@@ -62,6 +62,7 @@ class RoleAndPermissionsSeeder extends Seeder
 
         // NOTE USERS
         Permission::create(['name' => 'summary user']);
+        Permission::create(['name' => 'download user']);
         // Permission::create(['name' => 'store user']);
         // Permission::create(['name' => 'update user']);
         // Permission::create(['name' => 'destroy user']);
@@ -149,7 +150,7 @@ class RoleAndPermissionsSeeder extends Seeder
 
             'index agent', 'show agent', 'create agent', 'update agent', 'download agent', // [list, show, create, update(self id), download] of agent [all]
             'index client', 'show client', 'create client', 'update client', 'download client', // [list, show, create, update(self id), download] of client [all]
-            'summary user', // get count in [agent, client, beneficiary]
+            'summary user', 'download user', // get count in [agent, client, beneficiary]
         ]);
 
         // NOTE ✅ AGENT

@@ -36,7 +36,7 @@ export const useUserTransactionStaffStore = defineStore(title, () => {
     })
     const query = reactive<TGQuery>({
         search: '',
-        filter: 'name',
+        filter: 'agent',
         sort: 'DESC'
     })
     const params = reactive<TParams>(InitParams())

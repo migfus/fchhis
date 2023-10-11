@@ -1,7 +1,6 @@
 <template>
     <div class="">
         <AddFormBeneficiary />
-        <SearchBeneficiary />
 
         <div class="overflow-x-auto mx-0 rounded">
             <div class="inline-block min-w-full align-middle ">
@@ -34,7 +33,6 @@
 
 <script setup lang="ts">
 import AddFormBeneficiary from '../forms/AddFormBeneficiary.vue'
-import SearchBeneficiary from '../search/SearchBeneficiary.vue'
 const people = [
 { name: 'Lindsay Walton', bday: '2022-02-02', },
 // More people...

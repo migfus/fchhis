@@ -34,9 +34,11 @@
 
             </div>
             <div class="min-w-0 flex-1">
-                <button class="h-10 w-10 rounded-full">
+                <button class="h-10 w-full rounded-full flex">
                     <PlusCircleIcon class="-ml-1 mr-0.5 h-8 w-8 flex-shrink-0 self-center text-gray-400" aria-hidden="true" />
+                    <span class="ml-2 mt-2 truncate">Add Beneficiary</span>
                 </button>
+
             </div>
 
         </div>

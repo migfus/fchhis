@@ -9,6 +9,14 @@ export const NumberAddComma = (num: number)  => {
     return '0.00'
 }
 
+export const NumberToOriginal = (num: string) => {
+    if(num) {
+        num = num.replace(',', '')
+        return Number(num)
+    }
+    return 0
+}
+
 export const PlanToPay = (pay_type: {name: string}, plan_detail: TGPlanDetail) => {
     switch (pay_type.name) {
         case 'Monthly':
@@ -72,7 +80,6 @@ export const DueStatusColor = (dueDate: Date, target = 'text') => {
 
     else
         return ''
-
 }
 
 export const DueStatusDesc = (dueDate: Date) => {
@@ -85,6 +92,6 @@ export const DueStatusDesc = (dueDate: Date) => {
     else if(moment().diff(dueDate, 'days') >= 1)
         return 'Grace'
 
-    return `${moment().from(dueDate, true)} left`
+    return `${moment().from(dueDate, true)}`
 }
 

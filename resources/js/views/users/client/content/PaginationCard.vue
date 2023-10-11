@@ -1,6 +1,9 @@
 <template>
     <div v-if="$users.content" class="mt-2 border-b border-gray-200 bg-white px-4 py-5 sm:px-6 sm:rounded-xl shadow flex justify-end">
-        <TailwindPagination :data='$users.content' @click="$users.ScrollUp()" @PaginationChangePage="$users.GetAPI"
+        <TailwindPagination
+            @click="$users.ScrollUp()"
+            @PaginationChangePage="$users.GetAPI"
+            :data='$users.content'
             :itemClasses="[
                 'bg-white',
                 'text-gray-500',
@@ -8,8 +11,8 @@
                 '',
             ]"
             :activeClasses="[
-                'bg-primary-600',
-                'text-white',
+                'bg-gray-300',
+                'text-black',
                 '',
                 '',
             ]"/>

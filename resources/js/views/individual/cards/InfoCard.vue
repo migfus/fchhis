@@ -1,7 +1,7 @@
 <template>
     <BasicTransitionVue>
         <UpdateInfo v-if="$user.config.form == 'update'" />
-        <div v-else class="overflow-hidden bg-white shadow sm:rounded-xl mb-2 ">
+        <div v-else class="overflow-hidden bg-white shadow sm:rounded-xl mb-2">
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">Information</h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">Additional Information of Client</p>
@@ -37,7 +37,7 @@
                         <dd class="mt-1 text-sm text-gray-900">{{ `${$user.content.id}`}}</dd>
                     </div>
                     <div class="sm:col-span-2 flex justify-end">
-                        <AppButton @click="$user.config.form = 'update'" color="white">Edit</AppButton>
+                        <AppButton @click="$user.config.form = 'update'" :loading="$user.config.loading" color="white">Edit</AppButton>
                     </div>
                 </dl>
             </div>

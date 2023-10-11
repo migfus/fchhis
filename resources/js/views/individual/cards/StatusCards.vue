@@ -1,7 +1,7 @@
 <template>
     <div>
         <dl class="grid grid-cols-1">
-            <div class="overflow-hidden rounded-xl bg-white px-4 py-5 shadow sm:p-6 mb-2">
+            <div class="overflow-hidden sm:rounded-xl bg-white px-4 py-5 shadow sm:p-6 mb-2">
                 <dt class="truncate text-sm font-medium text-gray-500">Total Payed</dt>
                 <dd class="mt-1 text-3xl font-semibold tracking-tight text-green-500">{{ SumOfTransaction($trans.content) }}</dd>
 
