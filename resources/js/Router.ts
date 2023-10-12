@@ -106,6 +106,17 @@ const router = createRouter({
                 resource: 'client'
             }
         },
+        {
+            path: '/users/agent',
+            name: 'agents',
+            component: () => import('@/views/users/agent/AgentPage.vue'),
+            meta: {
+                sideBar: true,
+                title: 'Agents',
+                auth: true,
+                resource: 'agent'
+            }
+        },
             {
                 path: '/user/:id',
                 name: 'user',

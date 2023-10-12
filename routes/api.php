@@ -14,6 +14,7 @@ use App\Http\Controllers\DocumentAuthController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\BeneficiaryController;
 use App\Http\Controllers\ClientUserController;
+use App\Http\Controllers\AgentUserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PaymentTypeSelectController;
@@ -52,6 +53,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/statistic',   StatisticController::class)->only(['index']);
     Route::apiResource('/beneficiary', BeneficiaryController::class)->only(['index', 'store', 'destroy', 'update']);
     Route::apiResource('/users/client',ClientUserController::class)->only(['index', 'store']);
+    Route::apiResource('/users/agent', AgentUserController::class)->only(['index', 'store']);
 
     Route::get('/users/download/{id}', [UserController::class, 'download']);
     Route::apiResource('/users',    UserController::class)->only(['index', 'destroy', 'show', 'update']);

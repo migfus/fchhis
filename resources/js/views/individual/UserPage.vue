@@ -9,8 +9,10 @@
             <TransactionCard />
         </div>
         <div>
-            <StatusCard />
-            <InfoCard />
+            <ClientStatusCard v-if="$user.content.roles[0].name == 'Client'"/>
+            <AgentStatusCard v-if="$user.content.roles[0].name == 'Agent'"/>
+
+            <InfoCard v-if="$user.content.info"/>
         </div>
     </div>
 
@@ -24,13 +26,14 @@
 <script setup lang="ts">
 import { useUserStaffStore } from '@/store/@staff/UserStaffStore'
 import { useBeneficiaryStaffStore } from '@/store/@staff/BeneficiaryStaffStore'
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted } from 'vue'
 import { useTitle } from '@vueuse/core'
 
 import SearchTransaction from './search/SearchTransaction.vue'
 import HeaderCard from './cards/HeaderCard.vue'
 import BeneficiariesCard from './cards/BeneficiariesCard.vue'
-import StatusCard from './cards/StatusCards.vue'
+import ClientStatusCard from './cards/ClientStatusCards.vue'
+import AgentStatusCard from './cards/AgentStatusCard.vue'
 import InfoCard from './cards/InfoCard.vue'
 import TransactionCard from './cards/TransactionCard.vue'
 

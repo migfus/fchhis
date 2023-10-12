@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
+use Carbon\Carbon;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, HasShortflakePrimary;
@@ -64,6 +66,18 @@ class User extends Authenticatable
 
     public function client_transactions() {
         return $this->hasMany(Transaction::class, 'client_id');
+    }
+
+    public function agent_transactions() {
+        return $this->hasMany(Transaction::class, 'agent_id');
+    }
+
+    public function agent_transactions_current_month() {
+        return $this->agent_transactions()->where('created_at', '>=', Carbon::now()->startOfMonth())->where('created_at', '<=', Carbon::now()->endOfMonth());
+    }
+
+    public function staff_transactions() {
+        return $this->hasMany(Transaction::class, 'staff_id');
     }
 
     public function beneficiaries() {
