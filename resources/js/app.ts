@@ -7,26 +7,7 @@ import router from "@/Router";
 import { abilitiesPlugin } from '@casl/vue';
 import ability from './Ability';
 import type { Router } from 'vue-router';
-import 'pinia';
-import moment from 'moment'
-
-// moment.locale('en', {
-//     relativeTime : {
-//         future: "in %s",
-//         past:   "%s ago",
-//         s:  "s",
-//         m:  "1 min",
-//         mm: "%d min",
-//         h:  "1 h",
-//         hh: "%d h",
-//         d:  "1d",
-//         dd: "%dd",
-//         M:  "1 mth",
-//         MM: "%d mth",
-//         y:  "1 y",
-//         yy: "%d y"
-//     }
-// })
+import 'pinia'
 
 declare module 'pinia' {
     export interface PiniaCustomProperties {

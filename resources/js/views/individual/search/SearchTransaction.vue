@@ -78,9 +78,3 @@ watch($trans.query, throttle(() => {
     $trans.GetAPI()
 }, 1000))
 </script>
-
-<style scoped>
-.dp__pointer {
-    @apply rounded-xl
-}
-</style>

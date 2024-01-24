@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from "vue-router";
-import { useAuthStore } from "@/store/auth/AuthStore";
-import { usePreLoader } from "@/store/system/PreLoader";
+import { createRouter, createWebHistory } from "vue-router"
+import { useAuthStore } from "@/store/auth/AuthStore"
+import { usePreLoader } from "@/store/system/PreLoader"
 import ability from '@/Ability';
 
 const router = createRouter({

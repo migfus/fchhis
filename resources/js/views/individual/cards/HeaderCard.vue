@@ -6,12 +6,20 @@
                 <ClockIcon class="h-6 w-5 mr-2 text-black"/>
                 {{ moment(String($user.content.created_at)).format('MMM D, YYYY hh:mm A') }}
             </AppButton>
-            <RouterLink :to="{ name: 'user', params: { id: $user.content.info.agent.id }}">
-                <AppButton color="white" class="absolute top-[200px] right-[18px] sm:right-[48px] md:right-[55px] opacity-75 backdrop-blur-xl">
-                    <UsersIcon class="h-6 w-5 mr-2 text-black"/>
-                    {{ $user.content.info.agent.name }}
-                </AppButton>
-            </RouterLink>
+
+            <div v-if="$user.content.roles[0].name == 'Client'">
+                <RouterLink :to="{ name: 'user', params: { id: $user.content.info.agent.id }}">
+                    <AppButton color="white" class="absolute top-[200px] right-[18px] sm:right-[48px] md:right-[55px] opacity-75 backdrop-blur-xl">
+                        <UsersIcon class="h-6 w-5 mr-2 text-black"/>
+                        {{ $user.content.info.agent.name }}
+                    </AppButton>
+                </RouterLink>
+            </div>
+            <div v-else>
+
+            </div>
+
+
             <AppButton color="white" class="cursor-default absolute top-[150px] left-[15px] sm:left-[50px] md:left-[310px] opacity-75 backdrop-blur-xl">
                 <CheckBadgeIcon class="h-6 w-5 mr-2 text-blue-500"/>
                 {{ $user.content.roles[0].name }}
@@ -22,9 +30,18 @@
             <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
                 <div class="flex">
                     <img
+                        v-if="$user.content.roles[0].name == 'Client'"
                         :class="[
                             'h-24 w-24 rounded-full ring-4 sm:h-32 sm:w-32 ring-white',
                             DueStatusColor($user.content.info.due_at, 'ring')
+                        ]"
+                        :src="$user.content.avatar ?? 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'"
+                        alt=""
+                    />
+                    <img
+                        v-else
+                        :class="[
+                            'h-24 w-24 rounded-full ring-4 sm:h-32 sm:w-32 ring-white',
                         ]"
                         :src="$user.content.avatar ?? 'https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg'"
                         alt=""

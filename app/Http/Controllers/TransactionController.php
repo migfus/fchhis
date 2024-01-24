@@ -10,6 +10,7 @@ use App\Models\Transaction;
 use Carbon\Carbon;
 use App\Models\Info;
 use App\Models\PayType;
+use App\Models\User;
 
 class TransactionController extends Controller
 {
@@ -47,29 +48,67 @@ class TransactionController extends Controller
             ]);
         }
 
-    public function show(Request $req, $id) : JsonResponse {
+    public function show(Request $req, User $user) : JsonResponse {
         if(!$req->user()->hasPermissionTo('show transaction')) {
             return $this->G_UnauthorizedResponse('unauthorized to [show transaction]');
         }
 
+        $val = Validator::make($req->all(), [
+            'search' => '',
+            'filter' => 'required',
+            'sort' => 'required',
+            'start' => '',
+            'end' => '',
+        ]);
+
+        if($val->fails())
+            return $this->G_ValidatorFailResponse($val);
+
         if($req->user()->hasRole('Staff')) {
-            return $this->StaffShow($req, $id);
+            if($user->hasRole('Client')) {
+                return $this->StaffForClientShow($req, $user->id);
+            }
+            else if($user->hasRole('Agent')) {
+                return response()->json(['test']);
+            }
         }
 
         return $this->G_UnauthorizedResponse('unauthorized [no role available]');
     }
-        private function StaffShow($req, $id) : JsonResponse {
-            $val = Validator::make($req->all(), [
-                'search' => '',
-                'filter' => 'required',
-                'sort' => 'required',
-                'start' => '',
-                'end' => '',
+        private function StaffForClientShow($req, $id) : JsonResponse {
+            $data = Transaction::where('client_id', $id)->with(['client', 'plan_details.plan', 'pay_type', 'agent', 'staff']);
+
+            if((bool)strtotime($req->start) OR (bool)strtotime($req->end)) {
+                if((bool)strtotime($req->start)) {
+                    $data->where('created_at', '>=', $req->start);
+                }
+                if((bool)strtotime($req->end)) {
+                    $data->where('created_at', '<=', $req->end);
+                }
+            }
+
+            switch($req->filter) {
+                case 'plan':
+                    $data->whereHas('plan_details.plan', function($q) use($req) { $q->where('name', 'LIKE', '%'.$req->search.'%'); });
+                    break;
+                case 'or':
+                    $data->where('id', 'LIKE', '%'.$req->search.'%')->orWhere('or', 'LIKE', '%'.$req->search.'%');
+                    break;
+                case 'staff':
+                    $data->whereHas('staff', function($q) use($req) { $q->where('name', 'LIKE', '%'.$req->search.'%'); });
+                    break;
+                default:
+                    $data->whereHas('agent', function($q) use($req) { $q->where('name', 'LIKE', '%'.$req->search.'%'); });
+            }
+
+
+            return response()->json([
+                ...$this->G_ReturnDefault($req),
+                'data' => $data->orderBy('created_at', 'DESC')->get(),
+                'due_at' => Info::where('user_id', $id)->first()->due_at
             ]);
-
-            if($val->fails())
-                return $this->G_ValidatorFailResponse($val);
-
+        }
+        private function StaffForAgentShow($req, $id) : JsonResponse {
             $data = Transaction::where('client_id', $id)->with(['client', 'plan_details.plan', 'pay_type', 'agent', 'staff']);
 
             if((bool)strtotime($req->start) OR (bool)strtotime($req->end)) {

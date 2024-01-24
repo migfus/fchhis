@@ -4,13 +4,13 @@
         <div class="col-span-3">
             <BeneficiariesCard v-if="$user.content.roles[0].name == 'Client'"/>
 
-            <SearchTransaction />
+            <!-- <SearchTransaction /> -->
 
-            <TransactionCard />
+            <!-- <TransactionCard /> -->
         </div>
         <div>
-            <ClientStatusCard v-if="$user.content.roles[0].name == 'Client'"/>
-            <AgentStatusCard v-if="$user.content.roles[0].name == 'Agent'"/>
+            <!-- <ClientStatusCard v-if="$user.content.roles[0].name == 'Client'"/> -->
+            <!-- <AgentStatusCard v-if="$user.content.roles[0].name == 'Agent'"/> -->
 
             <InfoCard v-if="$user.content.info"/>
         </div>
