@@ -21,7 +21,7 @@ const router = createRouter({
         {
           path: 'about',
           name: 'about',
-          component: () => import('@/views/pages/about/@AboutPage.vue'),
+          component: () => import('@/views/about/page.vue'),
           meta: {
             title: 'About',
           },
@@ -29,7 +29,7 @@ const router = createRouter({
         {
           path: 'calendar',
           name: 'calendar',
-          component: () => import('@/views/pages/calendar/CalendarPage.vue'),
+          component: () => import('@/views/calendar/page.vue'),
           meta: {
             title: 'Calendar',
           },
@@ -37,7 +37,7 @@ const router = createRouter({
         {
           path: 'faqs',
           name: 'faqs',
-          component: () => import('@/views/pages/faqs/FaqsPage.vue'),
+          component: () => import('@/views/faqs/page.vue'),
           meta: {
             title: 'FAQs',
           },
@@ -49,7 +49,7 @@ const router = createRouter({
             {
               path: '',
               name: 'news',
-              component: () => import('@/views/pages/news/NewsUpdates.vue'),
+              component: () => import('@/views/news/page.vue'),
               meta: {
                 title: 'News & Updates',
               },
@@ -57,7 +57,7 @@ const router = createRouter({
             {
               path: ':id',
               name: 'post-id',
-              component: () => import('@/views/pages/news/PostPage.vue'),
+              component: () => import('@/views/news/[id].vue'),
               meta: {
                 title: 'Post',
               },
@@ -71,7 +71,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/login.vue'),
+      component: () => import('@/views/login/page.vue'),
       meta: {
         title: 'Login',
       },
@@ -157,7 +157,7 @@ const router = createRouter({
           path: 'account-settings',
           name: 'account-settings',
           component: () =>
-            import('@/views/account-settings/AccountSettingsPage.vue'),
+            import('@/views/dashboard/account-settings/page.vue'),
           meta: {
             sideBar: true,
             title: 'Account Settings',

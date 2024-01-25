@@ -13,7 +13,11 @@ const $route = useRoute()
 const config = reactive({
   loading: false,
 })
-const content = ref<contentInt>(null)
+const content = ref<contentInt>({
+  title: '',
+  content: '',
+  cover: '',
+})
 
 async function ShowAPI() {
   config.loading = true
