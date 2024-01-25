@@ -119,7 +119,8 @@ const router = createRouter({
             {
               path: 'client',
               name: 'clients',
-              component: () => import('@/views/users/client/ClientPage.vue'),
+              component: () =>
+                import('@/views/dashboard/users/client/page.vue'),
               meta: {
                 sideBar: true,
                 title: 'Clients',
@@ -132,7 +133,7 @@ const router = createRouter({
         {
           path: 'agent',
           name: 'agents',
-          component: () => import('@/views/users/agent/AgentPage.vue'),
+          component: () => import('@/views/dashboard/users/agent/page.vue'),
           meta: {
             sideBar: true,
             title: 'Agents',
