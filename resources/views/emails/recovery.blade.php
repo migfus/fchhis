@@ -1,108 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>
-        body{
-            height: 750px;
-            margin: 2px;
-            padding: 2px;
-            font-family: Helvetica, Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    body{
+        height: 750px;
+        margin: 2px;
+        padding: 2px;
+        font-family: Helvetica, Arial, sans-serif;
+    }
 
-        .button-container{
-            margin:40px 0;
-        }
+    .button-container{
+        margin:40px 0;
+    }
 
-        #box{
-            width: 850px;
-            margin: 0 auto;
-            height:100%;
-        }
+    #box{
+        width: 850px;
+        margin: 0 auto;
+        height:100%;
+    }
 
-        #header{
-            height: 200px;
-            width: 100%;
-            position: relative;
-            display: block;
-            border-bottom: 1px solid #504597;
-        }
+    #header{
+        height: 200px;
+        width: 100%;
+        position: relative;
+        display: block;
+        border-bottom: 1px solid #504597;
+    }
 
-        .button{
-            background-color: #d60e0e;
-            border: none;
-            color: white !important;
-            padding: 10px 25px;
-            text-align: center;
-            text-decoration: none;
-            margin:auto;
-            font-size: 22px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
+    .button{
+        background-color: #d60e0e;
+        border: none;
+        color: white !important;
+        padding: 10px 25px;
+        text-align: center;
+        text-decoration: none;
+        margin:auto;
+        font-size: 22px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
 
-        #image {
-            width: 150px;
-            height: auto;
-            margin-top: 16px;
-        }
+    #image {
+        width: 150px;
+        height: auto;
+        margin-top: 16px;
+    }
 
-        #rightbar {
-            width: 100%;
-            height: 560px;
-            padding: 0px;
-        }
+    #rightbar {
+        width: 100%;
+        height: 560px;
+        padding: 0px;
+    }
 
-        .text-div{
-            font-size: 18px;
-            margin-bottom: 3px;
-        }
+    .text-div{
+        font-size: 18px;
+        margin-bottom: 3px;
+    }
 
-        #footer {
-            clear: both;
-            height: 40px;
-            text-align: center;
-            background-color: #2d0f80;
-            margin: 0px;
-            padding: 0px;
-            color: white;
-        }
+    #footer {
+        clear: both;
+        height: 40px;
+        text-align: center;
+        background-color: #2d0f80;
+        margin: 0px;
+        padding: 0px;
+        color: white;
+    }
 
-        p, pre
-        {
-            font-size: 18px;
-            line-height: 1.4;
-        }
+    p, pre
+    {
+        font-size: 18px;
+        line-height: 1.4;
+    }
 
-        .heading{
-            color: #504597;
-            font-size: 24px;
-        }
-
-    </style>
+    .heading{
+        color: #504597;
+        font-size: 24px;
+    }
+  </style>
 </head>
 <body>
-    <div id="box">
-        <div id="header">
-            <img id="image" src="{{ $logo }}">
-            <p>Future Care and Helping Hands</p>
-        </div>
-        <div class="spacing"></div>
-        <div id ="rightbar">
-            <h1 class="heading"></h1>
-            <p>Hi {{$name}} ,</p>
-            <p>It seems, you attempt to recover your account.</p>
-            <p>If you didn't attempt this recovery, please ignore this email, perhaps someone accidentaly recovery their account using your email.</p>
-            <p>If you intentionally recovery your account, you can proceed by opening the link in below.</p>
-            <p>Recovery Link: <a href="{{ $link }}" target="_blank">{{ $link }}</a></p>
-
-            <div class="text-div">Thanks,</div>
-            <div class="text-div">FCHHIS System.</div>
-
-            <div class="text-div">FCHHIS System.</div>
-        </div>
+  <div id="box">
+    <div id="header">
+      <img id="image" src="{{ $logo }}">
+      <p>Future Care and Helping Hands</p>
     </div>
+    <div class="spacing"></div>
+    <div id ="rightbar">
+        <h1 class="heading"></h1>
+        <p>Hi {{$name}} ,</p>
+        <p>It seems, you attempt to recover your account.</p>
+        <p>If you didn't attempt this recovery, please ignore this email, perhaps someone accidentaly recovery their account using your email.</p>
+        <p>If you intentionally recovery your account, you can proceed by opening the link in below.</p>
+        <p>Recovery Link: <a href="{{ $link }}" target="_blank">{{ $link }}</a></p>
+
+        <div class="text-div">Thanks,</div>
+        <div class="text-div">FCHHIS System.</div>
+
+        <div class="text-div">FCHHIS System.</div>
+    </div>
+  </div>
 </body>
 </html>

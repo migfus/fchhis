@@ -1,3 +1,31 @@
+<script setup lang="ts">
+import { useAuthStore } from '@/store/auth/AuthStore'
+import { reactive } from 'vue'
+import * as Yup from 'yup'
+
+import { Form, Field, configure, ErrorMessage } from 'vee-validate'
+import AppButton from '@/components/AppButton.vue'
+
+const $auth = useAuthStore()
+
+configure({
+  validateOnInput: true,
+})
+const schema = Yup.object({
+  email: Yup.string().required('Email is required').email('Invalid Email'),
+  password: Yup.string().required('Password is required'),
+})
+
+interface InputInt {
+  email: string
+  password: string
+}
+const input = reactive<InputInt>({
+  email: 'admin@gmail.com',
+  password: '12345678',
+})
+</script>
+
 <template>
   <div class="h-full">
     <div
@@ -97,31 +125,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useAuthStore } from '@/store/auth/AuthStore'
-import { reactive } from 'vue'
-import * as Yup from 'yup'
-
-import { Form, Field, configure, ErrorMessage } from 'vee-validate'
-import AppButton from '@/components/AppButton.vue'
-
-const $auth = useAuthStore()
-
-configure({
-  validateOnInput: true,
-})
-const schema = Yup.object({
-  email: Yup.string().required('Email is required').email('Invalid Email'),
-  password: Yup.string().required('Password is required'),
-})
-
-interface InputInt {
-  email: string
-  password: string
-}
-const input = reactive<InputInt>({
-  email: 'admin@gmail.com',
-  password: '12345678',
-})
-</script>

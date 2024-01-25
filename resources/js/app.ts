@@ -1,39 +1,41 @@
-import '@/bootstrap';
+import '@/bootstrap'
 import '../css/app.css'
 
-import { createApp, markRaw } from 'vue';
-import { createPinia } from "pinia";
-import router from "@/Router";
-import { abilitiesPlugin } from '@casl/vue';
-import ability from './Ability';
-import type { Router } from 'vue-router';
+import { createApp, markRaw } from 'vue'
+import { createPinia } from 'pinia'
+import router from '@/Router'
+import { abilitiesPlugin } from '@casl/vue'
+import ability from './Ability'
+import type { Router } from 'vue-router'
 import 'pinia'
+import moment from 'moment'
 
 declare module 'pinia' {
-    export interface PiniaCustomProperties {
-        router: Router;
-    }
+  export interface PiniaCustomProperties {
+    router: Router
+  }
 }
 
 import Notifications from 'notiwind'
-import App from "@/App.vue";
+import App from './App.vue'
 
-const app = createApp(App);
-const pinia = createPinia();
+const app = createApp(App)
+app.config.globalProperties.$moment = moment
 
+const pinia = createPinia()
 
 pinia.use(({ store }) => {
-    store.router = markRaw(router);
-});
+  store.router = markRaw(router)
+})
 
-app.use(Notifications);
-app.use(pinia);
-app.use(router);
+app.use(Notifications)
+app.use(pinia)
+app.use(router)
 app.use(abilitiesPlugin, ability, {
-    useGlobalProperties: true,
-});
+  useGlobalProperties: true,
+})
 
-import JWTInterceptor from "@/helpers/JWTInterceptor";
-JWTInterceptor();
+import JWTInterceptor from '@/helpers/JWTInterceptor'
+JWTInterceptor()
 
-app.mount("#app");
+app.mount('#app')
