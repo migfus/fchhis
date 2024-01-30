@@ -6,21 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void {
-        Schema::create('password_recoveries', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('code');
-            $table->date('approved_at')->nullable();
-            $table->timestamps();
-        });
-    }
+  public function up(): void {
+    Schema::create('password_recoveries', function (Blueprint $table) {
+      $table->id();
+      $table->unsignedBigInteger('user_id');
+      $table->string('code');
+      $table->date('approved_at')->nullable();
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('password_recoveries');
-    }
+  public function down(): void {
+    Schema::dropIfExists('password_recoveries');
+  }
 };

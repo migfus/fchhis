@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Kra8\Snowflake\HasShortflakePrimary;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class PostCategory extends Model
 {
-    use HasFactory, HasShortflakePrimary;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
         'user_id',

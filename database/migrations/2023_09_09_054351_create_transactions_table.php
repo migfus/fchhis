@@ -6,31 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->string('or')->unique()->nullable();
-            $table->unsignedBigInteger('agent_id')->index();
-            $table->unsignedBigInteger('staff_id')->index();
-            $table->unsignedBigInteger('client_id')->index();
-            $table->unsignedBigInteger('pay_type_id')->index();
-            $table->unsignedBigInteger('plan_detail_id')->index();
+  public function up(): void {
+    Schema::create('transactions', function (Blueprint $table) {
+      $table->uuid('id')->primary();
+      $table->string('or')->unique()->nullable();
+      $table->unsignedBigInteger('agent_id')->index();
+      $table->unsignedBigInteger('staff_id')->index();
+      $table->unsignedBigInteger('client_id')->index();
+      $table->uuid('pay_type_id')->index();
+      $table->uuid('plan_detail_id')->index();
 
-            $table->decimal('amount', 15, 2);
+      $table->decimal('amount', 15, 2);
 
-            $table->timestamps();
-        });
-    }
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('transactions');
-    }
+  public function down(): void {
+    Schema::dropIfExists('transactions');
+  }
 };

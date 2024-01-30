@@ -6,25 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('branches', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('region_id')->index();
-            $table->string('name')->unique();
+  public function up(): void {
+    Schema::create('branches', function (Blueprint $table) {
+      $table->uuid('id')->primary();
+      $table->uuid('region_id')->index();
+      $table->string('name')->unique();
 
-            $table->timestamps();
-        });
-    }
+      $table->timestamps();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('branches');
-    }
+  public function down(): void {
+    Schema::dropIfExists('branches');
+  }
 };
