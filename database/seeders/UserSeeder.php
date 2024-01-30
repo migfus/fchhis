@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
     // NOTE ADMIN
     User::create([
         'id' => env('SEEDER_USER_ADMIN_ID', 'no id'),
-        'region_id' => null, // has access to all regino
-        'branch_id' => null,
+        'area_region_id' => null, // has access to all regino
+        'area_branch_id' => null,
         'email' => 'admin@gmail.com',
         'name' => '[admin]',
         'password'=> Hash::make('12345678'),
@@ -27,8 +27,8 @@ class UserSeeder extends Seeder
     // NOTE REGIONAL MANAGER
     User::create([
         'id' => env('SEEDER_USER_REGIONAL_MANAGER_ID', 'no id'),
-        'region_id' => env('SEEDER_REGION_X_ID', 'no id'),
-        'branch_id' => null,
+        'area_region_id' => env('SEEDER_AREA_REGION_X_ID', 'no id'),
+        'area_branch_id' => null,
         'email' => 'regional@gmail.com',
         'name' => '[regional manager]',
         'password'=> Hash::make('12345678'),
@@ -38,8 +38,8 @@ class UserSeeder extends Seeder
     // NOTE BRANCH MANAGER
     User::create([
         'id' => env('SEEDER_USER_BRANCH_MANAGER_ID', 'no id'),
-        'region_id' => env('SEEDER_REGION_X_ID', 'no id'),
-        'branch_id' => env('SEEDER_BRANCH_VALENCIA_ID', 'no id'),
+        'area_region_id' => env('SEEDER_AREA_REGION_X_ID', 'no id'),
+        'area_branch_id' => env('SEEDER_AREA_BRANCH_VALENCIA_ID', 'no id'),
         'email' => 'branch@gmail.com',
         'name' => '[branch manager]',
         'password'=> Hash::make('12345678'),
@@ -49,8 +49,8 @@ class UserSeeder extends Seeder
     // NOTE STAFF
     User::create([
         'id' => env('SEEDER_USER_STAFF_ID', 'no id'),
-        'region_id' => env('SEEDER_REGION_X_ID', 'no id'),
-        'branch_id' => env('SEEDER_BRANCH_VALENCIA_ID', 'no id'),
+        'area_region_id' => env('SEEDER_AREA_REGION_X_ID', 'no id'),
+        'area_branch_id' => env('SEEDER_AREA_BRANCH_VALENCIA_ID', 'no id'),
         'email' => 'staff@gmail.com',
         'name' => '[staff]',
         'password'=> Hash::make('12345678'),
@@ -61,8 +61,8 @@ class UserSeeder extends Seeder
     // NOTE AGENT
     $user = User::create([
         'id' => env('SEEDER_USER_AGENT_ID', 'no id'),
-        'region_id' => env('SEEDER_REGION_X_ID', 'no id'),
-        'branch_id' => env('SEEDER_BRANCH_VALENCIA_ID', 'no id'),
+        'area_region_id' => env('SEEDER_AREA_REGION_X_ID', 'no id'),
+        'area_branch_id' => env('SEEDER_AREA_BRANCH_VALENCIA_ID', 'no id'),
         'email' => 'agent@gmail.com',
         'name' => '[agent]',
         'password'=> Hash::make('12345678'),
@@ -88,8 +88,8 @@ class UserSeeder extends Seeder
     // NOTE CLIENT
     $user = User::create([
         'id' => env('SEEDER_USER_CLIENT_ID', 'no id'),
-        'region_id' => env('SEEDER_REGION_X_ID', 'no id'),
-        'branch_id' => env('SEEDER_BRANCH_VALENCIA_ID', 'no id'),
+        'area_region_id' => env('SEEDER_AREA_REGION_X_ID', 'no id'),
+        'area_branch_id' => env('SEEDER_AREA_BRANCH_VALENCIA_ID', 'no id'),
         'email' => 'migfus20@gmail.com',
         'name' => '[client]',
         'password'=> Hash::make('12345678'),
@@ -116,8 +116,8 @@ class UserSeeder extends Seeder
     $faker->addProvider(new \Ottaviano\Faker\Gravatar($faker));
     foreach(range(1, 20) as $idx) {
         $user = User::create([
-            'region_id' => env('SEEDER_REGION_X_ID', 'no id'),
-            'branch_id' => env('SEEDER_BRANCH_VALENCIA_ID', 'no id'),
+            'area_region_id' => env('SEEDER_AREA_REGION_X_ID', 'no id'),
+            'area_branch_id' => env('SEEDER_AREA_BRANCH_VALENCIA_ID', 'no id'),
             'email' => $faker->email,
             'name' => $faker->name,
             'password' => Hash::make('12345678'),

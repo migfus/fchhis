@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
 
             PlanSeeder::class, //plan & planDetails
             PayTypeSeeder::class,
-            RegionSeeder::class,
-            BranchSeeder::class,
+            AreaRegionSeeder::class,
+            AreaBranchSeeder::class,
             BeneficiarySeeder::class,
 
             UserSeeder::class,
